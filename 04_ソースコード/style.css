@@ -23,17 +23,18 @@ flex-flow: column;
 height:100px;
 margin:0 0 1em;
 }
+
 .content {
 padding:1em;
 background-color:#ffffff;
 margin:1em auto;
-width:45%;
-margin-right: 7%;
+width:85%;
+margin-right: 50%;
 border: 1px solid rgb(0, 0, 0);
 color: #DCB3FC;
 }
 
-/* .controller{
+.controller{
 position: fixed;
 left: 40%;
-}  */
+}
