@@ -1,0 +1,39 @@
+.a{
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #999;
+  padding: 5px 10px;
+}
+
+.line{
+border-left: thick solid #999;
+border-width:1px;
+height:100vw;
+left: 40%;
+position: absolute;
+}
+
+::placeholder {
+color:#DCB3FC;
+}
+
+.wrap {
+display:flex;
+flex-flow: column;
+height:100px;
+margin:0 0 1em;
+}
+.content {
+padding:1em;
+background-color:#ffffff;
+margin:1em auto;
+width:45%;
+margin-right: 7%;
+border: 1px solid rgb(0, 0, 0);
+color: #DCB3FC;
+}
+
+.controller{
+position: fixed;
+left: 40%;
+} 
