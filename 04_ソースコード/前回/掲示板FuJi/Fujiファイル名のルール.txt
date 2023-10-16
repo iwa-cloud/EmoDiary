@@ -1,12 +1,8 @@
-掲示板FuJiのファイル名のルール
+EmoDiaryのファイル名のルール
 
-p      ➡　　　パスワード(password)
 usr    ➡　　　ユーザー(user)
-s_up   ➡　　　サインアップ(sign up)
 inf    ➡　　　情報(information)
 com    ➡　　　完了(completion)
-reg    ➡　　　完了(registration)
-fg     ➡　　　忘れる(forget)
 chk    ➡　　　確認(check)
 chg    ➡　　　変更(change)
 
@@ -20,20 +16,14 @@ $_SESSION['mail']            ==  メールアドレス（新規登録）
 $_SESSION['input_mail']      ==  メールアドレス（ログインする時）
 $_SESSION['user_id']         ==  ユーザーid
 $_SESSION['user_id_cng']     ==  パスワードを変更したいユーザーid
-$_SESSION['genre_id']        ==  ジャンルid
-$_SESSION['room_id']         ==  スレッドid（話題）
 $_SESSION['error']           ==  エラー文（複数の場合は,でくっつける予定）
-$_SESSION['chat']            ==  チャット文
+
 
 
 $_POST['user_id']            == ユーザーid
 $_POST['name']               == ユーザー名
 $_POST['mail']               == メールアドレス
 $_POST['pass']               == パスワード
-$_POST['room_id']            == スレッドid（話題）
-$_POST['room_name']          == スレッド名（話題）
-$_POST['detail']             == スレッド説明（話題）
-$_POST['genre_id']           == ジャンルid
-$_POST['chat']               == チャット文
+
 
 
