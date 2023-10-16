@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
-    <title>ユーザー情報変更完了画面</title>
+    <title>検索画面</title>
 </head>
 <style>
 </style>
@@ -65,6 +65,7 @@
 <br>
 <br>
 <br>
+<<<<<<< HEAD:04_ソースコード/kensaku.html
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6"></div>
@@ -80,6 +81,20 @@
         </select>
 
    
+=======
+    <div class="wrap">
+    <input class="content col-md-4"></div>
+    <input class="content col-md-8" type="text" placeholder="メモ検索欄"></div>
+    <div class="wrap">
+    <input class="content" type="date" value=""></div>
+    <div class="wrap">
+    <input class="content" placeholder="タイトル検索欄"></div>
+    <div class="wrap">
+    <select class="content"  type="text" autocomplete="on" placeholder="メモ検索欄">
+      <option value="" selected hidden>タグ検索欄</option>
+      <option>サンプル</option>
+    </select>
+>>>>>>> b7164b162d1e8996f017a727fc7af13d5e1611ad:04_ソースコード/search.php
     </div>
   </div>
   </div>
