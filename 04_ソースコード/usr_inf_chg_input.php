@@ -21,6 +21,8 @@
   </nav>
     </div>
     <br>
+    <br>
+    <br>
     <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
         <div style="color: #DCB3FC; text-align:left">name</div>
         <input type="email" name="name" class="form-control" id="txt1" required>
