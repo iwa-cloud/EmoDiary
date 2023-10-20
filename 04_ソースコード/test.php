@@ -11,9 +11,6 @@ if( $_FILES['file']['size'] > 0 ){
 
     do{
         $flg = false;
-        
-        //ローカル側に一度アップロード
-        if( !move_uploaded_file($_FILES['file']["tmp_name"], $localDir . $_FILES['file']['name']) ) break;
 
         //FTPサーバに接続
         $ftp = ftp_connect($server);
@@ -25,6 +22,8 @@ if( $_FILES['file']['size'] > 0 ){
         //FTPサーバ上でディレクトリ移動
         if( !ftp_chdir($ftp, $remoteDir) ) break;
         
+        //ローカル側に一度アップロード
+        if( !move_uploaded_file($_FILES['file']["tmp_name"], $localDir . $_FILES['file']['name']) ) break;
         
         //アップロード
         $local = $localDir . $_FILES['file']['name']; //アップロードするファイル
@@ -38,7 +37,7 @@ if( $_FILES['file']['size'] > 0 ){
         $errorPlace = $local;
 
         //ローカル側のファイルを削除
-        // unlink( $localDir . $_FILES['file']['name'] );
+        unlink( $localDir . $_FILES['file']['name'] );
 
         //接続を閉じる
         ftp_close($ftp);
