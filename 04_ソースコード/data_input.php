@@ -24,6 +24,7 @@
         }
   </style>
     </style>
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
@@ -35,15 +36,24 @@
           <div class="row">
             <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i><href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
                 <div class="col-md-2" style="text-align:right">
-                  <details>
-                      <summary>
+                  <!-- <details>
+                      <summary> -->
+                        <div id="first">
                         <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='login.php'"></i>&emsp;
                         <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;
-                        <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
-                      </summary>
+                        <i type="button" class="bi bi-person-fill" style="font-size:40px" onclick="removeExample(this)"></i>
+                        </div>
+                        <script type="text/javascript">
+                            function removeExample(button){
+                                let parent = button.parentNode;
+					            parent.remove();
+                                
+                            }
+                        </script>
+                        <!-- </summary>
                     <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ログイン</button>
                     <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ユーザ情報変更</button>
-                  </details>
+                  </details> -->
                 </div>
           </div>
         </div>
@@ -106,6 +116,7 @@
 
         </form>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
