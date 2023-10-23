@@ -208,10 +208,27 @@ class DBManager
         // $resultが二次元配列になってる
         return $result;
     }
-    
 
-    // データ一覧取得タグ順(data_id,title, tag)
+    // データ一覧取得タグ順(data_id,title, tag)>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // userが使用したタグの最終利用時間順で並び替える
+    // user_idで絞って、tagの最終利用時間順で並び替える
     public function getDataByDate($user_id) {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT data.data_id, data.title, tag.tag_name FROM tagAndData JOIN data ON tagAndData.data_id = data.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE user_id = ? ORDER BY c_time DESC";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $user_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
+
+    // データ登録処理>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // tagの入れ方と写真の入れ方を考える
+    // タグの挿入後の個数が◯◯以上かどうか検査する
+    // データ登録後にデータの個数が◯◯以上になるか検査する
+    // tagは$_POSTで配列で渡す
+    public function insertData($user_id, $title, $url, $tag, $memo, $photo) {
         $pdo = $this->dbConnect();
         $sql = "SELECT data_id, title FROM data WHERE user_id = ? ORDER BY c_time DESC";
         $ps = $pdo->prepare($sql);
@@ -222,7 +239,37 @@ class DBManager
         return $result;
     }
 
+    // 新しいタグを追加
+    public function insertTag($user_id) {
+        $pdo = $this->dbConnect();
+        $sql = "INSERT INTO tag(tag_id, tag_name) VALUES (?,?)";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $user_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
 
+    // 
+
+    // データ更新
+    public function updateData() {
+
+    }
+
+    // タグ一覧取得
+    // ◯◯個まで取得する
+    // 最終利用時間が直近の◯◯個を取得する
+    public function getTags() {
+
+    }
+
+    // タグ最終利用時間更新処理
+    // tagAndDataテーブルでdata_idでソートしてused_timeを更新する
+    public function updateTagTime() {
+
+    }
 
 
 

@@ -10,6 +10,7 @@ if( $_FILES['file']['size'] > 0 ){
     $errorPlace = "";
 
     do{
+
         $flg = false;
 
         //FTPサーバに接続
@@ -18,23 +19,21 @@ if( $_FILES['file']['size'] > 0 ){
 
         //ログイン
         if( !ftp_login($ftp, $user, $pass) ) break;
-
-        //FTPサーバ上でディレクトリ移動
-        if( !ftp_chdir($ftp, $remoteDir) ) break;
         
-        //ローカル側に一度アップロード
-        if( !move_uploaded_file($_FILES['file']["tmp_name"], $localDir . $_FILES['file']['name']) ) break;
-        
-        //アップロード
-        $local = $localDir . $_FILES['file']['name']; //アップロードするファイル
-
         //PASVモードへ変更
 	    ftp_pasv($ftp, true);
+
+        //アップロード
+        $local = $localDir . $_FILES['file']['name']; //アップロードするファイル
         
-        $remote = $_FILES['file']['name']; //アップロード時の名前
+        $remote = $remoteDir . $_FILES['file']['name']; //アップロード時の名前
+
+        //ローカル側に一度アップロード
+        if( !move_uploaded_file($_FILES['file']["tmp_name"], $local) ) break;
+
         if( !ftp_put($ftp, $remote, $local, FTP_BINARY) ) break;
         
-        $errorPlace = $local;
+        $errorPlace = "失敗";
 
         //ローカル側のファイルを削除
         unlink( $localDir . $_FILES['file']['name'] );
