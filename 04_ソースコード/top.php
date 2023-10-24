@@ -31,22 +31,23 @@
   <div class="controller">
   <div class="line">
 </div>
+</div>  
+  <div id="nav">
+    <li><a href="#">最新 ↓</a></li>
+    <li><a href="#">タグ ↓</a></li>
+    <li><a href="#">日付 ↓</a></li>
+    <li><a href="#">編集 ↓</a></li>
   </div>
-<div class="wrap">
-    <input class="content" type="text" placeholder="メモ検索欄"></div>
-    <div class="wrap">
-    <input class="content" type="date" value=""></div>
-    <div class="wrap">
-    <input class="content" placeholder="タイトル検索欄"></div>
-    <div class="wrap">
-    <select class="content"  type="text" autocomplete="on" placeholder="メモ検索欄">
-      <option value="" selected hidden>タグ検索欄</option>
-      <option>サンプル</option>
-    </select>
-    </div>
+  </div>
   </div>
 </div>
 </div>
+<form method="post" action="sample.cgi" class="h">
+  <textarea name="kansou" rows="10" cols="100">cols="20"のテキストエリアです。</textarea><br>
+  <div class="ky">
+  <button class="form-control" style="color:#DCB3FC; "onclick="location.href='login.php'">共有</button>
+  </div>
+  </form>
 </body>
 </body>
 </html>
