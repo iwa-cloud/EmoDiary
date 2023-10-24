@@ -216,10 +216,10 @@ class DBManager
         return $result[0][0];
     }
 
-    // 一番最後のpd_idを取得
+    // 一番最後のdp_idを取得
     public function getMaxPdId() {
         $pdo = $this->dbConnect();
-        $sql = "SELECT pd_id FROM photoAndData ORDER BY pd_id DESC LIMIT 1";
+        $sql = "SELECT dp_id FROM photoAndData ORDER BY dp_id DESC LIMIT 1";
         $ps = $pdo->prepare($sql);
         $ps->execute();
         $result = $ps->fetchAll();
@@ -358,9 +358,14 @@ class DBManager
         $maxId = $this->numToStr($maxId);
         return $maxId;
     }
+    // 写真登録処理
+    public function insertPhoto($data_id, $photo_id, $photo_name) {
+        $photoTbl = $this->insertPhotoTbl($photo_id, $photo_name);
+        $PdTbl = $this->insertPdTbl($data_id,$photo_id);
+    }
 
-    // photoデータ登録
-    public function insertPhoto($photo_id, $photo_name) {
+    // photo登録
+    public function insertPhotoTbl($photo_id, $photo_name) {
         $pdo = $this->dbConnect();
         $sql = "INSERT INTO photo(photo_id, photo) VALUES (?,?)";
         $ps = $pdo->prepare($sql);
@@ -371,6 +376,26 @@ class DBManager
         // 戻り値はいらない
         return $result;
     }
+    
+    // photoAndData登録
+    public function insertPdTbl($data_id,$photo_id) {
+        $pdo = $this->dbConnect();
+        // 一番最後のdp_idを取得し、+1されたdp_idを生成する
+        $maxId = $this->getMaxPdId();
+        $maxId = $this->strToNum($maxId);
+        $maxId++;
+        $dp_id = $this->numToStr($maxId);
+        $sql = "INSERT INTO photoAndData(dp_id, data_id, photo_id) VALUES (?,?,?)";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $dp_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $data_id, PDO::PARAM_STR);
+        $ps->bindValue(3, $photo_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // 戻り値はいらない
+        return $result;
+    }
+
     
 
 
