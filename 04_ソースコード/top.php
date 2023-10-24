@@ -43,7 +43,7 @@
 </div>
 </div>
 <form method="post" action="sample.cgi" class="h">
-  <textarea name="kansou" rows="10" cols="100">cols="20"のテキストエリアです。</textarea><br>
+  <textarea name="kansou" rows="10" cols="100"></textarea><br>
   <div class="ky">
   <button class="form-control" style="color:#DCB3FC; "onclick="location.href='login.php'">共有</button>
   </div>
