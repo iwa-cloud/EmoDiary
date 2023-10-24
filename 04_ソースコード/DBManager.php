@@ -345,8 +345,33 @@ class DBManager
 
     // 検索
     public function search() {
-        
+
     }
+    
+    // 保存する写真の名前を決める(拡張子抜き)
+    public function getPhotoNextId() {
+        $pdo = $this->dbConnect();
+        // 一番最後のphoto_idを取得し、+1されたphoto_idを生成する
+        $maxId = $this->getMaxPhotoId();
+        $maxId = $this->strToNum($maxId);
+        $maxId++;
+        $maxId = $this->numToStr($maxId);
+        return $maxId;
+    }
+
+    // photoデータ登録
+    public function insertPhoto($photo_id, $photo_name) {
+        $pdo = $this->dbConnect();
+        $sql = "INSERT INTO photo(photo_id, photo) VALUES (?,?)";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $photo_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $photo_name, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // 戻り値はいらない
+        return $result;
+    }
+    
 
 
 

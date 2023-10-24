@@ -1,4 +1,18 @@
 <?php
+
+    require_once './DBManager.php';
+    $dbmng = new DBManager();
+    $photoMaxId = $dbmng->getPhotoNextId();
+    $photoName = $photoMaxId . ".jpeg";
+    // $name;
+    // foreach ($test as $row) {
+    //     $name = $row['user_name'];
+    // }
+
+    echo '<h1>';
+    var_dump($photoName);
+    echo '</h1>';
+
     //FTPサーバとアカウント情報
     $server = "ftp.lolipop.jp"; //送り先のFTPサーバー名もしくはIP
     $user = "daa.jp-jolly-ohita-1184"; //送り先のFTPユーザ
@@ -27,7 +41,7 @@ if( $_FILES['file']['size'] > 0 ){
         $local = $localDir . $_FILES['file']['name']; //アップロードするファイル
         
         // ファイル名は重複しないように調整する必要あり********************************************************************************************
-        $remote = $remoteDir . $_FILES['file']['name']; //アップロード時の名前
+        $remote = $remoteDir . $photoName; //アップロード時の名前
 
         //一時フォルダに一度アップロード
         if( !move_uploaded_file($_FILES['file']["tmp_name"], $local) ) break;
@@ -48,6 +62,9 @@ if( $_FILES['file']['size'] > 0 ){
     }while(0);
 
     if( $flg ){
+        // データベースに写真のパスを保存
+        $photoPass = "./img/" . $photoName;
+        $insertPhoto = $dbmng->insertPhoto($photoMaxId,$photoPass);
         $alert = "成功";
     }else{
         $alert = "失敗";
@@ -59,6 +76,7 @@ if( $_FILES['file']['size'] > 0 ){
         history.back();
     });
     </script>";
+
 }
 ?>
 <!DOCTYPE html>
