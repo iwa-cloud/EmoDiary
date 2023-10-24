@@ -2,13 +2,14 @@
 
     require_once './DBManager.php';
     $dbmng = new DBManager();
-    $photoMaxId = $dbmng->getPhotoNextId();
-    $photoName = $photoMaxId . ".jpeg";
-    // $name;
-    // foreach ($test as $row) {
-    //     $name = $row['user_name'];
-    // }
 
+    // photoテーブルの最後のid+1の値を取得
+    $photoMaxId = $dbmng->getPhotoNextId();
+
+    // 写真の名前と拡張子を設定
+    $photoName = $photoMaxId . ".jpeg";
+
+    // 試験的に表示
     echo '<h1>';
     var_dump($photoName);
     echo '</h1>';
@@ -20,6 +21,7 @@
     $remoteDir = './EmoDiary/img/'; //送り先のディレクトリ
     $localDir = './tmpImg/'; //一時アップロードディレクトリ
 
+    // 画像ファイルが送られれば処理を開始
 if( $_FILES['file']['size'] > 0 ){
     $errorPlace = "";
 
@@ -40,7 +42,6 @@ if( $_FILES['file']['size'] > 0 ){
         //アップロード
         $local = $localDir . $_FILES['file']['name']; //アップロードするファイル
         
-        // ファイル名は重複しないように調整する必要あり********************************************************************************************
         $remote = $remoteDir . $photoName; //アップロード時の名前
 
         //一時フォルダに一度アップロード
@@ -62,14 +63,22 @@ if( $_FILES['file']['size'] > 0 ){
     }while(0);
 
     if( $flg ){
-        // データベースに写真のパスを保存
+        // 写真のパス
         $photoPass = "./img/" . $photoName;
-        $insertPhoto = $dbmng->insertPhoto($photoMaxId,$photoPass);
+        // data_idは（仮）
+        $data_id = "0000001";
+
+        // photoテーブルに写真のパスを保存、photoAndDataテーブルで結びつけ
+        $insertPhoto = $dbmng->insertPhoto($data_id,$photoMaxId,$photoPass);
+
+        // alertの文字を格納
         $alert = "成功";
     }else{
+        // alertの文字を格納
         $alert = "失敗";
     }
 
+    // 結果を表示
     echo "<script type='text/javascript'>
     alert('". $alert ."');
     window.addEventListener('click', function() {
