@@ -26,6 +26,7 @@ if( $_FILES['file']['size'] > 0 ){
         //アップロード
         $local = $localDir . $_FILES['file']['name']; //アップロードするファイル
         
+        // ファイル名は重複しないように調整する必要あり********************************************************************************************
         $remote = $remoteDir . $_FILES['file']['name']; //アップロード時の名前
 
         //一時フォルダに一度アップロード
@@ -68,6 +69,9 @@ if( $_FILES['file']['size'] > 0 ){
     <title>Document</title>
 </head>
 <body>
-
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
+    <input type="file" name="file"><br>
+    <input type="submit" value="submit">
+</form>
 </body>
 </html>

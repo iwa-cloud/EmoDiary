@@ -182,6 +182,61 @@ class DBManager
         // $resultが二次元配列になってるから[0][0]を付けてる
         return $result[0][0];
     }
+
+    // 一番最後のtag_idを取得
+    public function getMaxTagId() {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT tag_id FROM tag ORDER BY tag_id DESC LIMIT 1";
+        $ps = $pdo->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってるから[0][0]を付けてる
+        return $result[0][0];
+    }
+
+    // 一番最後のphoto_idを取得
+    public function getMaxPhotoId() {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT photo_id FROM photo ORDER BY photo_id DESC LIMIT 1";
+        $ps = $pdo->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってるから[0][0]を付けてる
+        return $result[0][0];
+    }
+
+    // 一番最後のdata_idを取得
+    public function getMaxDataId() {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT data_id FROM data ORDER BY data_id DESC LIMIT 1";
+        $ps = $pdo->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってるから[0][0]を付けてる
+        return $result[0][0];
+    }
+
+    // 一番最後のpd_idを取得
+    public function getMaxPdId() {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT pd_id FROM photoAndData ORDER BY pd_id DESC LIMIT 1";
+        $ps = $pdo->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってるから[0][0]を付けてる
+        return $result[0][0];
+    }
+
+    // 一番最後のtagAndData_idを取得
+    public function getMaxTdId() {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT td_id FROM tagAndData ORDER BY td_id DESC LIMIT 1";
+        $ps = $pdo->prepare($sql);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってるから[0][0]を付けてる
+        return $result[0][0];
+    }
     
     // 0埋めされた文字から数字に変換
     public function strToNum($num) {
@@ -198,6 +253,7 @@ class DBManager
     // --------------------------------データ関係------------------------------------
 
     // データ一覧取得最新順兼日付順(data_id, title, c_time)
+    // 日付順はphpで処理する
     public function getDataNewest($user_id) {
         $pdo = $this->dbConnect();
         $sql = "SELECT data_id, title, c_time FROM data WHERE user_id = ? ORDER BY c_time DESC";
@@ -238,39 +294,59 @@ class DBManager
         // $resultが二次元配列になってる
         return $result;
     }
-
-    // 新しいタグを追加
-    public function insertTag($user_id) {
-        $pdo = $this->dbConnect();
-        $sql = "INSERT INTO tag(tag_id, tag_name) VALUES (?,?)";
-        $ps = $pdo->prepare($sql);
-        $ps->bindValue(1, $user_id, PDO::PARAM_STR);
-        $ps->execute();
-        $result = $ps->fetchAll();
-        // $resultが二次元配列になってる
-        return $result;
-    }
-
-    // 
-
+    
     // データ更新
     public function updateData() {
 
+    }
+
+    // 新しいタグを追加
+    // tag_idは手動で制御する
+    public function insertTag($tag_id, $tag_name) {
+        $pdo = $this->dbConnect();
+        $sql = "INSERT INTO tag(tag_id, tag_name) VALUES (?,?)";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $tag_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $tag_name, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // 戻り値はいらない
+        return $result;
     }
 
     // タグ一覧取得
     // ◯◯個まで取得する
     // 最終利用時間が直近の◯◯個を取得する
     public function getTags() {
-
+        $pdo = $this->dbConnect();
+        $sql = "SELECT * FROM tag";
+        $ps = $pdo->query($sql);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        return $result;
     }
 
     // タグ最終利用時間更新処理
     // tagAndDataテーブルでdata_idでソートしてused_timeを更新する
-    public function updateTagTime() {
-
+    // used_timeは更新する際に取得した時間を格納する
+    // $tag_idsは「1,2,3,~」みたいに、変更したいtag_idを書く
+    public function updateTagTime($data_id, $tag_ids) {
+        $pdo = $this->dbConnect();
+        $sql = "UPDATE tagAndData SET used_time = NOW() WHERE data_id = ? IN (?);
+        ";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $tag_ids, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // 戻り値はいらないかも
+        return $result;
     }
 
+    // 検索
+    public function search() {
+        
+    }
 
 
 
