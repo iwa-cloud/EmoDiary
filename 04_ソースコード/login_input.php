@@ -61,6 +61,8 @@
         <br>
         <br>
         <br>
+        <br>
+        <br>
         <form action="logincheck.php" method="post">
             <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
                 <div style="color: #DCB3FC; text-align:left">mail</div>

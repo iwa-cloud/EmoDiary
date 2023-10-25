@@ -51,6 +51,8 @@
                         <br>
                         <br>
                         <br>
+                        <br>
+                        <br>
                       <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='Login.php'">ログイン</button>
                     <br>
                       <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='shinki.php'">新規登録</button>
