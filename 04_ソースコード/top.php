@@ -45,7 +45,7 @@
 <form method="post" action="sample.cgi" class="h">
   <textarea name="kansou" rows="10" cols="100"></textarea><br>
   <div class="ky">
-  <button class="form-control" style="color:#DCB3FC; "onclick="location.href='login.php'">共有</button>
+  <button class="form-control" style="color:#DCB3FC; width: 100px; "onclick="location.href='login.php'">共有</button>
   </div>
   </form>
 </body>
