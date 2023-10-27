@@ -216,7 +216,7 @@ class DBManager
         return $result[0][0];
     }
 
-    // 一番最後のdp_idを取得
+    // 一番最後のdateAndPhoto_idを取得
     public function getMaxPdId() {
         $pdo = $this->dbConnect();
         $sql = "SELECT dp_id FROM photoAndData ORDER BY dp_id DESC LIMIT 1";
@@ -249,6 +249,27 @@ class DBManager
         $replace = sprintf('%07d', $num);
         return $replace;
     }
+
+    // 指定したid(VARCHAR)に+1した値を返す(VARCHAR)
+    public function nextId($id) {
+        $nextId = $this->strToNum($id);
+        $nextId++;
+        $nextId = $this->numToStr($id);
+        return $nextId;
+
+    }
+
+    // 時間を取得
+    public function getTime() {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT NOW()";
+        $ps = $pdo->query($sql);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってるから[0][0]を付けてる
+        return $result[0][0];
+    }
+
 
     // --------------------------------データ関係------------------------------------
 
@@ -300,14 +321,49 @@ class DBManager
 
     }
 
-    // 新しいタグを追加
-    // tag_idは手動で制御する
-    public function insertTag($tag_id, $tag_name) {
+
+    // --------------------------------タグ関係------------------------------------
+
+    // タグ新規登録処理
+    public function insertTag($data_id, $tag_id, $tag_name, $time) {
+
+        // tagテーブルに登録
+        $tagTbl = $this->insertTagTbl($tag_name);
+
+        // tagAndDataテーブルに登録
+        $tdTbl = $this->insertTdTbl($data_id,$tag_id, $time);
+    }
+
+    // tag登録
+    public function insertTagTbl($tag_name) {
         $pdo = $this->dbConnect();
+        // 一番最後のtag_idを取得し、+1されたtag_idを生成する
+        $tag_id = $this->getMaxTagId();
+        $tag_id = $this->nextId($tag_id);
+        
         $sql = "INSERT INTO tag(tag_id, tag_name) VALUES (?,?)";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $tag_id, PDO::PARAM_STR);
         $ps->bindValue(2, $tag_name, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // 戻り値はいらない
+        return $result;
+    }
+    
+    // tagAndData登録
+    public function insertTdTbl($data_id,$tag_id, $time) {
+        $pdo = $this->dbConnect();
+        // 一番最後のtd_idを取得し、+1されたtd_idを生成する
+        $maxId = $this->getMaxTdId();
+        $td_id = $this->nextId($maxId);
+
+        $sql = "INSERT INTO tagAndData(td_id, data_id, tag_id, used_time) VALUES (?,?,?,?)";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $td_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $data_id, PDO::PARAM_STR);
+        $ps->bindValue(3, $tag_id, PDO::PARAM_STR);
+        $ps->bindValue(4, $time, PDO::PARAM_STR);
         $ps->execute();
         $result = $ps->fetchAll();
         // 戻り値はいらない
@@ -325,42 +381,65 @@ class DBManager
         $result = $ps->fetchAll();
         return $result;
     }
-
-    // タグ最終利用時間更新処理
-    // tagAndDataテーブルでdata_idでソートしてused_timeを更新する
-    // used_timeは更新する際に取得した時間を格納する
-    // $tag_idsは「1,2,3,~」みたいに、変更したいtag_idを書く
-    public function updateTagTime($data_id, $tag_ids) {
+    
+    // タグ最終利用時間更新処理(仮)
+    public function updateTagTimeSub($time, $data_id, $tag_id) {
         $pdo = $this->dbConnect();
-        $sql = "UPDATE tagAndData SET used_time = NOW() WHERE data_id = ? IN (?);
-        ";
+        $sql = 'UPDATE tagAndData SET used_time = ? WHERE data_id = ? AND tag_id = ?';
         $ps = $pdo->prepare($sql);
-        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
-        $ps->bindValue(2, $tag_ids, PDO::PARAM_STR);
+        $ps->bindValue(1, $time, PDO::PARAM_STR);
+        $ps->bindValue(2, $data_id, PDO::PARAM_STR);
+        $ps->bindValue(3, $tag_id, PDO::PARAM_STR);
         $ps->execute();
         $result = $ps->fetchAll();
         // 戻り値はいらないかも
         return $result;
     }
 
-    // 検索
-    public function search() {
+    // タグ最終利用時間更新処理(理想)
+    // tagAndDataテーブルでdata_idでソートしてused_timeを更新する
+    // used_timeは更新する際に取得した時間を格納する
+    // $tag_idsは「"'0000001','0000002','0000003',~"」みたいに、変更したいtag_idを書く
+
+    // public function updateTagTime($data_id, $tag_ids) {
+    //     $pdo = $this->dbConnect();
+    //     $sql = 'UPDATE tagAndData SET used_time = NOW() WHERE data_id = ? AND tag_id IN (?)';
+    //     $ps = $pdo->prepare($sql);
+    //     $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+    //     $ps->bindValue(2, $tag_ids, PDO::PARAM_STR);
+    //     $ps->execute();
+    //     $result = $ps->fetchAll();
+    //     // 戻り値はいらないかも
+    //     return $result;
+    // }
+
+
+    // --------------------------------検索関係------------------------------------
+
+    // 検索(タイトル、メモ、タグ、日付)
+    public function search($title, $memo, $tag, $day) {
 
     }
+
     
+    // --------------------------------写真関係------------------------------------
+
     // 保存する写真の名前を決める(拡張子抜き)
     public function getPhotoNextId() {
         $pdo = $this->dbConnect();
         // 一番最後のphoto_idを取得し、+1されたphoto_idを生成する
         $maxId = $this->getMaxPhotoId();
-        $maxId = $this->strToNum($maxId);
-        $maxId++;
-        $maxId = $this->numToStr($maxId);
+        $maxId = $this->nextId($maxId);
         return $maxId;
     }
+
     // 写真登録処理
     public function insertPhoto($data_id, $photo_id, $photo_name) {
+
+        // photoテーブルに登録
         $photoTbl = $this->insertPhotoTbl($photo_id, $photo_name);
+
+        // photoAndDataテーブルに登録
         $PdTbl = $this->insertPdTbl($data_id,$photo_id);
     }
 
@@ -382,9 +461,8 @@ class DBManager
         $pdo = $this->dbConnect();
         // 一番最後のdp_idを取得し、+1されたdp_idを生成する
         $maxId = $this->getMaxPdId();
-        $maxId = $this->strToNum($maxId);
-        $maxId++;
-        $dp_id = $this->numToStr($maxId);
+        $dp_id = $this->nextId($maxId);
+
         $sql = "INSERT INTO photoAndData(dp_id, data_id, photo_id) VALUES (?,?,?)";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $dp_id, PDO::PARAM_STR);
@@ -400,6 +478,9 @@ class DBManager
 
 
 
+
+
+    // --------------------------------過去の開発の処理------------------------------------
 
     
     // ユーザー名重複チェック(1行以上結果が返ってきたら重複している)

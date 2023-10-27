@@ -10,16 +10,23 @@
 // gestのtest
     require_once './DBManager.php';
     $dbmng = new DBManager();
-    $test = $dbmng->getDataNewest("0000002");
-    // $name;
-    // foreach ($test as $row) {
-    //     $name = $row['user_name'];
-    // }
 
-    echo '<h1>';
-    var_dump($test);
-    echo '</h1>';
+    // 現在時刻を取得
+    $time = $dbmng->getTime();
+    // 最終利用時間を更新するtag_idを入れておく
+    $newTagTimes = array('0000014' => 'test1',);
+    // 対象data_id
+    $data_id = "0000001";
 
+    // tag使用時間更新処理（成功）
+    // data_idとtag_idから任意のtagを選択する
+    for($val = 0; $val < count($newTagTimes); $val++){
+        echo $time;
+        $tag_id = $newTagTimes[$val];
+        // 引数（更新時間、data_id、tag_id）
+        $test = $dbmng->updateTagTimeSub($time, $data_id, $tag_id);
+    }
+    
     ?>
 </body>
 </html>

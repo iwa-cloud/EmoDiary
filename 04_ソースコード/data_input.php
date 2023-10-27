@@ -3,6 +3,26 @@
             if(isset($_SESSION['name']) == true && isset($_SESSION['id']) == true && isset($_SESSION['useer_id']) == true){
                 header('Location:../try.php');
             }
+
+
+            // require_once './DBManager.php';
+            // $dbmng = new DBManager();
+
+            // // 現在時刻を取得
+            // $time = $dbmng->getTime();
+            // // 最終利用時間を更新するtag_idを入れておく
+            // $newTagTimes = ["0000006","0000002"];
+            // // 対象data_id
+            // $data_id = "0000001";
+
+            // // tag使用時間更新処理（成功）
+            // // data_idとtag_idから任意のtagを選択する
+            // for($val = 0; $val < count($newTagTimes); $val++){
+            //     echo $time;
+            //     $tag_id = $newTagTimes[$val];
+            //     // 引数（更新時間、data_id、tag_id）
+            //     $test = $dbmng->updateTagTimeSub($time, $data_id, $tag_id);
+            // }
     ?> -->
 <!DOCTYPE html>
 <html lang="ja">
