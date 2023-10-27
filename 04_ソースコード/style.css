@@ -118,3 +118,37 @@ margin-bottom: 0.5em;
   margin-top: 10px;
   text-align: right;
 }
+
+
+.b input{
+  width: 50%;
+  height:40px;
+}
+.c input{
+  width:40%;
+}
+.content1 {
+  padding:1em;
+  background-color:#ffffff;
+  margin:1em auto;
+  width:50%;
+  margin-right: 50%;
+  border: 1px solid rgb(0, 0, 0);
+  color: #DCB3FC;
+  }
+
+
+
+.g input{
+  position: absolute;
+  width: 50%;
+  height: 40px;
+  bottom: 5px;
+}
+
+.ky1{
+  position: relative;
+  margin-left: 1330px;
+  margin-top: 10px;
+  text-align: right;
+}
