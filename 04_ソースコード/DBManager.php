@@ -254,7 +254,7 @@ class DBManager
     public function nextId($id) {
         $nextId = $this->strToNum($id);
         $nextId++;
-        $nextId = $this->numToStr($id);
+        $nextId = $this->numToStr($nextId);
         return $nextId;
 
     }
@@ -286,12 +286,12 @@ class DBManager
         return $result;
     }
 
-    // データ一覧取得タグ順(data_id,title, tag)>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // データ一覧取得タグ順(data_id,title, tag)>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     // userが使用したタグの最終利用時間順で並び替える
     // user_idで絞って、tagの最終利用時間順で並び替える
     public function getDataByDate($user_id) {
         $pdo = $this->dbConnect();
-        $sql = "SELECT data.data_id, data.title, tag.tag_name FROM tagAndData JOIN data ON tagAndData.data_id = data.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE user_id = ? ORDER BY c_time DESC";
+        $sql = "SELECT data.data_id, data.title, tag.tag_name, tagAndData.used_time FROM tagAndData JOIN data ON tagAndData.data_id = data.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE user_id = ? ORDER BY used_time DESC";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $user_id, PDO::PARAM_STR);
         $ps->execute();
@@ -300,19 +300,44 @@ class DBManager
         return $result;
     }
 
-    // データ登録処理>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // データプレビュー取得
+    // photoとmemo
+    // user_idなくてもdata_idでいける？
+    public function getDataPAndM($data_id) {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT data.data_id, data.memo, photo.photo FROM photoAndData JOIN data ON photoAndData.data_id = data.data_id JOIN photo ON photo.photo_id = photoAndData.photo_id WHERE data_id = ?";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
+
+    // データ登録処理>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     // tagの入れ方と写真の入れ方を考える
     // タグの挿入後の個数が◯◯以上かどうか検査する
     // データ登録後にデータの個数が◯◯以上になるか検査する
     // tagは$_POSTで配列で渡す
-    public function insertData($user_id, $title, $url, $tag, $memo, $photo) {
+    public function insertData($user_id, $title, $url, $memo, $time) {
         $pdo = $this->dbConnect();
-        $sql = "SELECT data_id, title FROM data WHERE user_id = ? ORDER BY c_time DESC";
+        // 最後のdata_idを取得
+        $maxId = $this->getMaxDataId();
+        $data_id = $this->nextId($maxId);
+
+
+        // INSERT INTO data(data_id, user_id, title, url, memo, c_time) VALUES ("0000004","0000002","test3","testURL3","testMemo3",now());
+        $sql = "INSERT INTO data(data_id, user_id, title, url, memo, c_time) VALUES (?,?,?,?,?,?)";
         $ps = $pdo->prepare($sql);
-        $ps->bindValue(1, $user_id, PDO::PARAM_STR);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $user_id, PDO::PARAM_STR);
+        $ps->bindValue(3, $title, PDO::PARAM_STR);
+        $ps->bindValue(4, $url, PDO::PARAM_STR);
+        $ps->bindValue(5, $memo, PDO::PARAM_STR);
+        $ps->bindValue(6, $time, PDO::PARAM_STR);
         $ps->execute();
         $result = $ps->fetchAll();
-        // $resultが二次元配列になってる
+        // 戻り値はいらない
         return $result;
     }
     
@@ -394,6 +419,29 @@ class DBManager
         $result = $ps->fetchAll();
         // 戻り値はいらないかも
         return $result;
+    }
+
+    // タグ重複検索
+    // タグがすでに登録されていれば最終利用時間を更新し、
+    // 登録されていなければ、新規登録する
+    public function tagDoubleSearch($data_id, $tag_name) {
+        $flg = "no";
+        $pdo = $this->dbConnect();
+        $sql = 'SELECT tag_id FROM tag WHERE tag_name = ?';
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $tag_name, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        if(!(empty($result))) {
+            $flg = $this->insertTagTbl($result[0][0]);
+        } else {
+            // 時間を取得
+            $time = $this->getTime();
+            $flg = $this->updateTagTimeSub($time, $data_id, $result[0][0]);
+        }
+
+        
+        return $flg;
     }
 
     // タグ最終利用時間更新処理(理想)
