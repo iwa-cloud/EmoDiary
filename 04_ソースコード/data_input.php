@@ -16,10 +16,27 @@
     <style>
         .visible {
             display: block;
+            width : 75px;
         }
  
         .hidden {
             display: none;
+            width : 75px;
+        }
+        #first{
+          white-space: nowrap;
+        }
+        #first1_1{
+          width : 75px;
+        }
+        #first1_2{
+          width : 75px;
+        }
+        #first2_1{
+          width : 75px;
+        }
+        #first2_2{
+          width : 75px;
         }
     </style>
 </head>
@@ -37,19 +54,19 @@
                         <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
                       </summary> --> 
                       <summary>
-                        //元のコード
+                        <!-- //元のコード -->
                       <!-- <div id="first">
                         <i type="button" id="first_1" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='login.php'"></i>&emsp;
                         <i type="button" id="first_2" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;
                         <i type="button" id="first_3" class="bi bi-person-fill" style="font-size:40px" onclick="removeExample()"></i> 
                         </div> -->
-                        //クラスの切り替えテスト
-                        <div id="first">
-                        <i type="button" id="first1_1" class="visible" style="font-size:40px;" onclick="location.href='login.php'">◆</i>&emsp;
-                        <i type="button" id="first1_2" class="visible" style="font-size:40px" onclick="location.href='login.php'">🍀</i>&emsp;
-                        <i type="button" id="first2_1" class="hidden" style="font-size:40px;" onclick="location.href='login.php'">💛</i>&emsp;
-                        <i type="button" id="first2_2" class="hidden" style="font-size:40px" onclick="location.href='login.php'">♠</i>&emsp;
-                        <i type="button" id="parent" class="bi bi-person-fill" style="font-size:40px" ></i>
+                        <!-- //クラスの切り替えテスト -->
+                        <div id="first" class="first">
+                        <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
+                        <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
+                        <i type="button" id="first2_1" class="hidden" style="font-size:25px;" onclick="location.href='login.php'">ログアウト</i>&emsp;
+                        <i type="button" id="first2_2" class="hidden" style="font-size:25px;" onclick="location.href='login.php'">ユーザー情報変更</i>&emsp;                   
+                        <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;" ></i>
 
                         </div>
                         </summary>
