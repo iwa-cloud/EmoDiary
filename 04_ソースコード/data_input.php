@@ -38,6 +38,11 @@
         #first2_2{
           width : 75px;
         }
+        .half{
+          float:  left;               
+          margin:  5px;
+          padding:  10px;  
+        }
     </style>
 </head>
 <body>
@@ -62,11 +67,11 @@
                         </div> -->
                         <!-- //クラスの切り替えテスト -->
                         <div id="first" class="first">
-                        <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
-                        <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
-                        <i type="button" id="first2_1" class="hidden" style="font-size:25px;" onclick="location.href='login.php'">ログアウト</i>&emsp;
-                        <i type="button" id="first2_2" class="hidden" style="font-size:25px;" onclick="location.href='login.php'">ユーザー情報変更</i>&emsp;                   
-                        <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;" ></i>
+                        <i type="button" id="first1_1" class="visible bi bi-plus-square half" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
+                        <i type="button" id="first1_2" class="visible bi bi-search half" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
+                        <i type="button" id="first2_1" class="hidden half" style="font-size:25px; " onclick="location.href='login.php'">ログアウト</i>&emsp;
+                        <i type="button" id="first2_2" class="hidden half" style="font-size:25px;" onclick="location.href='login.php'">ユーザー情報変更</i>&emsp;                   
+                        <i type="button" id="parent" class="bi bi-person-fill half" style="font-size:25px;" ></i>
 
                         </div>
                         </summary>
