@@ -28,14 +28,40 @@
     // }
     
     
-    $tag = $dbmng->insertData("0000002", "test4", "testURL4", "testMemo4", $time);
-    echo $tag;
+    
+
+    // $data_id = "0000003";
+    // $user_id = "0000003";
+    // $title = "TitleTest3";
+    // $url = "URLTest3";
+    // $memo = "MemoTest3";
+    // $tag = $dbmng->updateData($data_id, $user_id, $title, $url, $memo, $time);
+    // echo $tag;
+    
+    
+    
+    // $data_id = "0000001";
+    // $tag_name = "楽しい";
+    // $tag = $dbmng->tagDoubleSearch($data_id,$tag_name);
     // var_dump($tag);
-    // if(empty($tag)) {
-    //     echo "no";
-    // }else {
-    //     echo "yes";
-    // }
+    
+    
+    
+    // $data_id = "0000003";
+    // $photo = "0000002";
+    // $tag = $dbmng->photoDoubleSearch($data_id, $photo);
+    
+    $user_id = "0000002";
+    $title = "";
+    $memo = "memotest";
+    $tag_name = "青春";
+    $day = "2023/10/23";
+    $result = $dbmng->search($user_id, $title, $memo, $tag_name, $day);
+    for($val = 0; $val < count($result); $val++){
+        echo "<h2>" . $result[$val] . "</h2>";
+    }
+
+    
 
     
     ?>
