@@ -71,7 +71,7 @@
     <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i><href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
+            <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='./login.php'"></i><href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
                 <div class="col-md-2" style="text-align:right">
                   <details>
                       <!-- <summary>
