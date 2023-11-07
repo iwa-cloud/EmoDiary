@@ -57,8 +57,8 @@
     $tag_name = "青春";
     $day = "2023/10/23";
     $result = $dbmng->search($user_id, $title, $memo, $tag_name, $day);
-    for($val = 0; $val < count($result); $val++){
-        echo "<h2>" . $result[$val] . "</h2>";
+    foreach ($result as $row) {
+        echo "<h2>" . $row['title'] . "</h2>";
     }
 
     
