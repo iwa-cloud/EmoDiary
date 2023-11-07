@@ -502,8 +502,10 @@ class DBManager
         $day = str_replace("/", "-" , $day);
         $day = $day . "%";
         $memo = "%" . $memo . "%";
-
-        $sql = 'SELECT title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = ?) AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = ?) AS sub2 ON data.data_id = sub2.data_id WHERE user_id = ? AND c_time LIKE ? AND (title LIKE ? AND memo LIKE )';
+        $title = "%" . $title . "%";
+        
+        // SELECT title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = "0000002") AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = "青春") AS sub2 ON data.data_id = sub2.data_id WHERE user_id = "0000002" AND c_time LIKE "2023-10-23%" AND (title LIKE "%%" AND memo LIKE "%memotest%");
+        $sql = 'SELECT title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = ?) AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = ?) AS sub2 ON data.data_id = sub2.data_id WHERE user_id = ? AND c_time LIKE ? AND (title LIKE ? AND memo LIKE ?)';
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $user_id, PDO::PARAM_STR);
         $ps->bindValue(2, $tag_name, PDO::PARAM_STR);
