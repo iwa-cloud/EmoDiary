@@ -53,9 +53,9 @@
                         <br>
                         <br>
                         <br>
-                      <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='Login.php'">ログイン</button>
+                      <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='./login_input.php'">ログイン</button>
                     <br>
-                      <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='shinki.php'">新規登録</button>
+                      <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='./sign_up.php'">新規登録</button>
                     </div>
                 </div>
             </div>
