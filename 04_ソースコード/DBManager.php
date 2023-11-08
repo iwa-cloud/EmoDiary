@@ -254,7 +254,7 @@ class DBManager
     public function nextId($id) {
         $nextId = $this->strToNum($id);
         $nextId++;
-        $nextId = $this->numToStr($id);
+        $nextId = $this->numToStr($nextId);
         return $nextId;
 
     }
@@ -286,12 +286,12 @@ class DBManager
         return $result;
     }
 
-    // データ一覧取得タグ順(data_id,title, tag)>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // データ一覧取得タグ順(data_id,title, tag)>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     // userが使用したタグの最終利用時間順で並び替える
     // user_idで絞って、tagの最終利用時間順で並び替える
     public function getDataByDate($user_id) {
         $pdo = $this->dbConnect();
-        $sql = "SELECT data.data_id, data.title, tag.tag_name FROM tagAndData JOIN data ON tagAndData.data_id = data.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE user_id = ? ORDER BY c_time DESC";
+        $sql = "SELECT data.data_id, data.title, tag.tag_name, tagAndData.used_time FROM tagAndData JOIN data ON tagAndData.data_id = data.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE user_id = ? ORDER BY used_time DESC";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $user_id, PDO::PARAM_STR);
         $ps->execute();
@@ -300,41 +300,77 @@ class DBManager
         return $result;
     }
 
-    // データ登録処理>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // データプレビュー取得
+    // photoとmemo
+    // user_idなくてもdata_idでいける？
+    public function getDataPAndM($data_id) {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT data.data_id, data.memo, photo.photo FROM photoAndData JOIN data ON photoAndData.data_id = data.data_id JOIN photo ON photo.photo_id = photoAndData.photo_id WHERE data_id = ?";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
+
+    // データ登録処理>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     // tagの入れ方と写真の入れ方を考える
     // タグの挿入後の個数が◯◯以上かどうか検査する
     // データ登録後にデータの個数が◯◯以上になるか検査する
     // tagは$_POSTで配列で渡す
-    public function insertData($user_id, $title, $url, $tag, $memo, $photo) {
+    public function insertData($user_id, $title, $url, $memo, $time) {
         $pdo = $this->dbConnect();
-        $sql = "SELECT data_id, title FROM data WHERE user_id = ? ORDER BY c_time DESC";
+        // 最後のdata_idを取得
+        $maxId = $this->getMaxDataId();
+        $data_id = $this->nextId($maxId);
+
+        $sql = "INSERT INTO data(data_id, user_id, title, url, memo, c_time) VALUES (?,?,?,?,?,?)";
         $ps = $pdo->prepare($sql);
-        $ps->bindValue(1, $user_id, PDO::PARAM_STR);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $user_id, PDO::PARAM_STR);
+        $ps->bindValue(3, $title, PDO::PARAM_STR);
+        $ps->bindValue(4, $url, PDO::PARAM_STR);
+        $ps->bindValue(5, $memo, PDO::PARAM_STR);
+        $ps->bindValue(6, $time, PDO::PARAM_STR);
         $ps->execute();
         $result = $ps->fetchAll();
-        // $resultが二次元配列になってる
+        // 戻り値はいらない
         return $result;
     }
     
-    // データ更新
-    public function updateData() {
+    // データ更新(data)
+    public function updateData($data_id, $user_id, $title, $url, $memo, $time) {
+        $pdo = $this->dbConnect();
 
+        $sql = "UPDATE data SET title = ?, url = ?, memo = ?, c_time = ? WHERE data_id = ? AND user_id = ?";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $title, PDO::PARAM_STR);
+        $ps->bindValue(2, $url, PDO::PARAM_STR);
+        $ps->bindValue(3, $memo, PDO::PARAM_STR);
+        $ps->bindValue(4, $time, PDO::PARAM_STR);
+        $ps->bindValue(5, $data_id, PDO::PARAM_STR);
+        $ps->bindValue(6, $user_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // 戻り値はいらない
+        return $result;
     }
 
 
     // --------------------------------タグ関係------------------------------------
 
     // タグ新規登録処理
-    public function insertTag($data_id, $tag_id, $tag_name, $time) {
+    public function insertTag($data_id, $tag_name, $time) {
 
         // tagテーブルに登録
-        $tagTbl = $this->insertTagTbl($tag_name);
+        $tag_id = $this->insertTagTbl($tag_name);
 
         // tagAndDataテーブルに登録
         $tdTbl = $this->insertTdTbl($data_id,$tag_id, $time);
     }
 
-    // tag登録
+    // tag登録処理
     public function insertTagTbl($tag_name) {
         $pdo = $this->dbConnect();
         // 一番最後のtag_idを取得し、+1されたtag_idを生成する
@@ -347,11 +383,11 @@ class DBManager
         $ps->bindValue(2, $tag_name, PDO::PARAM_STR);
         $ps->execute();
         $result = $ps->fetchAll();
-        // 戻り値はいらない
-        return $result;
+        // 戻り値はtag_id
+        return $tag_id;
     }
     
-    // tagAndData登録
+    // tagAndData登録処理
     public function insertTdTbl($data_id,$tag_id, $time) {
         $pdo = $this->dbConnect();
         // 一番最後のtd_idを取得し、+1されたtd_idを生成する
@@ -396,6 +432,34 @@ class DBManager
         return $result;
     }
 
+    // タグ重複検索
+    // タグがすでに登録されていれば最終利用時間を更新し、
+    // 登録されていなければ、新規登録する
+    public function tagDoubleSearch($data_id, $tag_name) {
+        $flg = "no";
+        // 時間を取得
+        $time = $this->getTime();
+
+        $pdo = $this->dbConnect();
+        $sql = 'SELECT tag_id FROM tag WHERE tag_name = ?';
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $tag_name, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        if(empty($result)) {
+            $flg = $this->insertTag($data_id, $tag_name, $time);
+        } else {
+            $tag_id = (String)$result[0][0];
+            $flg = $this->updateTagTimeSub($time, $data_id, $tag_id);
+        }
+        
+        return $result;
+    }
+
+    
+    
+
+
     // タグ最終利用時間更新処理(理想)
     // tagAndDataテーブルでdata_idでソートしてused_timeを更新する
     // used_timeは更新する際に取得した時間を格納する
@@ -412,19 +476,57 @@ class DBManager
     //     // 戻り値はいらないかも
     //     return $result;
     // }
-
-
+    
+    
     // --------------------------------検索関係------------------------------------
+    
+
 
     // 検索(タイトル、メモ、タグ、日付)
-    public function search($title, $memo, $tag, $day) {
+    // （要変換）カレンダーの値   (yyyy/MM/dd) -> (yyyy-MM-dd)
 
+    // カレンダーから検索 -> SELECT * FROM data WHERE c_time LIKE "2023-10-23%";
+    // title -> 'SELECT * FROM data WHERE user_id = "0000002" AND (title LIKE "" AND memo LIKE "%memotest%");'
+    // tag -> 'SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = "0000002") AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = "青春";'
+
+    // search -> 'SELECT title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = "0000002") AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = "青春") AS sub2 ON data.data_id = sub2.data_id WHERE user_id = "0000002" AND c_time LIKE "2023-10-23%" AND (title LIKE "" AND memo LIKE "%memotest%");'
+    // タグ検索（検索処理で利用）
+    // LIKE検索で検索したい
+    // dataをuser_idで絞ってdata_idを取得
+    // それとtagAndDataとtagを結びつけて
+    // それからtagをtag_nameで絞って検索する
+    public function search($user_id, $title, $memo, $tag_name, $day) {
+        $pdo = $this->dbConnect();
+        
+        // 検索用に修正
+        $day = str_replace("/", "-" , $day);
+        $day = $day . "%";
+        $memo = "%" . $memo . "%";
+        $title = "%" . $title . "%";
+        
+        // SELECT title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = "0000002") AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = "青春") AS sub2 ON data.data_id = sub2.data_id WHERE user_id = "0000002" AND c_time LIKE "2023-10-23%" AND (title LIKE "%%" AND memo LIKE "%memotest%");
+        $sql = 'SELECT title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = ?) AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = ?) AS sub2 ON data.data_id = sub2.data_id WHERE user_id = ? AND c_time LIKE ? AND (title LIKE ? AND memo LIKE ?)';
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $user_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $tag_name, PDO::PARAM_STR);
+        $ps->bindValue(3, $user_id, PDO::PARAM_STR);
+        $ps->bindValue(4, $day, PDO::PARAM_STR);
+        $ps->bindValue(5, $title, PDO::PARAM_STR);
+        $ps->bindValue(6, $memo, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // titleの配列
+        return $result;
     }
 
     
     // --------------------------------写真関係------------------------------------
+    // 写真を保存するときは名前を変える！！！！！！
+    // $photoにはフルパスを、$photo_nameには名前だけを入れる
 
-    // 保存する写真の名前を決める(拡張子抜き)
+
+
+    // 保存する写真の名前を生成(拡張子抜き)
     public function getPhotoNextId() {
         $pdo = $this->dbConnect();
         // 一番最後のphoto_idを取得し、+1されたphoto_idを生成する
@@ -434,18 +536,22 @@ class DBManager
     }
 
     // 写真登録処理
-    public function insertPhoto($data_id, $photo_id, $photo_name) {
+    public function insertPhoto($data_id, $photo_name) {
 
         // photoテーブルに登録
-        $photoTbl = $this->insertPhotoTbl($photo_id, $photo_name);
+        $photo_id = $this->insertPhotoTbl($photo_name);
 
         // photoAndDataテーブルに登録
         $PdTbl = $this->insertPdTbl($data_id,$photo_id);
     }
 
     // photo登録
-    public function insertPhotoTbl($photo_id, $photo_name) {
+    public function insertPhotoTbl($photo_name) {
         $pdo = $this->dbConnect();
+        // 一番最後のdp_idを取得し、+1されたdp_idを生成する
+        $maxId = $this->getMaxPhotoId();
+        $photo_id = $this->nextId($maxId);
+
         $sql = "INSERT INTO photo(photo_id, photo) VALUES (?,?)";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $photo_id, PDO::PARAM_STR);
@@ -453,11 +559,11 @@ class DBManager
         $ps->execute();
         $result = $ps->fetchAll();
         // 戻り値はいらない
-        return $result;
+        return $photo_id;
     }
     
     // photoAndData登録
-    public function insertPdTbl($data_id,$photo_id) {
+    public function insertPdTbl($data_id, $photo_id) {
         $pdo = $this->dbConnect();
         // 一番最後のdp_idを取得し、+1されたdp_idを生成する
         $maxId = $this->getMaxPdId();
@@ -474,7 +580,55 @@ class DBManager
         return $result;
     }
 
-    
+
+    // 写真重複検索
+    // 写真がすでに登録されていれば最終利用時間を更新し、
+    // 登録されていなければ、新規登録する
+    // data_idと写真の名前(./img/~.jpeg)
+    // 後に、先にphotoAndDataテーブルでdata_idで検索してから、LEFT OUTER JOINで結合したい
+    public function photoDoubleSearch($data_id, $photo) {
+        // LIKE検索用に修正
+        $photoLike = "%" . $photo . "%";
+
+        // パスの名前を格納
+        $photo_name = "./img/" . $photo . ".jpeg";
+
+        $pdo = $this->dbConnect();
+        // $sql = 'SELECT photo_id FROM photo WHERE photo LIKE ?';
+        // 指定したdata_idにphotoがあるか検索
+        $sql = 'SELECT photoAndData.photo_id FROM photoAndData INNER JOIN photo ON photoAndData.photo_id = photo.photo_id WHERE data_id = ?';
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        if(empty($result)) {
+            // 新規登録
+            $result = $this->insertPhoto($data_id, $photo_name);
+        } else {
+            // photo_idを$photoに格納
+            $photo = $result[0][0];
+            // 更新
+            $result = $this->updatePhoto($photo, $photo_name);
+        }
+        
+        return $result;
+    }
+
+
+    // 写真を上書き保存する
+    // (photoテーブルのphoto_idに紐づいた写真のパスを更新する)
+    public function updatePhoto($photo_id, $photo_name) {
+        $pdo = $this->dbConnect();
+
+        $sql = 'UPDATE photo SET photo = ? WHERE photo_id = ?';
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $photo_name, PDO::PARAM_STR);
+        $ps->bindValue(2, $photo_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // 戻り値はいらないかも
+        return $result;
+    }
 
 
 
