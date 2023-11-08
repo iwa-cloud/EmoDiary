@@ -17,8 +17,8 @@
                 <div class="col-md-2" style="text-align:right">
                   <details>
                       <summary>
-                        <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='login.php'"></i>&emsp;
-                        <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;
+                        <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='.php'"></i>&emsp;
+                        <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='.php'"></i>&emsp;
                         <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
                       </summary>
                     <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ログイン</button>
@@ -28,22 +28,16 @@
           </div>
         </div>
       </nav>
-
-<!-- <div class="container-fluid">
-    <div class="text-center mt-3">
-    <img src="./logo.png" width="15%">
-</div> -->
      <div id="maindiv" class="container">
         <div class = "row mt-5">
             <div class="offset-md-3 col-md-6">
             <div class="container-fluid">
-             <!-- <div class="text-center mt-3"> -->
-            <!-- <img src="./logo.png" width="50%"> -->
             </div>
                 <div class="row">
                     <div class="col-md-12 mt-1 mb-1 alert-danger text-center" id="errorMsg">
                     </div>
                 </div> 
+                <br>
                 <br>
                 <br>
                 <br>
@@ -59,7 +53,7 @@
             <div class="row">
                 <div class="col-md-12 mt-2">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-secondary btn-lg " style="background:white; color:#DCB3FC;" onclick="location.href='Login.php'">TOP画面へ</button>
+                        <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">TOP画面へ</button>
                     </div>
                 </div> 
             </div>

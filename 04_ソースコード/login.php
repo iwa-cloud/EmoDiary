@@ -33,26 +33,16 @@
         <div class = "row mt-5">
             <div class="offset-md-3 col-md-6">
             <div class="container-fluid">
-             <!-- <div class="text-center mt-3">
-            <img src="./logo.png" width="50%">
-            </div> -->
-                <div class="row">
-                    <div class="col-md-12 mt-1 mb-1 alert-danger text-center" id="errorMsg">
-                    </div>
-                </div> 
-                <div class="row">
-                  <div class="col-md-12 mt-1 mb-1 alert-danger text-center" id="errorMsg">
-                  </div>
+              <br>
+              <div class="text-center mt-3">
+                <img src="./logo.png" width="50%">
               </div>
+              <br>
+              <br>
+              <br>
             <div class="row">
                 <div class="col-md-12 mt-2">
                     <div class="d-grid gap-2">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
                       <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='Login.php'">ログイン</button>
                     <br>
                       <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='shinki.php'">新規登録</button>

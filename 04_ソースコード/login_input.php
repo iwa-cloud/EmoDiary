@@ -30,8 +30,8 @@
                 <div class="col-md-2" style="text-align:right">
                   <details>
                       <summary>
-                        <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='login.php'"></i>&emsp;
-                        <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;
+                        <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='.php'"></i>&emsp;
+                        <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='.php'"></i>&emsp;
                         <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
                       </summary>
                     <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ログイン</button>

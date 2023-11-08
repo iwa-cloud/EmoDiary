@@ -26,8 +26,8 @@
             <div class="col-md-2" style="text-align:right">
               <details>
                   <summary>
-                    <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='login.php'"></i>&emsp;
-                    <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;
+                    <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='.php'"></i>&emsp;
+                    <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='.php'"></i>&emsp;
                     <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
                   </summary>
                 <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ログイン</button>
@@ -63,7 +63,7 @@
             </div>
             <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
                 <p style="text-align: left; color:#DCB3FC;">confirmpass</p>
-                <input type="confirmpass" name="confirmpass" class="form-control" id="txt4"  required>
+                <input type="password" name="confirmpass" class="form-control" id="txt4"  required>
             </div>
             <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-4">
                 <input type="submit" class="form-control" value="新規登録" style="color:#DCB3FC;">
