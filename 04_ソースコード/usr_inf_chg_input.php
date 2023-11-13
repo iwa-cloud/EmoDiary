@@ -198,5 +198,6 @@
             pwd2.type = chk2.checked ? "text" : "password";
         };
     </script>
+    <script src="./header.js"></script>
 </body>
 </html>
