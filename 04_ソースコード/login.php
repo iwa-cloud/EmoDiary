@@ -1,3 +1,9 @@
+<?php
+  session_start(); 
+  $_SESSION['input_mail'] = "";
+  $_SESSION['input_pass'] = "";
+  $_SESSION['error'] = "";
+?>
 <!DOCTYPE html>
 <html>
 <head>
