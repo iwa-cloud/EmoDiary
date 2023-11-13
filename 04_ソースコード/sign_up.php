@@ -1,9 +1,10 @@
-<!-- <?php
-            session_start();
-            if(isset($_SESSION['name']) == true && isset($_SESSION['id']) == true && isset($_SESSION['useer_id']) == true){
-                header('Location:../try.html');
-            }       
-    ?> -->
+<?php
+  session_start();
+  $_SESSION['page'] = "sign_up";
+  if(isset($_SESSION['name']) == true && isset($_SESSION['id']) == true && isset($_SESSION['useer_id']) == true){
+      header('Location:../try.html');
+  }       
+?>
     <!DOCTYPE html>
     <html lang="ja">
     <head>
@@ -67,10 +68,10 @@
     <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='./login_input.php'"></i>&emsp;<href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
+            <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='./login.php'"></i>&emsp;<href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
                 <div class="col-md-2" style="text-align:right">
                   <details>
-                      <summary>
+                      <!-- <summary>
                         <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='.php'"></i>&emsp;
                         <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='.php'"></i>&emsp;
                         <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
@@ -150,17 +151,17 @@
         </div>
       </nav>
             <div class="text-danger text-center">
-                <!-- <?php
-                if(isset($_SESSION['msg'])){
-                    echo $_SESSION['msg'];
-                    unset($_SESSION['msg']);
-                }
-                ?> -->
+            <?php
+            if(isset($_SESSION['msg'])){
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+            }
+            ?>
             </div>
             <br>
             <br>
             <br>
-            <form action="shinkicheck.php" method="post">
+            <form action="sign_up_input_chk.php" method="post">
                 <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
@@ -173,6 +174,16 @@
                         <p style="text-align: left; color:#DCB3FC;">mail</p>
                         <input type="email" name="mail" class="form-control" id="txt2" required>
                     </div>
+                     
+                    <!-- エラー表示 -->
+                    <?php
+                        if ($_SESSION['error'] != "") {
+                        echo '<div class="error">';
+                        echo $_SESSION['error'];
+                        echo '</div>';
+                        }
+                    ?>
+
                     <div class="col-md-4"></div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4">

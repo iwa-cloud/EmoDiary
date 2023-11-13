@@ -1,9 +1,10 @@
-<!-- <?php
-            session_start();
-            if(isset($_SESSION['name']) == true && isset($_SESSION['id']) == true && isset($_SESSION['useer_id']) == true){
-                header('Location:../try.php');
-            }
-    ?> -->
+<?php
+    session_start();
+    $_SESSION['page'] = "login_input";
+    // if(isset($_SESSION['name']) == true && isset($_SESSION['id']) == true && isset($_SESSION['useer_id']) == true){
+    //     header('Location:../try.php');
+    // }
+    ?>
     <!DOCTYPE html>
     <html lang="ja">
     <head>
@@ -175,7 +176,16 @@
             <br>
             <br>
             <br>
-            <form action="logincheck.php" method="post">
+            <form action="./input_chk.php" method="post">
+                          <!-- エラー表示 -->
+            <?php
+                if ($_SESSION['error'] != "") {
+                echo '<div class="error">';
+                echo $_SESSION['error'];
+                echo '</div>';
+                }
+            ?>
+
                 <div class="container-fluid">
                     <div class="row">
                       <div class="col-md-4"></div>
