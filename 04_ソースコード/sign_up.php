@@ -161,48 +161,54 @@
             <br>
             <br>
             <form action="shinkicheck.php" method="post">
-              <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <p style="text-align: left; color:#DCB3FC;">name</p>
-                    <input type="textbox" name="name" class="form-control" id="txt1"  required>
-                </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <p style="text-align: left; color:#DCB3FC;">mail</p>
-                    <input type="email" name="mail" class="form-control" id="txt2"  required>
-                </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <p style="text-align: left; color:#DCB3FC;">pass</p>
-                    <input type="password" name="pass" class="form-control" id="pwd"  required>
-                </div>
-                <div class="col-md-4">
-                  <input type="checkbox" id="chk" style="margin-top: 50px;"> Show Password
-                </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <p style="text-align: left; color:#DCB3FC;">confirmpass</p>
-                    <input type="password" name="confirmpass" class="form-control" id="pwd"  required>
-                </div>
-                <div class="col-md-4">
-                  <input type="checkbox" id="chk" style="margin-top: 50px;"> Show Password
-                </div>
-                <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-4">
-                    <input type="submit" class="form-control" value="新規登録" style="color:#DCB3FC;">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <p style="text-align: left; color:#DCB3FC;">name</p>
+                        <input type="textbox" name="name" class="form-control" id="txt1" required>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <p style="text-align: left; color:#DCB3FC;">mail</p>
+                        <input type="email" name="mail" class="form-control" id="txt2" required>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <p style="text-align: left; color:#DCB3FC;">pass</p>
+                        <input type="password" name="pass" class="form-control" id="pwd1" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="checkbox" id="chk1" style="margin-top: 50px;"> Show Password
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <p style="text-align: left; color:#DCB3FC;">confirmpass</p>
+                        <input type="password" name="confirmpass" class="form-control" id="pwd2" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="checkbox" id="chk2" style="margin-top: 50px;"> Show Password
+                    </div>
+                    <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
+                        <input type="submit" class="form-control" value="新規登録" style="color:#DCB3FC;">
+                    </div>
                 </div>
             </form>
-        </div>
-        <script>
-          const pwd = document.getElementById("pwd");
-          const chk = document.getElementById("chk");
-
-          chk.onchange = function(e){
-              pwd.type = chk.checked ? "text" : "password";
-          };
-      </script>
+            <script>
+                const pwd1 = document.getElementById("pwd1");
+                const chk1 = document.getElementById("chk1");
+                const pwd2 = document.getElementById("pwd2");
+                const chk2 = document.getElementById("chk2");
+            
+                chk1.onchange = function (e) {
+                    pwd1.type = chk1.checked ? "text" : "password";
+                };
+            
+                chk2.onchange = function (e) {
+                    pwd2.type = chk2.checked ? "text" : "password";
+                };
+            </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
     </html>
