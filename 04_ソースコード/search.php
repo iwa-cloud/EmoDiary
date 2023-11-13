@@ -73,7 +73,7 @@
 
                         </div>
                         </summary>
-                        <script type="text/javascript">
+                        <!-- <script type="text/javascript">
                          const element = document.getElementById("first");
                          const element_1 = document.getElementById("first1_1");
                          const element_2 = document.getElementById("first1_2");
@@ -100,7 +100,7 @@
                               element_4.classList.remove("visible");
                               element_4.classList.add("hidden");
                             }
-                        });
+                        }); -->
                         // function removeExample(){
 					              //           element_1.remove();
                         //           element_2.remove();
@@ -119,7 +119,7 @@
                         //           element.innerHTML= '<i type="button" id="first_2" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;';
                         //           element.innerHTML= '<i type="button" id="first_3" class="bi bi-person-fill" style="font-size:40px" onclick="removeExample()"></i> ';
                         //  }
-                        </script>
+                        <!-- </script> -->
               </details>
                         </div>
             </div>
