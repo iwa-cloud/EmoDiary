@@ -168,6 +168,7 @@ class DBManager
         $ps->bindValue(4, $pass, PDO::PARAM_STR);
         $ps->execute();
         $result = $ps->fetchAll();
+        // 戻り値はいらない
         return $result;
     }
     

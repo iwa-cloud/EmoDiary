@@ -147,24 +147,56 @@
     <br>
     <br>
     <br>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left">name</div>
-        <input type="email" name="name" class="form-control" id="txt1" required>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div style="color: #DCB3FC; text-align:left">name</div>
+                <input type="email" name="name" class="form-control" id="txt1" required>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div style="color: #DCB3FC; text-align:left">pass</div>
+                <input type="password" name="pass" class="form-control" id="pwd1" required>
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" id="chk1" style="margin-top: 40px;"> Show Password
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div style="color: #DCB3FC; text-align:left">confirm pass</div>
+                <input type="password" name="cpass" class="form-control" id="pwd2" required>
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" id="chk2" style="margin-top: 40px;"> Show Password
+            </div>
+            <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
+                <input type="submit" class="btn btn-secondary" name="user" value="ユーザー情報変更" style="background:white; color:#DCB3FC;">
+            </div>
+            <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
+                <input type="submit" class="btn btn-secondary" name="back" value="戻る" style="background:white; color:#DCB3FC;">
+            </div>
+        </div>
     </div>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left">pass</div>
-        <input type="password" name="pass" class="form-control" id="txt2" required>
-    </div>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left">confirm pass</div>
-        <input type="password" name="cpass" class="form-control" id="txt3" required>
-    </div>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-4">
-        <input type="submit" class="btn btn-secondary" name="user" value="ユーザー情報変更" style="background:white; color:#DCB3FC;">
-    </div>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-4">
-        <input type="submit" class="btn btn-secondary" name="back" value="戻る" style="background:white; color:#DCB3FC;">
-    </div>
-    <script src="./header.js"></script>
-  </body>
+    
+    <script>
+        const pwd1 = document.getElementById("pwd1");
+        const chk1 = document.getElementById("chk1");
+        const pwd2 = document.getElementById("pwd2");
+        const chk2 = document.getElementById("chk2");
+    
+        chk1.onchange = function (e) {
+            pwd1.type = chk1.checked ? "text" : "password";
+        };
+    
+        chk2.onchange = function (e) {
+            pwd2.type = chk2.checked ? "text" : "password";
+        };
+    </script>
+</body>
 </html>
