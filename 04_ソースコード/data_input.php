@@ -95,7 +95,7 @@
                          const element_2 = document.getElementById("first_2");
                         //  const element_3 = document.getElementById("first_3");
                             function removeExample(){
-					            element_1.remove();
+					                      element_1.remove();
                                 element_2.remove();
                                 // element_3.remove();
                                 // element.innerHTML+= '<i type="button" style="font-size:20px;">ログアウト</i>';
@@ -108,7 +108,7 @@
                                 // document.write('<button name="button">クリックしてね</button>');
                                 // document.write('</div>');
                             }
-                        });
+                        
                         // function removeExample(){
 					              //           element_1.remove();
                         //           element_2.remove();
