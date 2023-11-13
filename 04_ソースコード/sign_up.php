@@ -96,7 +96,7 @@
 
                         </div>
                         </summary>
-                        <script type="text/javascript">
+                        <!-- <script type="text/javascript">
                          const element = document.getElementById("first");
                          const element_1 = document.getElementById("first1_1");
                          const element_2 = document.getElementById("first1_2");
@@ -123,8 +123,8 @@
                               element_4.classList.remove("visible");
                               element_4.classList.add("hidden");
                             }
-                        });
-                        // function removeExample(){
+                        }); -->
+                        <!-- // function removeExample(){
 					              //           element_1.remove();
                         //           element_2.remove();
                         //           element_3.remove();
@@ -141,7 +141,7 @@
                         //           element.innerHTML= '<i type="button" id="first_1" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='login.php'"></i>&emsp;';
                         //           element.innerHTML= '<i type="button" id="first_2" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;';
                         //           element.innerHTML= '<i type="button" id="first_3" class="bi bi-person-fill" style="font-size:40px" onclick="removeExample()"></i> ';
-                        //  }
+                        //  } -->
                         </script>
               </details>
                         </div>
@@ -183,5 +183,6 @@
         </form>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="./header.js"></script>
 </body>
 </html>

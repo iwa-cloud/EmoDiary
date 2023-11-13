@@ -62,27 +62,14 @@
         <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
             <div class="col-md-2" style="text-align:right">
               <details>
-                  <!-- <summary>
-                    <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='login.php'"></i>&emsp;
-                    <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;
-                    <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
-                  </summary> -->
                   <summary>
-                        <!-- //元のコード -->
-                      <!-- <div id="first">
-                        <i type="button" id="first_1" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='login.php'"></i>&emsp;
-                        <i type="button" id="first_2" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;
-                        <i type="button" id="first_3" class="bi bi-person-fill" style="font-size:40px" onclick="removeExample()"></i> 
-                        </div> -->
-                        <!-- //クラスの切り替えテスト -->
                         <div id="first" class="first">
                           <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;" ></i>
                           <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
                         <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
                         <button type="button" id="first2_2" class="hidden" onclick="location.href='login.php'">ログアウト</button>
                         <button type="button" id="first2_1" class="hidden" onclick="location.href='login.php'">ユーザー変更画面</button>
-                        <!-- <i type="button" id="first2_2" class="hidden" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;                   
-                        <i type="button" id="first2_1" class="hidden" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp; -->
+                        
 
                         </div>
                         </summary>
@@ -178,5 +165,6 @@
     this.style.color = "black"; // 選択後の色を濃いグレーに変更
   });
   </script>
+  <script src="./header.js"></script>
   </body>
   </html>

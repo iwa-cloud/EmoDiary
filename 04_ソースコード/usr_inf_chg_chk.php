@@ -89,7 +89,7 @@
 
                         </div>
                         </summary>
-                        <script type="text/javascript">
+                        <!-- <script type="text/javascript">
                          const element = document.getElementById("first");
                          const element_1 = document.getElementById("first1_1");
                          const element_2 = document.getElementById("first1_2");
@@ -116,7 +116,7 @@
                               element_4.classList.remove("visible");
                               element_4.classList.add("hidden");
                             }
-                        });
+                        }); -->
                         // function removeExample(){
 					              //           element_1.remove();
                         //           element_2.remove();
@@ -177,5 +177,6 @@
             <div class="col-md-3 mt-4"></div>
         </div>
     </div>
+    <script src="./header.js"></script>
 </body>
 </html>

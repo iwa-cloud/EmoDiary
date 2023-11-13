@@ -86,7 +86,7 @@
 
                         </div>
                         </summary>
-                        <script type="text/javascript">
+                        <!-- <script type="text/javascript">
                          const element = document.getElementById("first");
                          const element_1 = document.getElementById("first1_1");
                          const element_2 = document.getElementById("first1_2");
@@ -113,7 +113,7 @@
                               element_4.classList.remove("visible");
                               element_4.classList.add("hidden");
                             }
-                        });
+                        }); -->
                         // function removeExample(){
 					              //           element_1.remove();
                         //           element_2.remove();
@@ -160,6 +160,7 @@
   <button class="form-control" style="color:#DCB3FC; width: 100px; "onclick="location.href='login.php'">共有</button>
   </div>
   </form>
+  <script src="./header.js"></script>
 </body>
 </body>
 </html>
