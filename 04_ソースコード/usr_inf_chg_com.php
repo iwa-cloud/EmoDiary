@@ -63,7 +63,7 @@
         <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
             <div class="col-md-2" style="text-align:right">
               <details>
-                  <summary>
+                  <!-- <summary>
                     <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='.php'"></i>&emsp;
                     <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='.php'"></i>&emsp;
                     <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
