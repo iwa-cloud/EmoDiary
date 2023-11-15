@@ -1,73 +1,74 @@
-.a{
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.a {
   border: none;
   outline: none;
   border-bottom: 1px solid #999;
   padding: 5px 10px;
 }
 
-.line{
-border-left: thick solid #999;
-border-width:1px;
-height:100vw;
-left: 40%;
-position: absolute;
+.line {
+  border-left: thick solid #999;
+  border-width:1px;
+  height:100vw;
+  left: 40%;
+  position: absolute;
 }
 
 ::placeholder {
-color:#DCB3FC;
+  color:#DCB3FC;
 }
 
 .wrap {
-display:flex;
-flex-flow: column;
-height:100px;
-margin:0 0 1em;
+  display:flex;
+  flex-flow: column;
+  height:100px;
+  margin:0 0 1em;
 }
 
 .content {
-padding:1em;
-background-color:#ffffff;
-margin:1em auto;
-width:85%;
-border: 1px solid rgb(0, 0, 0);
-color: #DCB3FC;
+  padding:1em;
+  background-color:#ffffff;
+  margin:1em auto;
+  width:85%;
+  border: 1px solid rgb(0, 0, 0);
+  color: #DCB3FC;
 }
 
-.controller{
-position: fixed;
-left: 40%;
+.controller {
+  position: fixed;
+  left: 40%;
 }
 
 summary {  
   display: block;  
   list-style: none;
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
 }
 
 details summary::-webkit-details-marker {
-
   display: none;
-
 }
 
 details {
-border-radius: 4px;
-padding: 0.5em 0.5em 0;
-width: 250px;
-}
-
-summary {
-font-weight: bold;
-margin: -0.5em -0.5em 0;
-padding: 0.5em;
+  /* border: 1px solid #aaa; */
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+  width: 250px;
 }
 
 details[open] {
-padding: 0.5em;
+  padding: 0.5em;
 }
 
 details[open] summary {
-border-bottom: 1px solid #aaa;
-margin-bottom: 0.5em;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0.5em;
 }
 
 
@@ -76,12 +77,21 @@ margin-bottom: 0.5em;
   position: relative;
   margin-top: 5px;
   margin-right: 600px;
+
+  /* 他の「#nav」に書いてあった値 */
+  /* margin-top: 10px;
+  margin-right: 500px; */
+
   list-style: none;
   font-size: 0;
 }
- 
+
 #nav li {
   width: 152px;
+
+  /* 他の「#nav li」に書いてあった値 */
+  /* width: 146px; */
+  
   text-align: center;
   border: 0.5px solid #aaa9a9;
   background-color: #ffffff;
@@ -99,18 +109,14 @@ margin-bottom: 0.5em;
   padding: 19px;
 }
 
-* {
-      margin: 0px;
-      padding: 0px;
-  }
 
-.h{
+.h {
   position: relative;
   margin-left: 700px;
   margin-top: 280px;
 }
 
-.ky{
+.ky {
   position: relative;
   margin-left: 650px;
   margin-top: 10px;
@@ -118,13 +124,15 @@ margin-bottom: 0.5em;
 }
 
 
-.b input{
+.b input {
   width: 50%;
   height:40px;
 }
-.c input{
+
+.c input {
   width:40%;
 }
+
 .content1 {
   padding:1em;
   background-color:#ffffff;
@@ -133,188 +141,37 @@ margin-bottom: 0.5em;
   margin-right: 50%;
   border: 1px solid rgb(0, 0, 0);
   color: #DCB3FC;
-  }
+}
 
 
 
-.g input{
+.g input {
   position: absolute;
   width: 50%;
   height: 40px;
   bottom: 5px;
 }
 
-.ky1{
+.ky1 {
   position: relative;
   margin-left: 1330px;
   margin-top: 10px;
   text-align: right;
 }
-.kk{
-  position: absolute;
-  margin-left: 705px;
-  margin-top: 255px;
-  text-align: right; 
-}.a{
-  border: none;
-  outline: none;
-  border-bottom: 1px solid #999;
-  padding: 5px 10px;
-}
 
-.line{
-border-left: thick solid #999;
-border-width:1px;
-height:100vw;
-left: 40%;
-position: absolute;
-}
-
-::placeholder {
-color:#DCB3FC;
-}
-
-.wrap {
-display:flex;
-flex-flow: column;
-height:100px;
-margin:0 0 1em;
-}
-
-.content {
-padding:1em;
-background-color:#ffffff;
-margin:1em auto;
-width:85%;
-border: 1px solid rgb(0, 0, 0);
-color: #DCB3FC;
-}
-
-.controller{
-position: fixed;
-left: 40%;
-}
-
-summary {  
-  display: block;  
-  list-style: none;
-}
-
-details summary::-webkit-details-marker {
-
-  display: none;
-
-}
-
-details {
-border-radius: 4px;
-padding: 0.5em 0.5em 0;
-width: 250px;
-}
-
-summary {
-font-weight: bold;
-margin: -0.5em -0.5em 0;
-padding: 0.5em;
-}
-
-details[open] {
-padding: 0.5em;
-}
-
-details[open] summary {
-border-bottom: 1px solid #aaa;
-margin-bottom: 0.5em;
-}
-
-
-
-#nav {
-  position: relative;
-  margin-top: 5px;
-  margin-right: 600px;
-  list-style: none;
-  font-size: 0;
-}
- 
-#nav li {
-  width: 152px;
-  text-align: center;
-  border: 0.5px solid #aaa9a9;
-  background-color: #ffffff;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  line-height: 50px;
-  margin-right: 2px;
-}
- 
-#nav li a {
-  text-decoration: none;
-  color: #DCB3FC;
-  font-weight: bold;
-  padding: 19px;
-}
-
-* {
-      margin: 0px;
-      padding: 0px;
-  }
-
-.h{
-  position: relative;
-  margin-left: 700px;
-  margin-top: 280px;
-}
-
-.ky{
-  position: relative;
-  margin-left: 650px;
-  margin-top: 10px;
-  text-align: right;
-}
-
-
-.b input{
-  width: 50%;
-  height:40px;
-}
-.c input{
-  width:40%;
-}
-.content1 {
-  padding:1em;
-  background-color:#ffffff;
-  margin:1em auto;
-  width:50%;
-  margin-right: 50%;
-  border: 1px solid rgb(0, 0, 0);
-  color: #DCB3FC;
-  }
-
-
-
-.g input{
-  position: absolute;
-  width: 50%;
-  height: 40px;
-  bottom: 5px;
-}
-
-.ky1{
-  position: relative;
-  margin-left: 1330px;
-  margin-top: 10px;
-  text-align: right;
-}
-.kk{
+.kk {
   position: absolute;
   margin-left: 705px;
   margin-top: 255px;
   text-align: right; 
 }
 
-.ff{
+
+
+
+
+
+.ff {
   position: absolute;
   margin-left: 680px;
   margin-top: 0px;
@@ -328,30 +185,23 @@ margin-bottom: 0.5em;
   width:85%;
   border: 1px solid rgb(0, 0, 0);
   color: #DCB3FC;
-  }
+}
 
  
-select{
- 
+select {
   color:#DCB3FC;
 }
  
 #reservationDate {
   color: #DCB3FC;
   padding:1em;
-background-color:#ffffff;
-margin:1em auto;
-width:85%;
-border: 1px solid rgb(0, 0, 0);
+  background-color:#ffffff;
+  margin:1em auto;
+  width:85%;
+  border: 1px solid rgb(0, 0, 0);
 }
 
-.b input{
-  width: 50%;
-  height:40px;
-}
-.c input{
-  width:40%;
-}
+
 .content3 {
   padding:1em;
   background-color:#ffffff;
@@ -360,156 +210,13 @@ border: 1px solid rgb(0, 0, 0);
   margin-right: 50%;
   border: 1px solid rgb(0, 0, 0);
   color: #DCB3FC;
-  }
+}
 
-.g input{
-  position: absolute;
-  width: 50%;
-  height: 40px;
-  bottom: 5px;
-}
-.a{
-  border: none;
-  outline: none;
-  border-bottom: 1px solid #999;
-  padding: 5px 10px;
-}
- 
-.line{
-border-left: thick solid #999;
-border-width:1px;
-height:100vw;
-left: 40%;
-position: absolute;
-}
- 
-::placeholder {
-color:#DCB3FC;
-}
- 
-.wrap {
-display:flex;
-flex-flow: column;
-height:100px;
-margin:0 0 1em;
-}
- 
-.content {
-  padding:1em;
-  background-color:#ffffff;
-  margin:1em auto;
-  width:85%;
-  border: 1px solid rgb(0, 0, 0);
-}
- 
-.content2 {
-  padding:1em;
-  background-color:#ffffff;
-  margin:1em auto;
-  width:85%;
-  border: 1px solid rgb(0, 0, 0);
-  color: #DCB3FC;
-  }
- 
-.controller{
-position: fixed;
-left: 40%;
-}
- 
-summary {  
-  display: block;  
-  list-style: none;
-}
- 
-details summary::-webkit-details-marker {
- 
-  display: none;
- 
-}
- 
-details {
-/* border: 1px solid #aaa; */
-border-radius: 4px;
-padding: 0.5em 0.5em 0;
-width: 250px;
-}
- 
-summary {
-font-weight: bold;
-margin: -0.5em -0.5em 0;
-padding: 0.5em;
-}
- 
-details[open] {
-padding: 0.5em;
-}
- 
-details[open] summary {
-border-bottom: 1px solid #aaa;
-margin-bottom: 0.5em;
-}
- 
- 
- 
-#nav {
-  position: relative;
-  margin-top: 10px;
-  margin-right: 500px;
-  list-style: none;
-  font-size: 0;
-}
- 
-#nav li {
-  width: 146px;
-  text-align: center;
-  border: 0.5px solid #aaa9a9;
-  background-color: #ffffff;
-  display: inline-block;
-  font-size: 16px;
-  height: 50px;
-  line-height: 50px;
-  margin-right: 2px;
-}
- 
-#nav li a {
-  text-decoration: none;
-  color: #DCB3FC;
-  font-weight: bold;
-  padding: 19px;
-}
- 
-* {
-      margin: 0px;
-      padding: 0px;
-  }
- 
-.h{
-  position: relative;
-  margin-left: 700px;
-  margin-top: 280px;
-}
- 
-.ky{
-  position: relative;
-  margin-left: 650px;
-  margin-top: 10px;
-  text-align: right;
-}
- 
- 
-select{
- 
-  color:#DCB3FC;
-}
- 
-#reservationDate {
-  color: #DCB3FC;
-  padding:1em;
-background-color:#ffffff;
-margin:1em auto;
-width:85%;
-border: 1px solid rgb(0, 0, 0);
-}
+
+
+
+
+
 
 .error {
   color: red;
@@ -517,6 +224,6 @@ border: 1px solid rgb(0, 0, 0);
   margin-left: 43%;
 }
 
-table{
+table {
   margin:auto;
-  }
+}
