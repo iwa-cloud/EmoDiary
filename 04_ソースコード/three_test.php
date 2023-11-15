@@ -144,9 +144,9 @@
 </div>
 </div>  
   <div id="nav">
-    <li id = "new" onClick = "click(1)"><a href="#">最新 ↓</a></li>
-    <li id = "tag" onClick = "click(2)"><a href="#">タグ ↓</a></li>
-    <li id = "date" onClick = "click(3)"><a href="#">日付 ↓</a></li>
+    <li id = "newinf" ><a>最新 ↓</a></li>
+    <li id = "tag" onClick = "clickTest(2)"><a>タグ ↓</a></li>
+    <li id = "date" onClick = "clickTest(3)"><a>日付 ↓</a></li>
     <li><a href="#">編集 ↓</a></li>
 
   </div>
@@ -155,17 +155,28 @@
 </div>
 </div>
 <script>
+  // const newinf = document.getElementById('newinf');
+  // newinf.addEventListener('click',function(){
+  // const new_p = document.createElement('p');
+  // new_p.textContent = '最新情報';
+  // newinf.after(new_p);
+  // });
     // const new = document.ElementById("new");
     // const tag = document.ElementById("tag");
     // const date = document.ElementById("date");
-    function click(btn){
+    function clickTest(btn){
     
       if(btn == 1){
-        
-    const htmlContent = '<div>This is HTML content generated with JavaScript</div>';
-
+        // const new_p = document.createElement('p');
+        // new_p.textContent = '最新情報';
+        // newinf.after(new_p);
+    const htmlContent = 'This is HTML content generated with JavaScript';
+    document.write(htmlContent);
     // body要素に生成したHTMLを挿入
-    document.body.innerHTML = htmlContent;
+    console.log("htmlContent");
+    }else{
+      const test = '<div>' + btn + '</div>';
+      console.log("test");
     }
    
 }
