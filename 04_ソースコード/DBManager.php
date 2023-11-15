@@ -125,6 +125,16 @@ class DBManager
         return $result[0][0];
     }
 
+    // ユーザー情報変更処理
+    public function updateUserInfo($uId, $name, $pass) {
+        
+        // ユーザー名を更新
+        $tag_id = $this->updateName($uId, $name);
+
+        // パスワードを更新
+        $tdTbl = $this->updatePass($uId, $pass);
+    }
+
     // ユーザーのパスワードを更新
     public function updatePass($uId, $pass) {
         $pdo = $this->dbConnect();
