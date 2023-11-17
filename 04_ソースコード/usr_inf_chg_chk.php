@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -150,18 +153,25 @@
     <p class="ff" style="color: #ff0000; font-size: 20px;">この内容で登録しますか</p>
     <br>
     <br>
+    <form action="./usr_inf_chg.php" method="post">
     <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left;">name:</div>
+        <div style="color: #DCB3FC; text-align:left;">
+          name:<?php echo $_SESSION ['input_name']?>
+        </div>
         <div class="a" name="name"></div>
     </div>
     <br>
     <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left">mail:</div>
+        <div style="color: #DCB3FC; text-align:left">
+          mail:<?php echo $_SESSION ['input_mail']?>
+        </div>
         <div class="a" name="pass"></div>
     </div>
     <br>
     <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left;">pass:</div>
+        <div style="color: #DCB3FC; text-align:left;">
+          pass:<?php echo $_SESSION ['input_pass']?>
+        </div>
         <div class="a" name="name"></div>
     </div>
     <br>
@@ -177,6 +187,9 @@
             <div class="col-md-3 mt-4"></div>
         </div>
     </div>
+    </form>
+
+
     <script src="./header.js"></script>
 </body>
 </html>

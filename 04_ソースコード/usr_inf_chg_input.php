@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -151,12 +154,21 @@
     <br>
     <br>
     <br>
+    <form action="./usr_inf_chg_input_chk.php" method="post">
     <div class="container-fluid">
         <div class="row">
+          <!-- エラー表示 -->
+          <?php
+              if ($_SESSION['error'] != "") {
+              echo '<div class="error">';
+              echo $_SESSION['error'];
+              echo '</div>';
+              }
+          ?>
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div style="color: #DCB3FC; text-align:left">name</div>
-                <input type="email" name="name" class="form-control" id="txt1" required>
+                <input type="text" name="name" class="form-control" id="txt1" required>
             </div>
             <div class="col-md-4"></div>
             <div class="col-md-4"></div>
@@ -183,6 +195,7 @@
             </div>
         </div>
     </div>
+    </form>
     
     <script>
         const pwd1 = document.getElementById("pwd1");
