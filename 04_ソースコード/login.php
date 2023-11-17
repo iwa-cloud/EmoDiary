@@ -95,13 +95,10 @@
                 <br>
                 <br>
                 <br>
+                <br>
                   <div class="row">
                     <div class="col-md-12 mt-2">
                       <div class="d-grid gap-2">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
                         <br>
                         <br>
                         <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='./login_input.php'">ログイン</button>

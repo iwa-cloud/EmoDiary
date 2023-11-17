@@ -158,7 +158,9 @@
       <br>
       <br>
       <br>
-      <p class="ff" style="color: #ff0000; font-size: 20px;">この内容で登録しますか</p>
+      <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
+      <p style="color: #ff0000; font-size: 20px; text-align: center;">この内容で登録しますか</p>
+      </div>
       <br>
       <br>
       <form action="./sign_up_regist.php" method="post">
