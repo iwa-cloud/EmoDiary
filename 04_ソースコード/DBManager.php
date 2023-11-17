@@ -284,6 +284,42 @@ class DBManager
 
     // --------------------------------データ関係------------------------------------
 
+    // データ一件取得(title, url, memo)
+    public function getData($data_id) {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT * FROM data WHERE data_id = ?";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
+
+    // データ一件取得(tag)
+    public function getDataTag($data_id) {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT tag.tag_name FROM tag JOIN (SELECT tag_id FROM tagAndData WHERE data_id = ?) AS sub ON tag.tag_id = sub.tag_id";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
+
+    // データ一件取得(photo)
+    public function getDataPhoto($data_id) {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT photo.photo FROM photo JOIN (SELECT photo_id FROM photoAndData WHERE data_id = ?) AS sub ON photo.photo_id = sub.photo_id";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
+
     // データ一覧取得最新順兼日付順(data_id, title, c_time)
     // 日付順はphpで処理する
     public function getDataNewest($user_id) {
