@@ -150,6 +150,17 @@
             width: 100px;
             color:#DCB3FC;
         }
+
+        .data_select_width {
+            padding:1em;
+            background-color:#ffffff;
+            margin:1em auto;
+            width:100%;
+            margin-right: 50%;
+            border: 1px solid rgb(0, 0, 0);
+            color: #DCB3FC;
+        }
+
     </style>
 </head>
 
