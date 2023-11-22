@@ -17,6 +17,7 @@ $_SESSION['input_mail']      ==  メールアドレス（ログインする時�
 $_SESSION['user_id']         ==  ユーザーid
 $_SESSION['user_id_cng']     ==  パスワードを変更したいユーザーid
 $_SESSION['error']           ==  エラー文（複数の場合は,でくっつける予定）
+$_SESSION['test']            ==  なんでも
 
 
 
