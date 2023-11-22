@@ -296,10 +296,10 @@ class DBManager
         return $result;
     }
 
-    // データ一件取得(tag)
+    // データ取得(tag)
     public function getDataTag($data_id) {
         $pdo = $this->dbConnect();
-        $sql = "SELECT tag.tag_name FROM tag JOIN (SELECT tag_id FROM tagAndData WHERE data_id = ?) AS sub ON tag.tag_id = sub.tag_id";
+        $sql = "SELECT tag.tag_id, tag.tag_name FROM tag JOIN (SELECT tag_id FROM tagAndData WHERE data_id = ?) AS sub ON tag.tag_id = sub.tag_id";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $data_id, PDO::PARAM_STR);
         $ps->execute();
