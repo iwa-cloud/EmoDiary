@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -89,7 +92,7 @@
 
                         </div>
                         </summary>
-                        <script type="text/javascript">
+                        <!-- <script type="text/javascript">
                          const element = document.getElementById("first");
                          const element_1 = document.getElementById("first1_1");
                          const element_2 = document.getElementById("first1_2");
@@ -116,8 +119,8 @@
                               element_4.classList.remove("visible");
                               element_4.classList.add("hidden");
                             }
-                        });
-                        // function removeExample(){
+                        }); -->
+                        <!-- // function removeExample(){
 					              //           element_1.remove();
                         //           element_2.remove();
                         //           element_3.remove();
@@ -135,7 +138,7 @@
                         //           element.innerHTML= '<i type="button" id="first_2" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;';
                         //           element.innerHTML= '<i type="button" id="first_3" class="bi bi-person-fill" style="font-size:40px" onclick="removeExample()"></i> ';
                         //  }
-                        </script>
+                        </script> -->
               </details>
             </div>
                         </div>
@@ -147,23 +150,67 @@
     <br>
     <br>
     <br>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left">name</div>
-        <input type="email" name="name" class="form-control" id="txt1" required>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form action="./usr_inf_chg_input_chk.php" method="post">
+    <div class="container-fluid">
+        <div class="row">
+          <!-- エラー表示 -->
+          <?php
+              if ($_SESSION['error'] != "") {
+              echo '<div class="error">';
+              echo $_SESSION['error'];
+              echo '</div>';
+              }
+          ?>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div style="color: #DCB3FC; text-align:left">name</div>
+                <input type="text" name="name" class="form-control" id="txt1" required>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div style="color: #DCB3FC; text-align:left">pass</div>
+                <input type="password" name="pass" class="form-control" id="pwd1" required>
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" id="chk1" style="margin-top: 40px;"> Show Password
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div style="color: #DCB3FC; text-align:left">confirm pass</div>
+                <input type="password" name="cpass" class="form-control" id="pwd2" required>
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" id="chk2" style="margin-top: 40px;"> Show Password
+            </div>
+            <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
+                <input type="submit" class="btn btn-secondary" name="user" value="ユーザー情報変更" style="background:white; color:#DCB3FC;">
+            </div>
+            <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
+                <input type="submit" class="btn btn-secondary" name="back" value="戻る" style="background:white; color:#DCB3FC;">
+            </div>
+        </div>
     </div>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left">pass</div>
-        <input type="password" name="pass" class="form-control" id="txt2" required>
-    </div>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
-        <div style="color: #DCB3FC; text-align:left">confirm pass</div>
-        <input type="password" name="cpass" class="form-control" id="txt3" required>
-    </div>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-4">
-        <input type="submit" class="btn btn-secondary" name="user" value="ユーザー情報変更" style="background:white; color:#DCB3FC;">
-    </div>
-    <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-4">
-        <input type="submit" class="btn btn-secondary" name="back" value="戻る" style="background:white; color:#DCB3FC;">
-    </div>
+    </form>
+    
+    <script>
+        const pwd1 = document.getElementById("pwd1");
+        const chk1 = document.getElementById("chk1");
+        const pwd2 = document.getElementById("pwd2");
+        const chk2 = document.getElementById("chk2");
+    
+        chk1.onchange = function (e) {
+            pwd1.type = chk1.checked ? "text" : "password";
+        };
+    
+        chk2.onchange = function (e) {
+            pwd2.type = chk2.checked ? "text" : "password";
+        };
+    </script>
+    <script src="./header.js"></script>
 </body>
 </html>

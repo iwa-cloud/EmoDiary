@@ -54,6 +54,9 @@
 summary {
   display: block;
   list-style: none;
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
 }
 
 details summary::-webkit-details-marker {
@@ -81,6 +84,11 @@ details[open] summary {
   position: relative;
   margin-top: 5px;
   margin-right: 600px;
+
+  /* 他の「#nav」に書いてあった値 */
+  /* margin-top: 10px;
+  margin-right: 500px; */
+
   list-style: none;
   font-size: 0;
 }
@@ -89,6 +97,10 @@ details[open] summary {
   /* width: 9.5vw; */
   min-width: 9.5vw; /* 最小幅を指定 */
   max-width: 9.5vw; /* 最大幅を指定 */
+
+  /* 他の「#nav li」に書いてあった値 */
+  /* width: 146px; */
+  
   text-align: center;
   border: 0.5px solid #aaa9a9;
   background-color: #ffffff;
@@ -151,7 +163,6 @@ details[open] summary {
   margin-top: 10px;
   text-align: right;
 }
-
 .ff {
   position: absolute;
 }
