@@ -273,24 +273,6 @@
                 hoge.style.color = 'black';
             }
         }
-
-        addOption();
-        function addOption() {
-            // selectタグを取得する
-            let select = document.getElementById("selectTag");
-            // optionタグを作成する
-            let option = document.createElement("option");
-
-            <?php
-            foreach ($tag as $tagValue) {
-                echo "option.value = " . $tagValue . ";";
-                echo "select.appendChild(option);";
-            }
-            ?>
-
-            // option.value = 4;
-            // select.appendChild(option);
-        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>

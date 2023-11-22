@@ -119,7 +119,9 @@ if($_FILES['file']['size'] > 0) {
 <body>
     <h2><?php echo $title; ?></h2>
     <h2><?php echo $url; ?></h2>
-    <h2><?php var_dump($tags); ?></h2>
+    <h2><?php foreach($tags  as $option) {
+        echo $option . "  ";
+    } ?></h2>
     <h2><?php echo $memo; ?></h2>
     <h2><?php echo $img; ?></h2>
 </body>

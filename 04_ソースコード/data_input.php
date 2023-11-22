@@ -225,10 +225,10 @@
                           </p>
                       
                           <p class="data_input_width">ハッシュタグ<br>
-                              <select class="data_select_width" id="selectTag" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+                              <select class="data_select_width" id="selectTag" name="selectTags[]" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)" multiple>
 
                               <!-- 表示するやつ -->
-                              <option value="0000000" selected>適用された一覧</option>
+                              <option value="0000000">適用された一覧</option>
 
                               </select>
                           </p>
@@ -348,9 +348,11 @@
             // 「tags」にタグの一覧を追加し、表示
             let option = document.createElement("option");
             // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
-            option.setAttribute("name", "selectTags[]");
+            // option.setAttribute("name", "selectTags");
             option.value = elTag.value;
             option.innerText = selectText;
+            // 選んだ状態にする
+            option.setAttribute("selected", "selected");
             insertTag.appendChild(option);
             // 選択したタグを一覧から削除
             elTag.remove(selectIndex);
@@ -386,12 +388,14 @@
             // 「tags」にタグの一覧を追加し、表示
             let option = document.createElement("option");
             // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
-            option.setAttribute("name", "selectTags[]");
+            // option.setAttribute("name", "selectTags");
 
             option.value = tagMaxId;
             tagMaxId = nextId(tagMaxId);
-
+            
             option.innerText = inputTag.value;
+            // 選んだ状態にする
+            option.setAttribute("selected", "selected");
             insertTag.appendChild(option);
             inputTag.value = "";
         }
