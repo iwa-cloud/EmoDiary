@@ -161,6 +161,11 @@
             <br>
             <br>
             <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <form action="sign_up_input_chk.php" method="post">
                 <div class="row">
                     <div class="col-md-4"></div>
