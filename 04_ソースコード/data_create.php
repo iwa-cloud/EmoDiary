@@ -1,115 +1,127 @@
 <?php
+session_start();
+require_once './DBManager.php';
+$dbmng = new DBManager();
+$_SESSION['test'] = "";
 
-//     require_once './DBManager.php';
-//     $dbmng = new DBManager();
+// photoテーブルの最後のid+1の値を取得
+$photoMaxId = $dbmng->getPhotoNextId();
 
-//     // photoテーブルの最後のid+1の値を取得
-//     $photoMaxId = $dbmng->getPhotoNextId();
+// 登録するデータidを取得
+$data_id = $dbmng->getMaxDataId();
+$data_id = $dbmng->nextId($data_id);
 
-//     // 写真の名前と拡張子を設定
-//     $photoName = $photoMaxId . ".jpeg";
+// 画像の名前を格納
+$photoName;
 
-//     // 試験的に表示
-//     echo '<h1>';
-//     var_dump($photoName);
-//     echo '</h1>';
+//FTPサーバとアカウント情報
+$server = "ftp.lolipop.jp"; //送り先のFTPサーバー名もしくはIP
+$user = "daa.jp-jolly-ohita-1184"; //送り先のFTPユーザ
+$pass = "Pass0219"; //送り先のFTPパスワード
+$remoteDir = './EmoDiary/img/'; //送り先のディレクトリ
+$localDir = './tmpImg/'; //一時アップロードディレクトリ
 
-//     //FTPサーバとアカウント情報
-//     $server = "ftp.lolipop.jp"; //送り先のFTPサーバー名もしくはIP
-//     $user = "daa.jp-jolly-ohita-1184"; //送り先のFTPユーザ
-//     $pass = "Pass0219"; //送り先のFTPパスワード
-//     $remoteDir = './EmoDiary/img/'; //送り先のディレクトリ
-//     $localDir = './tmpImg/'; //一時アップロードディレクトリ
+    // 画像ファイルが送られれば処理を開始
+if( $_FILES['file']['size'] > 0 ){
 
-//     // 画像ファイルが送られれば処理を開始
-// if( $_FILES['file']['size'] > 0 ){
-//     $errorPlace = "";
+    // 写真の名前と拡張子を設定
+    $photoName = $photoMaxId . strstr($_FILES['file']['name'], '.');
 
-//     do{
-//         // 処理が全て実行されれば「true」になる
-//         $flg = false;
+    $errorPlace = "";
 
-//         //FTPサーバに接続
-//         $ftp = ftp_connect($server);
-//         if( !$ftp ) break;
+    do{
+        // 処理が全て実行されれば「true」になる
+        $flg = false;
 
-//         //ログイン
-//         if( !ftp_login($ftp, $user, $pass) ) break;
+        //FTPサーバに接続
+        $ftp = ftp_connect($server);
+        if( !$ftp ) break;
+
+        //ログイン
+        if( !ftp_login($ftp, $user, $pass) ) break;
         
-//         //PASVモードへ変更
-// 	    ftp_pasv($ftp, true);
+        //PASVモードへ変更
+	    ftp_pasv($ftp, true);
 
-//         //アップロード
-//         $local = $localDir . $_FILES['file']['name']; //アップロードするファイル
+        //アップロード
+        $local = $localDir . $_FILES['file']['name']; //アップロードするファイル
         
-//         $remote = $remoteDir . $photoName; //アップロード時の名前
+        $remote = $remoteDir . $photoName; //アップロード時の名前
 
-//         //一時フォルダに一度アップロード
-//         if( !move_uploaded_file($_FILES['file']["tmp_name"], $local) ) break;
+        //一時フォルダに一度アップロード
+        if( !move_uploaded_file($_FILES['file']["tmp_name"], $local) ) break;
 
-//         // 一時フォルダから送り先ディレクトリにアップロード
-//         if( !ftp_put($ftp, $remote, $local, FTP_BINARY) ) break;
+        // 一時フォルダから送り先ディレクトリにアップロード
+        if( !ftp_put($ftp, $remote, $local, FTP_BINARY) ) break;
+
+        //ローカル側のファイルを削除
+        unlink( $localDir . $_FILES['file']['name'] );
+
+        //接続を閉じる
+        ftp_close($ftp);
+        $flg = true;
+
+    }while(0);
+
+    if( $flg ){
+        // 写真のパス
+        $photoPass = "./img/" . $photoName;
+        // 初期化
+        $title = "ありません";
+        $url = "ありません";
+        $memo = "ありません";
+        // $img = "ありません";
+        // 複数入ってる可能性あり
+        $tags;
+
+        // 入力値があれば代入
+        if(!empty($_POST['title'])) {
+            $title = $_POST['title'];
+        }
+        if(!empty($_POST['url'])) {
+            $url = $_POST['url'];
+        }
+        // メモはnameが「bin」になってた
+        if(!empty($_POST['bin'])) {
+            $memo = $_POST['bin'];
+        }
+        if(!empty($_POST['hiddenSelectTags'])) {
+            $tags = $_POST['hiddenSelectTags'];
+        }
         
-//         // //テストメモ
-//         // $errorPlace = "通ってる";
+        // $_SESSION['test'] = $data_id;
 
-//         //ローカル側のファイルを削除
-//         unlink( $localDir . $_FILES['file']['name'] );
+        // 作成時間を取得
+        $time = $dbmng->getTime();
 
-//         //接続を閉じる
-//         ftp_close($ftp);
-//         $flg = true;
+        // DBにデータを登録
+        $result = $dbmng->insertData($data_id, $_SESSION['user_id'], $title, $url, $memo, $time);
 
-//     }while(0);
+        // photoテーブルに写真のパスを保存、photoAndDataテーブルで結びつけ
+        $insertPhoto = $dbmng->insertPhoto($data_id,$photoPass);
 
-//     if( $flg ){
-//         // 写真のパス
-//         $photoPass = "./img/" . $photoName;
-//         // data_idは（仮）
-//         $data_id = "0000001";
+        // tagテーブルにtagを保存、tagAndDataテーブルに結びつけ
+        for($i = 0; $i < count($tags); $i++) {
+            $insertTag = $dbmng->tagDoubleSearch($data_id, $tags[$i], $time);
+        }
 
-//         // photoテーブルに写真のパスを保存、photoAndDataテーブルで結びつけ
-//         $insertPhoto = $dbmng->insertPhoto($data_id,$photoMaxId,$photoPass);
 
-//         // alertの文字を格納
-//         $alert = "成功";
-//     }else{
-//         // alertの文字を格納
-//         $alert = "失敗";
-//     }
+        // alertの文字を格納
+        $alert = "成功";
+    }else{
+        // alertの文字を格納
+        $alert = "失敗";
+    }
 
-//     $_SESSION['error'] = "";
-//     $_SESSION['user_id'] = $user;
-//     header('Location:top.php');
-// }
-
-// 初期化
-$title = "ありません";
-$url = "ありません";
-$memo = "ありません";
-$img = "ありません";
-// 複数入ってる可能性あり
-$tags;
-
-// 入力値があれば代入
-if(!empty($_POST['title'])) {
-    $title = $_POST['title'];
+    $_SESSION['error'] = "";
+    // $_SESSION['test'] = $alert;
+    // $_SESSION['user_id'] = $user;
+    header('Location:top.php');
 }
-if(!empty($_POST['url'])) {
-    $url = $_POST['url'];
-}
-// メモはnameが「bin」になってた
-if(!empty($_POST['bin'])) {
-    $memo = $_POST['bin'];
-}
-if(!empty($_POST['selectTags'])) {
-    $tags = $_POST['selectTags'];
-}
-if($_FILES['file']['size'] > 0) {
-    $img = $_FILES['file']['name'];
-}
+
+
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -117,12 +129,22 @@ if($_FILES['file']['size'] > 0) {
     <title>Document</title>
 </head>
 <body>
-    <h2><?php echo $title; ?></h2>
-    <h2><?php echo $url; ?></h2>
-    <h2><?php foreach($tags  as $option) {
-        echo $option . "  ";
-    } ?></h2>
-    <h2><?php echo $memo; ?></h2>
-    <h2><?php echo $img; ?></h2>
+    <h2><?php
+    // echo $title;
+    ?></h2>
+    <h2><?php
+    // echo $url;
+    ?></h2>
+    <h2><?php
+    // foreach($tags  as $option) {
+    //     echo $option . "  ";
+    // }
+    ?></h2>
+    <h2><?php
+    // echo $memo;
+    ?></h2>
+    <h2><?php
+    // echo $photoPass;
+    ?></h2>
 </body>
-</html>
+</html> -->

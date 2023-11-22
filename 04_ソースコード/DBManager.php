@@ -366,11 +366,8 @@ class DBManager
     // タグの挿入後の個数が◯◯以上かどうか検査する
     // データ登録後にデータの個数が◯◯以上になるか検査する
     // tagは$_POSTで配列で渡す
-    public function insertData($user_id, $title, $url, $memo, $time) {
+    public function insertData($data_id, $user_id, $title, $url, $memo, $time) {
         $pdo = $this->dbConnect();
-        // 最後のdata_idを取得
-        $maxId = $this->getMaxDataId();
-        $data_id = $this->nextId($maxId);
 
         $sql = "INSERT INTO data(data_id, user_id, title, url, memo, c_time) VALUES (?,?,?,?,?,?)";
         $ps = $pdo->prepare($sql);
@@ -482,10 +479,8 @@ class DBManager
     // タグ重複検索
     // タグがすでに登録されていれば最終利用時間を更新し、
     // 登録されていなければ、新規登録する
-    public function tagDoubleSearch($data_id, $tag_name) {
+    public function tagDoubleSearch($data_id, $tag_name, $time) {
         $flg = "no";
-        // 時間を取得
-        $time = $this->getTime();
 
         $pdo = $this->dbConnect();
         $sql = 'SELECT tag_id FROM tag WHERE tag_name = ?';

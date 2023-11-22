@@ -1,5 +1,7 @@
 <?php
     session_start();
+    // 次の画面遷移で使うため、試験的に
+    $_SESSION['user_id'] = "0000002";
     // 他の画面から遷移する際には「data_id」を送ってもらう
     require_once './DBManager.php';
     $dbmng = new DBManager();
@@ -225,10 +227,10 @@
                           </p>
                       
                           <p class="data_input_width">ハッシュタグ<br>
-                              <select class="data_select_width" id="selectTag" name="selectTags[]" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)" multiple>
+                              <select class="data_select_width" id="selectTag" name="selectTags" type="text" autocomplete="on" onchange="changeColor(this)">
 
-                              <!-- 表示するやつ -->
                               <option value="0000000">適用された一覧</option>
+                              <!-- jsでここに一覧を表示 -->
 
                               </select>
                           </p>
@@ -251,6 +253,11 @@
                           <p class="data_input_width">文章<br>
                               <input id="memo" maxlength = 200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
                           </p>
+
+                          <!-- 非表示 -->
+                          <div id="hiddenDiv">
+                            <!-- 選択したタグのinputを非表示で追加 -->
+                          </div>
                   
                       </div>
                           
@@ -282,6 +289,7 @@
             ?>
         );
 
+        // 画面右上のアイコンの表示処理
         const element = document.getElementById("first");
         const Button = document.getElementById("parent");
         const element_2 = document.getElementById("first1_2");
@@ -305,6 +313,7 @@
             }
         });
 
+        // 文字の色を変える処理
         function changeColor(hoge) {
             if (hoge.value == 0) {
                 hoge.style.color = '';
@@ -314,7 +323,7 @@
         }
 
         
-        
+        // タグの一覧をselect要素に入れ込む処理
         function showTags(tIdArr,tNameArr) {
             // select要素(２箇所書かないと反応しない)
             let elTag = document.getElementById("tags");
@@ -327,39 +336,76 @@
                 elTag.appendChild(option);
             }
         }
+
         // select要素(２箇所書かないと反応しない)
         let elTag = document.getElementById("tags");
         // 選ばれた要素
-        let selectedTag = document.getElementById("selectTag")
+        let selectedTag = document.getElementById("selectTag");
         
 
         // タグ一覧からタグを選択した時
         elTag.onchange = event => {
-
-            // テスト用
-            // alert("押されました");
-
-            // select要素
             let insertTag = document.getElementById("selectTag");
             // 選択したoptionのindexを取得
             let selectIndex = elTag.selectedIndex;
-            // indexからtextを取得
             let selectText = elTag.options[selectIndex].text;
+            let eValue = selectText;
+            let option = document.createElement("option");
+            option.value = eValue;
+            option.innerText = selectText;
+            // 選んだ状態にする
+            // option.setAttribute("selected", "selected");
+            insertTag.appendChild(option);
+            // 選択したタグを一覧から削除
+            elTag.remove(selectIndex);
+            
+            // $_POST['selectTags']で受け取るためにinputを非表示で追加
+            let hiddenDiv = document.getElementById("hiddenDiv");
+            let inputEl = document.createElement("input");
+            inputEl.setAttribute("id", eValue);
+            inputEl.setAttribute("type", "hidden");
+            inputEl.name = "hiddenSelectTags[]";
+            inputEl.value = eValue;
+            hiddenDiv.appendChild(inputEl);
+        }
+        
+        // 入力されたタグを追加する処理
+        let tagMaxId = "" + <?php $tagMaxId = $dbmng->nextId($tagMaxId);
+            echo "\"" . $tagMaxId . "\"";?>;
+        function hashed() {
+            // select要素
+            let insertTag = document.getElementById("selectTag");
+            // 入力した要素
+            let inputTag = document.getElementById("inputTag");
+            let eValue = inputTag.value;
             // 「tags」にタグの一覧を追加し、表示
             let option = document.createElement("option");
             // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
             // option.setAttribute("name", "selectTags");
-            option.value = elTag.value;
-            option.innerText = selectText;
+
+            option.value = tagMaxId;
+            
+            option.innerText = eValue;
             // 選んだ状態にする
-            option.setAttribute("selected", "selected");
+            // option.setAttribute("selected", "selected");
             insertTag.appendChild(option);
-            // 選択したタグを一覧から削除
-            elTag.remove(selectIndex);
+            inputTag.value = "";
+            
+            // $_POST['selectTags']で受け取るためにinputを非表示で追加
+            let hiddenDiv = document.getElementById("hiddenDiv");
+            let inputEl = document.createElement("input");
+            inputEl.setAttribute("id", eValue);
+            inputEl.setAttribute("type", "hidden");
+            inputEl.name = "hiddenSelectTags[]";
+            inputEl.value = eValue;
+            hiddenDiv.appendChild(inputEl);
+
+            tagMaxId = nextId(tagMaxId);
         }
 
         // 選択したタグを押下した時
         selectedTag.onchange = event => {
+            let eValue = selectedTag.value;
              // select要素
              let insertTag = document.getElementById("tags");
             // 選択したoptionのindexを取得
@@ -370,34 +416,23 @@
             let option = document.createElement("option");
             // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
             option.setAttribute("name", "tags");
-            option.value = selectedTag.value;
+            option.value = eValue;
             option.innerText = selectText;
             insertTag.appendChild(option);
             // 選択したタグを一覧から削除
             selectedTag.remove(selectIndex);
-        }
 
-        // 入力されたタグを追加する処理
-        let tagMaxId = "" + <?php $tagMaxId = $dbmng->nextId($tagMaxId);
-            echo "\"" . $tagMaxId . "\"";?>;
-        function hashed() {
-            // select要素
-            let insertTag = document.getElementById("selectTag");
-            // 入力した要素
-            let inputTag = document.getElementById("inputTag");
-            // 「tags」にタグの一覧を追加し、表示
-            let option = document.createElement("option");
-            // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
-            // option.setAttribute("name", "selectTags");
+            // 非表示のinputタグも削除
+            let delEl = document.getElementById(eValue);
+            delEl.remove();
 
-            option.value = tagMaxId;
-            tagMaxId = nextId(tagMaxId);
-            
-            option.innerText = inputTag.value;
-            // 選んだ状態にする
-            option.setAttribute("selected", "selected");
-            insertTag.appendChild(option);
-            inputTag.value = "";
+
+            // selectedを再定義
+            // let options = selectedTag.options;
+
+            // for(let i = 0; i < options.length; i++) {
+            //     options[i].setAttribute("selected", "selected");
+            // }
         }
 
         // DBManager.phpのnextId()が使えなかったため、jsで再定義
