@@ -60,10 +60,10 @@ if($_SESSION['searchFlg'] == false) {
 // echo "memo" . $_POST['inputDate'] . '<br>';
 // echo "memo" . $_POST['inputTitle'] . '<br>';
 // var_dump($_POST['inputTag']);
-echo "memo" . $inputMemo . '<br>';
-echo "memo" . $inputDate . '<br>';
-echo "memo" . $inputTitle . '<br>';
-var_dump($inputTag);
+// echo "memo" . $inputMemo . '<br>';
+// echo "memo" . $inputDate . '<br>';
+// echo "memo" . $inputTitle . '<br>';
+// var_dump($inputTag);
 // $data = $dbmng->search($_SESSION['user_id'],$inputMemo, $inputDate, $inputTitle, $inputTag);
 $data = $dbmng->search($_SESSION['user_id'],$inputTitle, $inputMemo, $inputTag, $inputDate);
 
@@ -202,7 +202,8 @@ foreach ($data as $row) {
 
     <!-- 検索結果表示領域 -->
     <div class="col-md-5">
-      <div class="viewScroll viewFrame" id="borderStyle" style="background-color: #dcb3fc53;">
+      <!-- <div class="viewScroll viewFrame" id="borderStyle" style="background-color: #dcb3fc53;"> -->
+      <div class="viewScroll viewFrame" id="borderStyle">
 
         <!-- タイトルを表示 -->
         <!-- <div class="titles">
@@ -244,7 +245,8 @@ foreach ($data as $row) {
     </div>
     
     <!-- 検索入力領域 -->
-    <div class="col-md-7" style="background-color: #b5fcb353;">
+    <!-- <div class="col-md-7" style="background-color: #b5fcb353;"> -->
+    <div class="col-md-7">
       <div id="searchFrame">
         <form action="./search.php" method="post">
           <!-- memo -->
