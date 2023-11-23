@@ -4,8 +4,16 @@
     require_once './DBManager.php';
     $dbmng = new DBManager();
 
-    // 試験的に
-    $_SESSION['data_id'] = "0000001";
+    // 検索画面のflgを初期化'
+    $_SESSION['searchFlg'] = false;
+
+    // search.phpから遷移したか判定
+    if(!empty($_POST['data_id'])) {
+        $_SESSION['data_id'] = $_POST['data_id'];
+    }else{
+        // 試験的に
+        $_SESSION['data_id'] = "0000001";
+    }
 
     // data_idからデータ(title, url, memo)を取得
     $data1 = $dbmng->getData($_SESSION['data_id']);

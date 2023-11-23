@@ -2,6 +2,9 @@
     session_start();
     // 「登録」処理のため、flgに「true」を代入
     $_SESSION['newData'] = true;
+
+    // 検索画面のflgを初期化'
+    $_SESSION['searchFlg'] = false;
     
     // 次の画面遷移で使うため、試験的に
     $_SESSION['user_id'] = "0000002";
@@ -218,7 +221,7 @@
     <div id="data_frame">
         <div class="container-fluid">
             <div class="row">
-                <form action="./data_create.php" method="post"  enctype="multipart/form-data">
+                <form action="./data_create.php" method="post" enctype="multipart/form-data">
                   <!-- 画面の左側 -->
                       <div class="col-lg-6" id="data_left">
                           <p class="data_input_width">タイトル<br>
@@ -356,8 +359,6 @@
             let option = document.createElement("option");
             option.value = eValue;
             option.innerText = selectText;
-            // 選んだ状態にする
-            // option.setAttribute("selected", "selected");
             insertTag.appendChild(option);
             // 選択したタグを一覧から削除
             elTag.remove(selectIndex);
@@ -383,14 +384,10 @@
             let eValue = inputTag.value;
             // 「tags」にタグの一覧を追加し、表示
             let option = document.createElement("option");
-            // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
-            // option.setAttribute("name", "selectTags");
 
             option.value = tagMaxId;
             
             option.innerText = eValue;
-            // 選んだ状態にする
-            // option.setAttribute("selected", "selected");
             insertTag.appendChild(option);
             inputTag.value = "";
             
@@ -428,14 +425,6 @@
             // 非表示のinputタグも削除
             let delEl = document.getElementById(eValue);
             delEl.remove();
-
-
-            // selectedを再定義
-            // let options = selectedTag.options;
-
-            // for(let i = 0; i < options.length; i++) {
-            //     options[i].setAttribute("selected", "selected");
-            // }
         }
 
         // DBManager.phpのnextId()が使えなかったため、jsで再定義
