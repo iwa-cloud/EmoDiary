@@ -488,17 +488,42 @@ class DBManager
         $ps->bindValue(1, $tag_name, PDO::PARAM_STR);
         $ps->execute();
         $result = $ps->fetchAll();
-        if(empty($result)) {
+        if(empty($result[0][0])) {
             $flg = $this->insertTag($data_id, $tag_name, $time);
         } else {
             $tag_id = (String)$result[0][0];
-            $flg = $this->updateTagTimeSub($time, $data_id, $tag_id);
+
+            // data_idとtag_idが結びついた行があるか
+            $flg = $this->dataTagChk($data_id, $tag_id);
+
+            if($flg == "no") {
+                // tagAndDataテーブルに登録
+                $flg = $this->insertTdTbl($data_id, $tag_id, $time);
+            }else{
+                // 最終利用時間を更新
+                $flg = $this->updateTagTimeSub($time, $data_id, $tag_id);
+            }
         }
         
         return $result;
     }
 
-    
+    // data_idとtag_idが結びついているか
+    public function dataTagChk($data_id, $tag_id) {
+        $td = "no";
+        $pdo = $this->dbConnect();
+        $sql = 'SELECT td_id FROM tagAndData WHERE data_id = ? AND tag_id = ?';
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->bindValue(2, $tag_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // 返り値があればtd_idを返す
+        if(!empty($result[0]['td_id'])) {
+            $td = $result[0]['td_id'];
+        }
+        return $td;
+    }
     
 
 

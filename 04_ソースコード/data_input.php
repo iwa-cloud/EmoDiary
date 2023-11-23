@@ -1,5 +1,8 @@
 <?php
     session_start();
+    // 「登録」処理のため、flgに「true」を代入
+    $_SESSION['newData'] = true;
+    
     // 次の画面遷移で使うため、試験的に
     $_SESSION['user_id'] = "0000002";
     // 他の画面から遷移する際には「data_id」を送ってもらう

@@ -7,9 +7,14 @@ $_SESSION['test'] = "";
 // photoテーブルの最後のid+1の値を取得
 $photoMaxId = $dbmng->getPhotoNextId();
 
-// 登録するデータidを取得
-$data_id = $dbmng->getMaxDataId();
-$data_id = $dbmng->nextId($data_id);
+$data_id;
+if($_SESSION['newData'] == true) {
+    // 登録するデータidを取得
+    $data_id = $dbmng->getMaxDataId();
+    $data_id = $dbmng->nextId($data_id);
+}else{
+    $data_id = $_SESSION['data_id'];
+}
 
 // 画像の名前を格納
 $photoName;
