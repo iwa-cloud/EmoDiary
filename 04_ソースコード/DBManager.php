@@ -296,10 +296,22 @@ class DBManager
         return $result;
     }
 
-    // データ取得(tag)
+    // データに適応されているタグを取得
     public function getDataTag($data_id) {
         $pdo = $this->dbConnect();
         $sql = "SELECT tag.tag_id, tag.tag_name FROM tag JOIN (SELECT tag_id FROM tagAndData WHERE data_id = ?) AS sub ON tag.tag_id = sub.tag_id";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
+
+    // 使用されていないタグを取得
+    public function getNotSelectTag($data_id) {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT tag.tag_id, tag.tag_name FROM tag LEFT JOIN (SELECT tag_id FROM tagAndData WHERE data_id = ?) AS sub ON tag.tag_id = sub.tag_id WHERE sub.tag_id IS NULL";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $data_id, PDO::PARAM_STR);
         $ps->execute();
@@ -571,8 +583,8 @@ class DBManager
         $memo = "%" . $memo . "%";
         $title = "%" . $title . "%";
         
-        // SELECT title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = "0000002") AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = "青春") AS sub2 ON data.data_id = sub2.data_id WHERE user_id = "0000002" AND c_time LIKE "2023-10-23%" AND (title LIKE "%%" AND memo LIKE "%memotest%");
-        $sql = 'SELECT title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = ?) AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name = ?) AS sub2 ON data.data_id = sub2.data_id WHERE user_id = ? AND c_time LIKE ? AND (title LIKE ? AND memo LIKE ?)';
+        // SELECT DISTINCT data.data_id, data.title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = "0000002") AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name LIKE "%%") AS sub2 ON data.data_id = sub2.data_id WHERE user_id = "0000002" AND c_time LIKE "2023%" AND (title LIKE "%%" AND memo LIKE "%%");
+        $sql = 'SELECT DISTINCT data.data_id, data.title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = ?) AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name LIKE ?) AS sub2 ON data.data_id = sub2.data_id WHERE user_id = ? AND c_time LIKE ? AND (title LIKE ? AND memo LIKE ?)';
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $user_id, PDO::PARAM_STR);
         $ps->bindValue(2, $tag_name, PDO::PARAM_STR);
