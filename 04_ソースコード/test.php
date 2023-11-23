@@ -1,137 +1,125 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>選択要素の一覧</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <title>検索画面</title>
     <style>
-.custom-dropdown {
-    position: relative;
-    display: inline-block;
-    margin-right: 50px;
-}
+        .visible {
+            display: block;
+            /* width : 25px; */
+        }
+ 
+        .hidden {
+            display: none;
+            /* width : 25px; */
+        }
+        #first{
+          align-items: flex-end;
+          white-space: nowrap;
+        }
+        #first1_1{
+          width : 25px;
+          float: right;
+          margin-right: 20px;
+        }
+        #first1_2{
+          width : 25px;
+          float: right;
+          margin-right: 20px;
+        }
 
-.dropdown-toggle {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.dropdown-list {
-    width: 100px;
-    display: none;
-    position: absolute;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.dropdown-list li {
-    padding: 5px;
-    display: flex;
-    align-items: center;
-}
-
-.delete_btn {
-    margin-left: auto;
-    background-color: #ff0000;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.add-button {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.custom-list {
-    width: 100px;
-    display: none;
-    position: absolute;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.custom-list li {
-    padding: 5px;
-    display: flex;
-    align-items: center;
-}
-
-.add-item-button {
-    margin-left: auto;
-    background-color: #00cc00;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-
-
+        #parent {
+          /* width:25px; */
+          float: right;
+        }
+        .half{
+          float:  left;               
+          margin:  5px;
+          padding:  10px;  
+        }
     </style>
 </head>
 <body>
 
-<div class="custom-dropdown">
-    <button class="dropdown-toggle" id="dropdown-btn">選択</button>
-    <ul class="dropdown-list" id="dropdown-list">
-        <li>項目1 <button class="delete_btn">削除</button></li>
-        <li>項目2 <button class="delete_btn">削除</button></li>
-        <li>項目3 <button class="delete_btn">削除</button></li>
-    </ul>
-</div>
+  <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
+        <div class="col-md-2" style="text-align:right">
+          <details>
+            <summary>
+              <div id="first" class="first">
+                <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;" ></i>
+                <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
+                <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
+                <button type="button" id="first2_2" class="hidden" onclick="location.href='login.php'">ログアウト</button>
+                <button type="button" id="first2_1" class="hidden" onclick="location.href='login.php'">ユーザー変更画面</button>
+              </div>
+            </summary>
+          </details>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-<div class="custom-dropdown">
-    <button class="add-button" id="add-button">追加</button>
-    <ul class="custom-list" id="item-list">
-        <li>項目1 <button class="add-item-button">追加</button></li>
-        <li>項目2 <button class="add-item-button">追加</button></li>
-        <li>項目3 <button class="add-item-button">追加</button></li>
-    </ul>
-</div>
+  <div class="controller">
+    <div class="line">
+    </div>
+  </div>
 
-<script>
-
-let dropdownToggle = document.getElementById("dropdown-btn");
-let dropdownList = document.getElementById("dropdown-list");
-
-dropdownToggle.addEventListener("click", function () {
-    dropdownList.style.display = dropdownList.style.display === "block" ? "none" : "block";
-});
-
-let deleteButtons = document.querySelectorAll(".delete_btn");
-deleteButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-        let listItem = this.parentElement;
-        listItem.parentNode.removeChild(listItem);
-    });
-});
-
-let addButton = document.getElementById("add-button");
-let itemList = document.getElementById("item-list");
-
-addButton.addEventListener("click", function () {
-    itemList.style.display = itemList.style.display === "block" ? "none" : "block";
-});
-
-let addButtons = document.querySelectorAll(".add-item-button");
-
-addButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-        let newItem = document.createElement("li");
-        newItem.innerHTML = '新しい項目 <button class="delete_btn">削除</button>';
-        dropdownList.appendChild(newItem);
-    });
-});
-
-
-</script>
-</body>
-</html>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <input class="content" type="text" placeholder="メモ検索欄" style="color: black;">
+          </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <input type="date" id="reservationDate" placeholder="年／月／日">
+          </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <input class="content" placeholder="タイトル検索欄" style="color: black;">
+          </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <select class="content"  type="text" name="example"  onchange="changeColor(this)">
+          </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <option class="content" value="" selected hidden>タグ検索欄1</option>
+            <option>サンプル</option>
+          </div>
+          </select>
+    </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    function changeColor(hoge){
+      if( hoge.value == 0 ){
+          hoge.style.color = '';
+      }else{
+          hoge.style.color = 'black';
+      }
+  }
+   
+  document.getElementById("reservationDate").addEventListener("change", function () {
+    this.style.color = "black"; // 選択後の色を濃いグレーに変更
+  });
+  </script>
+  <script src="./header.js"></script>
+  </body>
+  </html>
