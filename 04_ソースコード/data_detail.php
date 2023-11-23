@@ -233,7 +233,7 @@
                     </div>
                     <!-- 名前： Data_Detail_Regist_Button -->
                     <div class="DDRButton">
-                        <input type="submit" class="form-control" id="editButton" value="編集" onclick="location.href='data_input.php'">
+                        <input type="submit" class="form-control" id="editButton" value="編集" onclick="location.href='data_edit.php'">
                         <input type="submit" class="form-control" id="shareButton" value="共有">
                     </div>
                 </div>
