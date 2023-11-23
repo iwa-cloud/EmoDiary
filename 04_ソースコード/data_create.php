@@ -28,6 +28,8 @@ $localDir = './tmpImg/'; //一時アップロードディレクトリ
 
     // 画像ファイルが送られれば処理を開始
 if( $_FILES['file']['size'] > 0 ){
+    // 写真のパス
+    $photoPass = "./img/" . $photoName;
 
     // 写真の名前と拡張子を設定
     $photoName = $photoMaxId . strstr($_FILES['file']['name'], '.');
@@ -69,61 +71,62 @@ if( $_FILES['file']['size'] > 0 ){
     }while(0);
 
     if( $flg ){
-        // 写真のパス
-        $photoPass = "./img/" . $photoName;
-        // 初期化
-        $title = "ありません";
-        $url = "ありません";
-        $memo = "ありません";
-        // $img = "ありません";
-        // 複数入ってる可能性あり
-        $tags;
-
-        // 入力値があれば代入
-        if(!empty($_POST['title'])) {
-            $title = $_POST['title'];
-        }
-        if(!empty($_POST['url'])) {
-            $url = $_POST['url'];
-        }
-        // メモはnameが「bin」になってた
-        if(!empty($_POST['bin'])) {
-            $memo = $_POST['bin'];
-        }
-        if(!empty($_POST['hiddenSelectTags'])) {
-            $tags = $_POST['hiddenSelectTags'];
-        }
-        
-        // $_SESSION['test'] = $data_id;
-
-        // 作成時間を取得
-        $time = $dbmng->getTime();
-
-        // DBにデータを登録
-        $result = $dbmng->insertData($data_id, $_SESSION['user_id'], $title, $url, $memo, $time);
-
-        // photoテーブルに写真のパスを保存、photoAndDataテーブルで結びつけ
-        $insertPhoto = $dbmng->insertPhoto($data_id,$photoPass);
-
-        // tagテーブルにtagを保存、tagAndDataテーブルに結びつけ
-        for($i = 0; $i < count($tags); $i++) {
-            $insertTag = $dbmng->tagDoubleSearch($data_id, $tags[$i], $time);
-        }
-
-
         // alertの文字を格納
         $alert = "成功";
     }else{
         // alertの文字を格納
         $alert = "失敗";
     }
-
-    $_SESSION['error'] = "";
-    // $_SESSION['test'] = $alert;
-    // $_SESSION['user_id'] = $user;
-    header('Location:top.php');
+}else{
+    $photoPass = "none";
 }
 
+
+// 初期化
+$title = "ありません";
+$url = "ありません";
+$memo = "ありません";
+// $img = "ありません";
+// 複数入ってる可能性あり
+$tags;
+
+// 入力値があれば代入
+if(!empty($_POST['title'])) {
+    $title = $_POST['title'];
+}
+if(!empty($_POST['url'])) {
+    $url = $_POST['url'];
+}
+// メモはnameが「bin」になってた
+if(!empty($_POST['bin'])) {
+    $memo = $_POST['bin'];
+}
+if(!empty($_POST['hiddenSelectTags'])) {
+    $tags = $_POST['hiddenSelectTags'];
+}
+
+// $_SESSION['test'] = $data_id;
+
+// 作成時間を取得
+$time = $dbmng->getTime();
+
+// DBにデータを登録
+$result = $dbmng->insertData($data_id, $_SESSION['user_id'], $title, $url, $memo, $time);
+
+if($photoPass != "none") {
+    // photoテーブルに写真のパスを保存、photoAndDataテーブルで結びつけ
+    $insertPhoto = $dbmng->insertPhoto($data_id,$photoPass);
+}
+
+// tagテーブルにtagを保存、tagAndDataテーブルに結びつけ
+for($i = 0; $i < count($tags); $i++) {
+    $insertTag = $dbmng->tagDoubleSearch($data_id, $tags[$i], $time);
+}
+
+$_SESSION['error'] = "";
+// $_SESSION['test'] = $alert;
+// $_SESSION['user_id'] = $user;
+header('Location:top.php');
 
 ?>
 <!-- <!DOCTYPE html>
