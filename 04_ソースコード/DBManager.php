@@ -364,7 +364,7 @@ class DBManager
     // user_idなくてもdata_idでいける？
     public function getDataPAndM($data_id) {
         $pdo = $this->dbConnect();
-        $sql = "SELECT data.data_id, data.memo, photo.photo FROM photoAndData JOIN data ON photoAndData.data_id = data.data_id JOIN photo ON photo.photo_id = photoAndData.photo_id WHERE data_id = ?";
+        $sql = "SELECT dataId.memo, photo.photo FROM photoAndData JOIN (SELECT * FROM data WHERE data_id = ?) AS dataId ON photoAndData.data_id = dataId.data_id JOIN photo ON photo.photo_id = photoAndData.photo_id";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $data_id, PDO::PARAM_STR);
         $ps->execute();

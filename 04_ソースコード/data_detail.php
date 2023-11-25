@@ -99,11 +99,11 @@
             justify-content: space-between;
         }
 
-        #data_left {
+        .data_left {
             /* background-color: rgba(255, 201, 201, 0.486); */
         }
 
-        #data_right {
+        .data_right {
             /* background-color: rgba(220, 179, 252, 0.233); */
         }
 
@@ -208,7 +208,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- 画面の左側 -->
-                <div class="col-lg-6" id="data_left">
+                <div class="col-lg-6 data_left">
                     <p class="data_input_width">タイトル<br>
                         <input type="text" name="title" value="<?php echo $title; ?>" readonly required>
                     </p>
@@ -234,7 +234,7 @@
                 </div>
                     
                 <!-- 画面の右側 -->
-                <div class="col-lg-6" id="data_right">
+                <div class="col-lg-6 data_right">
                     <!-- 画像表示領域 -->
                     <div id="imgMaxSize">
                         <img id="imgSize" src="<?php echo $photo; ?>" alt="none">
