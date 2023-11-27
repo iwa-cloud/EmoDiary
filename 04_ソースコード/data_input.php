@@ -17,7 +17,7 @@
     $title = "タイトル";
     $url = "URL";
     $memo = "メモ";
-    $photo = "./img/gray.png";
+    $photo = "./img/dog.png";
     $tagIdArray = array();
     $tagNameArray = array();
     $tagIdJson;
@@ -136,16 +136,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: black;
+            background-color: #EEEEEE;
+        }
+
+        #imgMaxSize2 {
+            width: 100%;
+            max-height: 520px;
+            height: auto;
+
         }
        
         #imgSize {
             /* 試験的に80%にしてる */
-            width: 100%;
-            height: auto;
-            margin: right;
-            /* object-fit: contain; */
-        }
+            max-width: 85%;
+            
+            max-height: 520px;
+             
+            margin: right; 
+            object-fit: contain;
+         }
        
         .DDRButton {
             width: 550px;
@@ -288,7 +297,7 @@
                       <!-- <div class="col-md-6" id="data_right"> -->
                           <!-- 画像表示領域 -->
                           <div id="imgMaxSize">
-                              <img id="imgSize" src="<?php echo $photo; ?>" alt="none">
+                              <img id="imgMaxSize2" src="<?php echo $photo; ?>" alt="none">
                           </div>
                           <div class="DDRButton">
                           <div class="custom-file-input">
