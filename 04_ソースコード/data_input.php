@@ -24,7 +24,7 @@
     $title = "タイトル";
     $url = "URL";
     $memo = "メモ";
-    $photo = "./img/gray.png";
+    $photo = "./img/dog.png";
     $tagIdArray = array();
     $tagNameArray = array();
     $tagIdJson;
@@ -257,7 +257,7 @@
     <div id="data_frame">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <form action="./data_create.php" method="post"  enctype="multipart/form-data">
                         <!-- 画面の左側 -->
                         <div class="col-md-6" id="data_left">
@@ -288,8 +288,7 @@
                                 <option value="0000000" selected>選択してください</option>
                                 <!-- 表示順に関する処理はしてない -->
                             </select>
-                            </p>
-                            
+                            </p>          
  
                             <p class="data_input_width">文章<br>
                             <input id="memo" maxlength = 200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
@@ -300,6 +299,7 @@
                                 <!-- 選択したタグのinputを非表示で追加 -->
                             </div>
                         </div>
+                </div>
 
                         <!-- 画面の右側 -->
                         <div class="col-md-6">
@@ -322,7 +322,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
             </div>
         </div>
     </div>
