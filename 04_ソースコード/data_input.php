@@ -1,5 +1,13 @@
 <?php
     session_start();
+    // 「登録」処理のため、flgに「true」を代入
+    $_SESSION['newData'] = true;
+    // 検索画面のflgを初期化'
+    $_SESSION['searchFlg'] = false;
+    
+    // 次の画面遷移で使うため、試験的に
+    $_SESSION['user_id'] = "0000002";
+
     // 他の画面から遷移する際には「data_id」を送ってもらう
     require_once './DBManager.php';
     $dbmng = new DBManager();
@@ -238,75 +246,83 @@
     </nav>
  
     <!-- 画面の中央に要素を寄せる -->
-    <div id="data_frame">
-        <div class="container-fluid">
-            <div class="row">
+<div id="data_frame">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-md-6">
-                <form action="./data_create.php" method="post"  enctype="multipart/form-data">
-                  <!-- 画面の左側 -->
-                      <div class="col-md-6" id="data_left">
-                          <p class="data_input_width">タイトル<br>
-                              <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
-                          </p>
-                     
-                          <p class="data_input_width">URL(任意)<br>
-                              <input type="text" maxlength = 1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>">
-                          </p>
-                     
-                          <p class="data_input_width">ハッシュタグ<br>
-                              <select class="data_select_width" id="selectTag" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
- 
-                              <!-- 表示するやつ -->
-                              <option value="0000000" selected>適用された一覧</option>
- 
-                              </select>
-                          </p>
- 
-                          <p class="data_input_width">
-                              <input type="text" maxlength = 50 name="tagu" id="inputTag" style="width: 89%; height: 50px;">
-                              <input type="button" class="btn btn-outline-secondary" value="適用" id="button1" style="width: 10%; height: 50px;" onclick="hashed()">
-                          </p>
- 
-                          <p class="data_input_width">
-                              <select class="data_select_width" id="tags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
- 
-                              <!-- 表示するやつ -->
-                              <option value="0000000" selected>選択してください</option>
-                              <!-- 表示順に関する処理はしてない -->
-                                 
-                              </select>
-                          </p>
- 
-                          <p class="data_input_width">文章<br>
-                              <input id="memo" maxlength = 200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
-                          </p>
-    </div>    
-                      </div>
-                         
-                      <!-- 画面の右側 -->
-                      <div class="col-md-6">
-                      <!-- <div class="col-md-6" id="data_right"> -->
-                          <!-- 画像表示領域 -->
-                          <div id="imgMaxSize">
-                              <img id="imgSize" src="<?php echo $photo; ?>" alt="none">
-                          </div>
-                          <div class="DDRButton">
-                          <div class="custom-file-input">
-                              <input type="file" name="file" accept="img/*" onchange="previewImg(this);" id="fileInput">
-                              <label for="fileInput">ファイルを選択</label>
-                          </div>
-                          <!-- 名前： Data_Detail_Regist_Button -->
-                          <br>
-                          <br>
-                          <div class="DDRButton">
-                              <input type="submit" class="form-control" id="editButton" value="登録" onclick="location.href='data_create.php'" style="border: 1px solid #999;">
-                          </div>
-    </div>
-                      </div>
+                <form action="./data_create.php" method="post" enctype="multipart/form-data">
+                    <!-- 画面の左側 -->
+                    <div class="col-md-6" id="data_left">
+                        <p class="data_input_width">タイトル<br>
+                            <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
+                        </p>
+
+                        <p class="data_input_width">URL(任意)<br>
+                            <input type="text" maxlength = 1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>">
+                        </p>
+
+                        <p class="data_input_width">ハッシュタグ<br>
+                            <select class="data_select_width" id="selectTag" name="selectTags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+
+                            <!-- 表示するやつ -->
+                            <option value="0000000" selected>適用された一覧</option>
+
+                        </select>
+                        </p>
+
+                        <p class="data_input_width">
+                            <input type="text" maxlength = 50 name="tagu" id="inputTag" style="width: 89%; height: 50px;">
+                            <input type="button" class="btn btn-outline-secondary" value="適用" id="button1" style="width: 10%; height: 50px;" onclick="hashed()">
+                        </p>
+
+                        <p class="data_input_width">
+                            <select class="data_select_width" id="tags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+
+                            <!-- 表示するやつ -->
+                            <option value="0000000" selected>選択してください</option>
+                            <!-- 表示順に関する処理はしてない -->
+
+                        </select>
+                        </p>
+
+                        <p class="data_input_width">文章<br>
+                            <input id="memo" maxlength = 200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
+                        </p>
+
+                        <!-- 非表示 -->
+                        <div id="hiddenDiv">
+                            <!-- 選択したタグのinputを非表示で追加 -->
+                        </div>
+
+                    </div>    
+                    <!-- </div> -->
+
+                    <!-- 画面の右側 -->
+                    <div class="col-md-6" id="data_right">
+                        <!-- <div class="col-md-6" id="data_right"> -->
+                        <!-- 画像表示領域 -->
+                        <div id="imgMaxSize">
+                            <img id="imgSize" src="<?php echo $photo; ?>" alt="none">
+                        </div>
+                        <div class="DDRButton">
+                            <div class="custom-file-input">
+                                <input type="file" name="file" accept="img/*" onchange="previewImg(this);" id="fileInput">
+                                <label for="fileInput">ファイルを選択</label>
+                                </div>
+                                <!-- 名前： Data_Detail_Regist_Button -->
+                                <br>
+                                <br>
+                                <div class="DDRButton">
+                                    <input type="submit" class="form-control" id="editButton" value="登録" style="border: 1px solid #999;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
     <!-- id="imgMaxSize" -->
  
     <script>
@@ -317,6 +333,7 @@
             ?>
         );
  
+        // 画面右上のアイコンの表示処理
         const element = document.getElementById("first");
         const Button = document.getElementById("parent");
         const element_2 = document.getElementById("first1_2");
@@ -339,7 +356,8 @@
                 element_4.classList.add("hidden");
             }
         });
- 
+
+        // 文字の色を変える処理
         function changeColor(hoge) {
             if (hoge.value == 0) {
                 hoge.style.color = '';
@@ -349,7 +367,7 @@
         }
  
        
-       
+        // タグの一覧をselect要素に入れ込む処理
         function showTags(tIdArr,tNameArr) {
             // select要素(２箇所書かないと反応しない)
             let elTag = document.getElementById("tags");
@@ -362,17 +380,15 @@
                 elTag.appendChild(option);
             }
         }
+
         // select要素(２箇所書かないと反応しない)
         let elTag = document.getElementById("tags");
         // 選ばれた要素
-        let selectedTag = document.getElementById("selectTag")
+        let selectedTag = document.getElementById("selectTag");
        
  
         // タグ一覧からタグを選択した時
         elTag.onchange = event => {
- 
-            // テスト用
-            // alert("押されました");
  
             // select要素
             let insertTag = document.getElementById("selectTag");
@@ -380,19 +396,27 @@
             let selectIndex = elTag.selectedIndex;
             // indexからtextを取得
             let selectText = elTag.options[selectIndex].text;
-            // 「tags」にタグの一覧を追加し、表示
+            let eValue = selectText;
             let option = document.createElement("option");
-            // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
-            option.setAttribute("name", "selectTags[]");
-            option.value = elTag.value;
+            option.value = eValue;
             option.innerText = selectText;
             insertTag.appendChild(option);
             // 選択したタグを一覧から削除
             elTag.remove(selectIndex);
+            
+            // $_POST['selectTags']で受け取るためにinputを非表示で追加
+            let hiddenDiv = document.getElementById("hiddenDiv");
+            let inputEl = document.createElement("input");
+            inputEl.setAttribute("id", eValue);
+            inputEl.setAttribute("type", "hidden");
+            inputEl.name = "hiddenSelectTags[]";
+            inputEl.value = eValue;
+            hiddenDiv.appendChild(inputEl);
         }
  
         // 選択したタグを押下した時
         selectedTag.onchange = event => {
+            let eValue = selectedTag.value;
              // select要素
              let insertTag = document.getElementById("tags");
             // 選択したoptionのindexを取得
@@ -403,11 +427,15 @@
             let option = document.createElement("option");
             // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
             option.setAttribute("name", "tags");
-            option.value = selectedTag.value;
+            option.value = eValue;
             option.innerText = selectText;
             insertTag.appendChild(option);
             // 選択したタグを一覧から削除
             selectedTag.remove(selectIndex);
+            
+            // 非表示のinputタグも削除
+            let delEl = document.getElementById(eValue);
+            delEl.remove();
         }
  
         // 入力されたタグを追加する処理
@@ -418,17 +446,24 @@
             let insertTag = document.getElementById("selectTag");
             // 入力した要素
             let inputTag = document.getElementById("inputTag");
+            let eValue = inputTag.value;
             // 「tags」にタグの一覧を追加し、表示
             let option = document.createElement("option");
-            // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
-            option.setAttribute("name", "selectTags[]");
- 
             option.value = tagMaxId;
-            tagMaxId = nextId(tagMaxId);
- 
-            option.innerText = inputTag.value;
+            
+            option.innerText = eValue;
             insertTag.appendChild(option);
             inputTag.value = "";
+            
+            // $_POST['selectTags']で受け取るためにinputを非表示で追加
+            let hiddenDiv = document.getElementById("hiddenDiv");
+            let inputEl = document.createElement("input");
+            inputEl.setAttribute("id", eValue);
+            inputEl.setAttribute("type", "hidden");
+            inputEl.name = "hiddenSelectTags[]";
+            inputEl.value = eValue;
+            hiddenDiv.appendChild(inputEl);
+            tagMaxId = nextId(tagMaxId);
         }
  
         // DBManager.phpのnextId()が使えなかったため、jsで再定義
