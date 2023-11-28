@@ -1,58 +1,44 @@
 <?php
     session_start();
-    // 「登録」処理のため、flgに「true」を代入
-    $_SESSION['newData'] = true;
-    // 検索画面のflgを初期化'
-    $_SESSION['searchFlg'] = false;
-   
-    // 次の画面遷移で使うため、試験的に
-    $_SESSION['user_id'] = "0000002";
     // 他の画面から遷移する際には「data_id」を送ってもらう
     require_once './DBManager.php';
     $dbmng = new DBManager();
  
-    // 試験的に
-    // $_SESSION['data_id'] = "0000001";
+    // 検索画面のflgを初期化'
+    $_SESSION['searchFlg'] = false;
  
-    // data_idからデータ(tag)を取得
-    $tags = $dbmng->getTags();
- 
-    // タグを入力するやつ用
-    $tagMaxId = $dbmng->getMaxTagId();
-    // $tagMaxId = $dbmng->nextId($tagMaxId);
- 
-    $title = "タイトル";
-    $url = "URL";
-    $memo = "メモ";
-    $photo = "./img/dog.png";
-    $tagIdArray = array();
-    $tagNameArray = array();
-    $tagIdJson;
-    $tagNameJson;
-    // foreach ($data1 as $row) {
-    //     $title = $row['title'];
-    //     $url = $row['url'];
-    //     $memo = $row['memo'];
-    // }
-    // // $data2は埋め込む
-    // foreach ($data3 as $row) {
-    //     $photo = $row['photo'];
-    // }
- 
-    // if($photo == null) {
-    //     $photo = "./img/gray.png";
-    // }
- 
-    foreach ($tags as $row) {
-        // jsで配列を使うため、phpで配列に詰めておく
-        array_push($tagIdArray, $row['tag_id']);
-        array_push($tagNameArray, $row['tag_name']);
+    // search.phpから遷移したか判定
+    if(!empty($_POST['data_id'])) {
+        $_SESSION['data_id'] = $_POST['data_id'];
+    }else{
+        // 試験的に
+        $_SESSION['data_id'] = "0000001";
     }
-   
  
-    // phpの配列をjsで使えるように変換
-    $tagIdJson = json_encode($tagIdArray);
-    $tagNameJson = json_encode($tagNameArray);
+    // data_idからデータ(title, url, memo)を取得
+    $data1 = $dbmng->getData($_SESSION['data_id']);
+    // data_idからデータ(tag)を取得
+    $data2 = $dbmng->getDataTag($_SESSION['data_id']);
+    // data_idからデータ(photo)を取得
+    $data3 = $dbmng->getDataPhoto($_SESSION['data_id']);
+ 
+    $title;
+    $url;
+    $memo;
+    $photo;
+    foreach ($data1 as $row) {
+        $title = $row['title'];
+        $url = $row['url'];
+        $memo = $row['memo'];
+    }
+    // $data2は埋め込む
+    foreach ($data3 as $row) {
+        $photo = $row['photo'];
+    }
+ 
+    if($photo == null) {
+        $photo = "./img/gray.png";
+    }
  
 ?>
 <!DOCTYPE html>
@@ -61,7 +47,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>データ登録画面</title>
+    <title>データ詳細画面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
@@ -270,11 +256,13 @@
                             </p>
                             <br>
                             <p class="data_input_width">ハッシュタグ<br>
-                            <select class="data_select_width" id="selectTag" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
-                                <!-- 表示するやつ -->
-                                <option value="0000000"></option>
-                                <!-- jsでここに一覧を表示 -->
-                            </select>
+                                <select class="data_select_width" id="selectTag" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+                                <?php
+                                    foreach ($data2 as $row) {
+                                        echo "<option>" . $row['tag_name'] . "</option>";
+                                    }
+                                ?>
+                                </select>
                             </p>
                             <br>
                             <br>
@@ -292,7 +280,7 @@
                             </p>           -->
  
                             <p class="data_input_width">文章<br>
-                            <input id="memo" maxlength = 200 class="data_input_width_input" style="height: 230px" type="text" name="bin" value="<?php echo $memo; ?>">
+                                <input id="memo" maxlength = 200  style="height: 230px" type="text" name="bin" value="<?php echo $memo; ?>" readonly>
                             </p>
  
                             <!-- 非表示 -->
@@ -314,6 +302,7 @@
                                     <input type="file" name="file" accept="img/*" onchange="previewImg(this);" id="fileInput">
                                     <label for="fileInput">ファイルを選択</label>
                                 </div> -->
+                                <br>
                                 <div class="DDRButton">
                                     <input type="submit" class="form-control" id="editButton" value="編集" onclick="location.href='data_edit.php'" style="border: 1px solid #999;">
                                 </div>
