@@ -248,15 +248,15 @@
                         <!-- 画面の左側 -->
                         <div class="col-md-6" id="data_left">
                             <p class="data_input_width">タイトル<br>
-                            <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
+                            <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required readonly>
                             </p>
                             <br>
                             <p class="data_input_width">URL(任意)<br>
-                            <input type="text" maxlength = 1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>">
+                            <input type="text" maxlength = 1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>" readonly>
                             </p>
                             <br>
                             <p class="data_input_width">ハッシュタグ<br>
-                                <select class="data_select_width" id="selectTag" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+                                <select class="data_select_width" id="selectTag" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)" readonly>
                                 <?php
                                     foreach ($data2 as $row) {
                                         echo "<option>" . $row['tag_name'] . "</option>";
