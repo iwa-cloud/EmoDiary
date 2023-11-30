@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <style>
+        .parent ul{
+        display: none;
+        }
+        .active {
+        background-color: lightgreen;
+        }
+        .active ul {
+        display: block;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="parent" onclick="func1(this)">親要素1
+          <ul>
+            <li>子要素1-1</li>
+            <li>子要素1-2</li>
+          </ul>
+        </li>
+        <li class="parent" onclick="func1(this)">親要素2
+          <ul>
+            <li>子要素2-1</li>
+            <li>子要素2-2</li>
+          </ul>
+        </li>
+      </ul>
+
+    <script>
+        function func1(e) {
+            e.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>
