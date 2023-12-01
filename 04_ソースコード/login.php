@@ -4,6 +4,7 @@
   $_SESSION['input_mail'] = "";
   $_SESSION['input_pass'] = "";
   $_SESSION['error'] = "";
+  $_SESSION['select_name'] = "new";
 ?>
 <!DOCTYPE html>
 <html>

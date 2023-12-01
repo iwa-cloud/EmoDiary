@@ -201,6 +201,34 @@ $previewMemo = "選択されていません";
       /* padding-right: 10%; */
       margin: 3% 15% 0 auto;
     }
+
+    .tagMenu {
+      /* 要素の大きさは仮 */
+      width: 100%;
+      
+      display: flex;
+      flex-flow: column;
+    }
+    .tagMenu button {
+      border: 1px solid;
+      border-color: rgb(188, 188, 188) transparent rgb(188, 188, 188) rgb(188, 188, 188);
+    }
+    .parent {
+      height: 50px;
+      background: rgba(181, 181, 181, 0.258);
+      color: #DCB3FC;
+      font-size:20px;
+    }
+    .child {
+      height: 50px;
+      background: white;
+      /* margin-left: 20px; */
+      font-size:20px;
+    }
+    .active {
+      display: none;
+    }
+
   </style>
 </head>
 <body>
@@ -241,6 +269,7 @@ $previewMemo = "選択されていません";
           </form><br>
         </div>
         
+
         <!-- タイトル表示領域 -->
         <div class="viewScroll  viewFrame">
           <p id="element1" class="element"></p>
@@ -278,25 +307,44 @@ $previewMemo = "選択されていません";
             }
           }
 
-          // 「タグ順」を押下したとき
-          // <div class="titles">
-          // <input id="acd-chk1" class="acd-chk" type="checkbox">
-          // <label class="acd-label" for="acd-chk1">＃タグ名</label>
-          // <div class="acd-content">
-          //  <strong class="mb-1" style="font-size:20px;">タイトル</strong>
-          // </div>
-          // </div>
           function dateASC($result){
+            $tagNameArr = array();
+            $titles = array();
+            $tagDataId = array();
+
             foreach ($result as $row) {
-              echo '<div class="titles">';
-              echo '<input id="acd-chk1" class="acd-chk" type="checkbox">';
-              echo '<label class="acd-label" for="acd-chk1">'. $row['title'] . '</label>';
-              echo '<div class="acd-content">';
-              echo '<strong class="mb-1" style="font-size:20px;">タイトル</strong>';
-              echo '</div>';
-              echo '</div>';
+              array_push($tagNameArr, $row['tag_name']);
+              array_push($titles, $row['title']);
+              array_push($tagDataId, $row['data_id']);
             }
+
+            // $arr1 = ["tag1", "tag1", "tag1", "tag2", "tag2", "tag3"];
+            // $arr2 = ["title1", "title2", "title3", "title4", "title5", "title6"];
+            // $arr3 = ["0000001", "0000002", "0000003", "0000004", "0000005", "0000006"];
+
+
+            // 初期化
+            $html = '<div class="tagMenu">';
+            $cnt = 0;
+
+            // 配列の要素を順に処理
+            for ($i = 0; $i < count($titles); $i++) {
+                // 親ボタン
+                if ($i == 0 || $tagNameArr[$i] !== $tagNameArr[$i - 1]) {
+                    $html .= '<button type="button" class="parent" onclick="func1(\'c' . ($cnt + 1) . '\')">' . $tagNameArr[$i] . '</button>';
+                    $cnt++;
+                }
+
+                // 子ボタン
+                $html .= '<button type="button" class="child c' . $cnt . ' active" onclick="func2(\'' . $tagDataId[$i] . '\')">' . $titles[$i] . '</button>';
+            }
+
+            // 最後の要素を閉じる
+            $html .= '</div>';
+
+            echo $html;
           }
+
 
           // 【テスト】data_idを出力
           if(!empty($_POST['data_id'])) {
@@ -311,9 +359,10 @@ $previewMemo = "選択されていません";
             $_SESSION['data_id'] = "new";
           }
 
-          echo $_SESSION['data_id'];
+          // echo $_SESSION['data_id'];
           ?>
 
+        <!-- <h1 id="echoText">ここ</h1> -->
         </div>
       </div>
 
@@ -365,6 +414,19 @@ $previewMemo = "選択されていません";
         elements[i].style.display = 'none';
       }
       document.getElementById(elementId).style.display = 'block';
+    }
+
+    function func1(e) {
+      let childs = document.getElementsByClassName(e);
+      for(let i = 0; i < childs.length; i++) {
+        childs[i].classList.toggle("active");
+      }
+        // e.classList.toggle("active");
+    }
+    function func2(text) {
+      let echoText = document.getElementById("echoText");
+      echoText.textContent = text;
+      sendPost('', text);
     }
 
   </script>

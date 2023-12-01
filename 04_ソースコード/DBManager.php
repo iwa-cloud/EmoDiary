@@ -350,7 +350,7 @@ class DBManager
     // user_idで絞って、tagの最終利用時間順で並び替える
     public function getDataByDate($user_id) {
         $pdo = $this->dbConnect();
-        $sql = "SELECT data.data_id, data.title, tag.tag_name, tagAndData.used_time FROM tagAndData JOIN data ON tagAndData.data_id = data.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE user_id = ? ORDER BY used_time DESC";
+        $sql = "SELECT data.data_id, data.title, tag.tag_name, tagAndData.used_time FROM tagAndData JOIN data ON tagAndData.data_id = data.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE user_id = ? ORDER BY tag.tag_name DESC";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $user_id, PDO::PARAM_STR);
         $ps->execute();
