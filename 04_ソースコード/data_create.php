@@ -28,11 +28,12 @@ $localDir = './tmpImg/'; //一時アップロードディレクトリ
 
     // 画像ファイルが送られれば処理を開始
 if( $_FILES['file']['size'] > 0 ){
+    // 写真の名前と拡張子を設定
+    $photoName = $photoMaxId . strstr($_FILES['file']['name'], '.');
+    
     // 写真のパス
     $photoPass = "./img/" . $photoName;
 
-    // 写真の名前と拡張子を設定
-    $photoName = $photoMaxId . strstr($_FILES['file']['name'], '.');
 
     $errorPlace = "";
 
