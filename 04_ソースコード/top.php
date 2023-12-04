@@ -251,7 +251,7 @@ $previewMemo = "選択されていません";
           <details>
             <summary>
               <div id="first" class="first">
-                <i type="li" id="parent" class="bi bi-person-fill" style="font-size:25px;"onclick="location.href='login.php'" ></i>
+                <i type="li" id="parent" class="bi bi-person-fill" style="font-size:25px;"></i>
                 <i type="li" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='search.php'"></i>&emsp;
                 <i type="li" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='data_input.php'"></i>&emsp;
                 <li type="li" id="first2_2" class="hidden" onclick="location.href='logout.php'">ログアウト</li>
