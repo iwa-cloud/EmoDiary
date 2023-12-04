@@ -287,7 +287,7 @@ $previewMemo = "選択されていません";
           <?php
           // 前回押したボタンによって表示内容をを変える
           //試験的にuser_idを「0000002」
-          // $user_id = "0000002";
+          $user_id = $_SESSION['user_id'];
 
           // 最新順
           if($_SESSION['select_name'] == "new"){
