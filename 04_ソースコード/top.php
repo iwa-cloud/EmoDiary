@@ -163,15 +163,16 @@ $previewMemo = "選択されていません";
     #topFrame {
       margin: 3%;
       padding-left: 5%;
+      align-items: center;
     }
 
     #topImgMaxSize {
-      width: 85%;
-      height: 520px;
+      width: 400px;
+      height: 400px;
       /* margin-left: 15%; */
-      display: flex;
+      /* display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: center; */
       background-color: #EEEEEE;
 
     }
@@ -286,7 +287,7 @@ $previewMemo = "選択されていません";
           <?php
           // 前回押したボタンによって表示内容をを変える
           //試験的にuser_idを「0000002」
-          $user_id = "0000002";
+          // $user_id = "0000002";
 
           // 最新順
           if($_SESSION['select_name'] == "new"){
