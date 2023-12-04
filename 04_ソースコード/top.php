@@ -126,6 +126,7 @@ $previewMemo = "選択されていません";
     .viewFrame{
       height: 84vh;
       width: 100%;
+      overflow: scroll;
     }
 
     #borderStyle {
@@ -160,7 +161,7 @@ $previewMemo = "選択されていません";
     }
 
     #topFrame {
-      margin: 10%;
+      margin: 3%;
       padding-left: 5%;
     }
 
@@ -168,6 +169,8 @@ $previewMemo = "選択されていません";
       width: 85%;
       height: 520px;
       margin-left: 15%;
+      background-color: #EEEEEE;
+
     }
 
     #topImgSize {
@@ -245,7 +248,7 @@ $previewMemo = "選択されていません";
           <details>
             <summary>
               <div id="first" class="first">
-                <i type="li" id="parent" class="bi bi-person-fill" style="font-size:25px;" ></i>
+                <i type="li" id="parent" class="bi bi-person-fill" style="font-size:25px;"onclick="location.href='data_input.php'" ></i>
                 <i type="li" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='search.php'"></i>&emsp;
                 <i type="li" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
                 <li type="li" id="first2_2" class="hidden" onclick="location.href='logout.php'">ログアウト</li>
@@ -276,10 +279,6 @@ $previewMemo = "選択されていません";
 
         <!-- タイトル表示領域 -->
         <div class="viewScroll  viewFrame">
-          <p id="element1" class="element"></p>
-          <p id="element2" class="element" style="display: none;"></p>
-          <p id="element3" class="element" style="display: none;"></p>
-          <div class="Scroll">
 
           <?php
           // 前回押したボタンによって表示内容をを変える
@@ -367,7 +366,6 @@ $previewMemo = "選択されていません";
           // echo $_SESSION['data_id'];
           ?>
 
-          </div>
         <!-- <h1 id="echoText">ここ</h1> -->
         </div>
       </div>
