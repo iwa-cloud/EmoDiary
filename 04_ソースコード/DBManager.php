@@ -583,8 +583,9 @@ class DBManager
         $memo = "%" . $memo . "%";
         $title = "%" . $title . "%";
         
-        // SELECT DISTINCT data.data_id, data.title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = "0000002") AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name LIKE "%%") AS sub2 ON data.data_id = sub2.data_id WHERE user_id = "0000002" AND c_time LIKE "2023%" AND (title LIKE "%%" AND memo LIKE "%%");
-        $sql = 'SELECT DISTINCT data.data_id, data.title FROM data JOIN (SELECT sub.data_id FROM tagAndData JOIN (SELECT * FROM data WHERE user_id = ?) AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name LIKE ?) AS sub2 ON data.data_id = sub2.data_id WHERE user_id = ? AND c_time LIKE ? AND (title LIKE ? AND memo LIKE ?)';
+        // SELECT DISTINCT data.data_id, data.title FROM data LEFT JOIN (SELECT sub.data_id FROM tagAndData LEFT JOIN (SELECT * FROM data WHERE user_id = "0000002") AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name LIKE "%%") AS sub2 ON data.data_id = sub2.data_id WHERE user_id = "0000002" AND c_time LIKE "2023%" AND (title LIKE "%%" AND memo LIKE "%%");
+
+        $sql = 'SELECT DISTINCT data.data_id, data.title FROM data LEFT JOIN (SELECT sub.data_id FROM tagAndData LEFT JOIN (SELECT * FROM data WHERE user_id = ?) AS sub ON tagAndData.data_id = sub.data_id JOIN tag ON tag.tag_id = tagAndData.tag_id WHERE tag_name LIKE ?) AS sub2 ON data.data_id = sub2.data_id WHERE user_id = ? AND c_time LIKE ? AND (title LIKE ? AND memo LIKE ?)';
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $user_id, PDO::PARAM_STR);
         $ps->bindValue(2, $tag_name, PDO::PARAM_STR);
