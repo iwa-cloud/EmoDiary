@@ -165,16 +165,16 @@ $previewMemo = "選択されていません";
     }
 
     #topImgMaxSize {
-      width: 100%;
-      height: 100%;
+      width: 85%;
+      height: 520px;
       margin-left: 15%;
     }
 
     #topImgSize {
       /* 試験的に80%にしてる */
-      width: 60%;
-      height: auto;
-      /* object-fit: contain; */
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .data_input_width {
@@ -229,6 +229,10 @@ $previewMemo = "選択されていません";
       display: none;
     }
 
+    .Scroll {
+      overflow: scroll;
+      height: 85vh;
+    }
   </style>
 </head>
 <body>
@@ -275,6 +279,7 @@ $previewMemo = "選択されていません";
           <p id="element1" class="element"></p>
           <p id="element2" class="element" style="display: none;"></p>
           <p id="element3" class="element" style="display: none;"></p>
+          <div class="Scroll">
 
           <?php
           // 前回押したボタンによって表示内容をを変える
@@ -362,6 +367,7 @@ $previewMemo = "選択されていません";
           // echo $_SESSION['data_id'];
           ?>
 
+          </div>
         <!-- <h1 id="echoText">ここ</h1> -->
         </div>
       </div>
@@ -424,8 +430,8 @@ $previewMemo = "選択されていません";
         // e.classList.toggle("active");
     }
     function func2(text) {
-      let echoText = document.getElementById("echoText");
-      echoText.textContent = text;
+      // let echoText = document.getElementById("echoText");
+      // echoText.textContent = text;
       sendPost('', text);
     }
 

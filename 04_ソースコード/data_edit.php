@@ -167,8 +167,8 @@
 
         #imgMaxSize2 {
             width: 100%;
-            max-height: 520px;
-            height: auto;
+            height: 100%;
+            object-fit: contain;
 
         }
        

@@ -134,8 +134,8 @@
  
         #imgMaxSize2 {
             width: 100%;
-            max-height: 520px;
-            height: auto;
+            height: 100%;
+            object-fit: contain;
  
         }
        
@@ -244,7 +244,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="./data_create.php" method="post"  enctype="multipart/form-data">
+                    <!-- <form action="./data_create.php" method="post"  enctype="multipart/form-data"> -->
                         <!-- 画面の左側 -->
                         <div class="col-md-6" id="data_left">
                             <p class="data_input_width">タイトル<br>
@@ -310,11 +310,11 @@
                                 <br>
                                 <!-- 名前： Data_Detail_Regist_Button -->
                                 <div class="DDRButton">
-                                    <input type="submit" class="form-control" id="editButton" value="共有" onclick="location.href='data_create.php'" style="border: 1px solid #999;">
+                                    <input type="submit" class="form-control" id="editButton" value="共有" style="border: 1px solid #999;">
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    <!-- </form> -->
             </div>
         </div>
     </div>

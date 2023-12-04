@@ -2,7 +2,6 @@
     session_start();
     // 「登録」処理のため、flgに「true」を代入
     $_SESSION['newData'] = true;
-
     // 検索画面のflgを初期化'
     $_SESSION['searchFlg'] = false;
     
@@ -25,7 +24,7 @@
     $title = "タイトル";
     $url = "URL";
     $memo = "メモ";
-    $photo = "./img/gray.png";
+    $photo = "./img/dog.png";
     $tagIdArray = array();
     $tagNameArray = array();
     $tagIdJson;
@@ -63,42 +62,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>データ登録画面</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./style.css">
     <style>
-        
+       
         /* 試験的に色付けあり */
         .visible {
             display: block;
         }
-
+ 
         .hidden {
             display: none;
         }
-
+ 
         #first {
             align-items: flex-end;
             white-space: nowrap;
         }
-        
+       
         #first1_2 {
             width: 25px;
             float: right;
             margin-right: 20px;
         }
-
+ 
         #parent {
             float: right;
         }
-
+ 
         .half {
             float: left;
             margin: 5px;
             padding: 10px;
         }
-
+ 
         /* 以下メイン画面CSS */
         #button1 {
             height: 50px;
@@ -106,97 +104,153 @@
             background-color:white;
             color:#DCB3FC;
         }
-
+ 
         #data_frame {
             margin: 5vw;
             display: flex;
             justify-content: space-between;
         }
-
+ 
         #data_left {
             /* background-color: rgba(255, 201, 201, 0.486); */
+            /* float: left; */
         }
-
+ 
         #data_right {
             /* background-color: rgba(220, 179, 252, 0.233); */
+            /* float: right; */
         }
-
+ 
         .data_input_width {
-            width: 80%;
+            width: 100%;
             color:#DCB3FC;
         }
-
+ 
         .data_input_width_input {
             width: 100%;
             height: 50px;
         }
-
+ 
         #memo {
             width: 100%;
             height:150px;
         }
-
+ 
         #imgMaxSize {
-            width: 550px;
-            height: 550px;
+            width: 85%;
+            height: 520px;
             margin-left: 15%;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: black;
+            background-color: #EEEEEE;
         }
-        
+
+        #imgMaxSize2 {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+
+        }
+       
         #imgSize {
             /* 試験的に80%にしてる */
+            max-width: 85%;
+            
+            max-height: 520px;
+             
+            margin: right; 
+            object-fit: contain;
+         }
+         
+         
+         #shareButton {
+             width: 100px;
+             color:#DCB3FC;
+            }
+            
+            .data_select_width {
+                padding:1em;
+                background-color:#ffffff;
+                margin:1em auto;
+                width:100%;
+                margin-right: 50%;
+                border: 1px solid rgb(0, 0, 0);
+                color: #DCB3FC;
+            }
+            .DDRButton {
+                /* width: 550px;*/
+                /* float: right; */
+                /* margin: 0 0 0 auto; */
+                /* display: flex; */
+                /* flex-direction:column;
+                align-items:flex-end;
+                margin: right;
+                margin-left: 15%; */
+                /* background-color: #dcb3fc71; */
+            }
+            #editButton {
+                width: 100px;
+                color:#DCB3FC;
+                /* margin: right; */
+                border: 1px solid #999;
+                margin-top: 20px;
+               }
+            .custom-file-input {
+                /* float: right; */
+                margin-top: 20px;
+                /* position: relative; */
+                /* display: inline-block; */
+            }
+            
+            .custom-file-input input[type="file"] {
+                opacity: 0;
+                /* position: absolute;
+                top: 0;
+                left: 0; */
+            width: 5vw;
+            height: auto;
+            cursor: pointer;
+        }
+ 
+        .custom-file-input label {
+            margin-top: 10px;
+            /* display: inline-block; */
+            padding: 8px 16px;
+            background-color: white;
+            color: #DCB3FC;
+            border: 1px solid #999;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .buttonArea {
+            width: 100%;
+            height: 200px;
+            /* text-align: right; */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .formCss {
             width: 100%;
             height: auto;
-            /* object-fit: contain; */
         }
-        
-        .DDRButton {
-            width: 550px;
-            float: right;
-            display: flex;
-            flex-direction:column;
-            align-items:flex-end;
-            margin: 15% 20% 0% 0%;
-            /* background-color: #dcb3fc71; */
-        }
-
-        #editButton {
-            width: 100px;
-            color:#DCB3FC;
-        }
-
-        #shareButton {
-            width: 100px;
-            color:#DCB3FC;
-        }
-
-        .data_select_width {
-            padding:1em;
-            background-color:#ffffff;
-            margin:1em auto;
-            width:100%;
-            margin-right: 50%;
-            border: 1px solid rgb(0, 0, 0);
-            color: #DCB3FC;
-        }
-
     </style>
 </head>
-
+ 
 <body>
     <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10">
-                    <i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i>&emsp; 
+                    <i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i>&emsp;
                     <a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a>
                 </div>
                 <div class="col-md-2" style="text-align:right">
                     <details>
-
+ 
                         <summary>
                             <!-- クラスの切り替えテスト -->
                             <div id="first">
@@ -210,83 +264,86 @@
                                 <button type="button" id="first2_1" class="hidden" onclick="location.href='usr_inf_chg_input.php'">ユーザー変更画面</button>
                             </div>
                         </summary>
-                        
+                       
                     </details>
                 </div>
             </div>
         </div>
     </nav>
-
+ 
     <!-- 画面の中央に要素を寄せる -->
     <div id="data_frame">
-        <div class="container-fluid">
-            <div class="row">
-                <form action="./data_create.php" method="post" enctype="multipart/form-data">
-                  <!-- 画面の左側 -->
-                      <div class="col-lg-6" id="data_left">
-                          <p class="data_input_width">タイトル<br>
-                              <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
-                          </p>
-                      
-                          <p class="data_input_width">URL(任意)<br>
-                              <input type="text" maxlength = 1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>">
-                          </p>
-                      
-                          <p class="data_input_width">ハッシュタグ<br>
-                              <select class="data_select_width" id="selectTag" name="selectTags" type="text" autocomplete="on" onchange="changeColor(this)">
+        <form class="formCss" action="./data_create.php" method="post" enctype="multipart/form-data">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- <div class="col-md-6"> -->
+                    <!-- 画面の左側 -->
+                    <div class="col-md-6" id="data_left">
+                        <p class="data_input_width">タイトル<br>
+                        <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
+                        </p>
+                    
+                        <p class="data_input_width">URL(任意)<br>
+                        <input type="text" maxlength = 1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>">
+                        </p>
+                        
+                        <p class="data_input_width">ハッシュタグ<br>
+                        <select class="data_select_width" id="selectTag"
+                        name="selectTags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+                            <!-- 表示するやつ -->
+                            <option value="0000000">適用された一覧</option>
+                            <!-- jsでここに一覧を表示 -->
+                        </select>
+                        </p>
+                        
+                        <p class="data_input_width">
+                        <input type="text" maxlength = 50 name="tagu" id="inputTag" style="width: 89%; height: 50px;">
+                        <input type="button" class="btn btn-outline-secondary" value="適用" id="button1" style="width: 10%; height: 50px;" onclick="hashed()">
+                        </p>
+                        
+                        <p class="data_input_width">
+                        <select class="data_select_width" id="tags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+                            <!-- 表示するやつ -->
+                            <option value="0000000" selected>選択してください</option>
+                            <!-- 表示順に関する処理はしてない -->
+                        </select>
+                        </p>          
 
-                              <option value="0000000">適用された一覧</option>
-                              <!-- jsでここに一覧を表示 -->
+                        <p class="data_input_width">文章<br>
+                        <input id="memo" maxlength = 200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
+                        </p>
 
-                              </select>
-                          </p>
-
-                          <p class="data_input_width">
-                              <input type="text" maxlength = 50 name="tagu" id="inputTag" style="width: 89%; height: 50px;">
-                              <input type="button" class="btn btn-outline-secondary" value="適用" id="button1" style="width: 10%; height: 50px;" onclick="hashed()">
-                          </p>
-
-                          <p class="data_input_width">
-                              <select class="data_select_width" id="tags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
-
-                              <!-- 表示するやつ -->
-                              <option value="0000000" selected>選択してください</option>
-                              <!-- 表示順に関する処理はしてない -->
-                                  
-                              </select>
-                          </p>
-
-                          <p class="data_input_width">文章<br>
-                              <input id="memo" maxlength = 200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
-                          </p>
-
-                          <!-- 非表示 -->
-                          <div id="hiddenDiv">
+                        <!-- 非表示 -->
+                        <div id="hiddenDiv">
                             <!-- 選択したタグのinputを非表示で追加 -->
-                          </div>
-                  
-                      </div>
-                          
-                      <!-- 画面の右側 -->
-                      <div class="col-lg-6" id="data_right">
-                          <!-- 画像表示領域 -->
-                          <div id="imgMaxSize">
-                              <img id="imgSize" src="<?php echo $photo; ?>" alt="none">
-                          </div>
-                          <div class="DDRButton">
-                              <input type="file" name="file" accept="img/*" onchange="previewImg(this);">
-                          </div>
-                          <!-- 名前： Data_Detail_Regist_Button -->
-                          <div class="DDRButton">
-                              <input type="submit" class="form-control" id="editButton" value="登録" onclick="location.href='data_input.php'">
-                          </div>
-                      </div>
-                </form>
+                        </div>
+                    </div>
+
+                    <!-- 画面の右側 -->
+                    <div class="col-md-6" id="data_right">
+                    <!-- <div class="col-md-6" id="data_right"> -->
+                    <!-- 画像表示領域 -->
+                        <div id="imgMaxSize">
+                            <img id="imgMaxSize2" src="<?php echo $photo; ?>" alt="none">
+                        </div>
+                        <div class="buttonArea">
+                            <div class="custom-file-input">
+                                <input type="file" name="file" accept="img/*" onchange="previewImg(this);" id="fileInput">
+                                <label for="fileInput">ファイルを選択</label>
+                            </div>
+                            <!-- 名前： Data_Detail_Regist_Button -->
+                            <div class="DDRButton">
+                                <input type="submit" class="form-control" id="editButton" value="登録">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-
-
+    <!-- id="imgMaxSize" -->
+ 
     <script>
         // DBに登録されているtagの一覧を表示
         showTags(
@@ -294,7 +351,6 @@
                 echo $tagIdJson . "," . $tagNameJson;
             ?>
         );
-
         // 画面右上のアイコンの表示処理
         const element = document.getElementById("first");
         const Button = document.getElementById("parent");
@@ -421,12 +477,10 @@
             insertTag.appendChild(option);
             // 選択したタグを一覧から削除
             selectedTag.remove(selectIndex);
-
             // 非表示のinputタグも削除
             let delEl = document.getElementById(eValue);
             delEl.remove();
         }
-
         // DBManager.phpのnextId()が使えなかったため、jsで再定義
         function nextId(id) {
             id = parseInt(id);
@@ -439,11 +493,11 @@
         function previewImg(obj) {
             let fileReader = new FileReader();
             fileReader.onload = (function() {
-                document.getElementById('imgSize').src = fileReader.result;
+                document.getElementById('imgMaxSize2').src = fileReader.result;
             });
             fileReader.readAsDataURL(obj.files[0]);
         }
-
+ 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
