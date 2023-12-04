@@ -6,7 +6,7 @@
     $_SESSION['searchFlg'] = false;
     
     // 次の画面遷移で使うため、試験的に
-    $_SESSION['user_id'] = "0000002";
+    // $_SESSION['user_id'] = "0000002";
     // 他の画面から遷移する際には「data_id」を送ってもらう
     require_once './DBManager.php';
     $dbmng = new DBManager();

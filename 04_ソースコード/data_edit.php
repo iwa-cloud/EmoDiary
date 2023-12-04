@@ -4,8 +4,8 @@
     $_SESSION['newData'] = false;
 
     // 次の画面遷移で使うため、試験的に
-    $_SESSION['data_id'] = "0000006";
-    $_SESSION['user_id'] = "0000002";
+    // $_SESSION['data_id'] = "0000006";
+    // $_SESSION['user_id'] = "0000002";
     
     require_once './DBManager.php';
     $dbmng = new DBManager();

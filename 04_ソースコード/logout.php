@@ -1,3 +1,6 @@
+<?php
+session_destroy();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -165,7 +168,7 @@
             <div class="row">
                 <div class="col-md-12 mt-2">
                     <div class="d-grid gap-2">
-                        <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">TOP画面へ</button>
+                        <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ログイン画面へ</button>
                     </div>
                 </div> 
             </div>

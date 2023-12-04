@@ -4,7 +4,7 @@ require_once './DBManager.php';
 $dbmng = new DBManager();
 
 // 試験的に
-$_SESSION['user_id'] = "0000002";
+// $_SESSION['user_id'] = "0000002";
 $tags = $dbmng->getTags();
 $tagIdArray = array();
 $tagNameArray = array();
@@ -173,6 +173,11 @@ foreach ($data as $row) {
   .titles input {
     display: none;
   }
+
+  .Scroll {
+    overflow: scroll;
+    height: 93vh;
+  }
   </style>
 </head>
 <body>
@@ -202,8 +207,9 @@ foreach ($data as $row) {
 
     <!-- 検索結果表示領域 -->
     <div class="col-md-5">
-      <!-- <div class="viewScroll viewFrame" id="borderStyle" style="background-color: #dcb3fc53;"> -->
-      <div class="viewScroll viewFrame" id="borderStyle">
+      <div class="viewScroll viewFrame" id="borderStyle" style="background-color: #dcb3fc53;">
+      <!-- <div class="viewScroll viewFrame" id="borderStyle"> -->
+        <div class="Scroll">
 
         <!-- タイトルを表示 -->
         <!-- <div class="titles">
@@ -240,13 +246,13 @@ foreach ($data as $row) {
             echo '</div>';
           }
         ?>
-
+        </div>
       </div>
     </div>
     
     <!-- 検索入力領域 -->
-    <!-- <div class="col-md-7" style="background-color: #b5fcb353;"> -->
-    <div class="col-md-7">
+    <div class="col-md-7" style="background-color: #b5fcb353;">
+    <!-- <div class="col-md-7"> -->
       <div id="searchFrame">
         <form action="./search.php" method="post">
           <!-- memo -->

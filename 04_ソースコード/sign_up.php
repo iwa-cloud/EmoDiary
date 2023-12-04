@@ -1,9 +1,9 @@
 <?php
   session_start();
   $_SESSION['page'] = "sign_up";
-  if(isset($_SESSION['name']) == true && isset($_SESSION['id']) == true && isset($_SESSION['useer_id']) == true){
-      header('Location:../try.html');
-  }       
+  // if(isset($_SESSION['name']) == true && isset($_SESSION['id']) == true && isset($_SESSION['useer_id']) == true){
+  //     header('Location:../try.html');
+  // }       
 ?>
     <!DOCTYPE html>
     <html lang="ja">

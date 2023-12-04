@@ -12,7 +12,7 @@
         $_SESSION['data_id'] = $_POST['data_id'];
     }else{
         // 試験的に
-        $_SESSION['data_id'] = "0000001";
+        // $_SESSION['data_id'] = "0000001";
     }
  
     // data_idからデータ(title, url, memo)を取得
@@ -25,7 +25,7 @@
     $title;
     $url;
     $memo;
-    $photo;
+    $photo = "";
     foreach ($data1 as $row) {
         $title = $row['title'];
         $url = $row['url'];
@@ -36,7 +36,7 @@
         $photo = $row['photo'];
     }
  
-    if($photo == null) {
+    if($photo == "") {
         $photo = "./img/gray.png";
     }
  
