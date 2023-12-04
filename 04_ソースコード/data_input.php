@@ -273,7 +273,7 @@
  
     <!-- 画面の中央に要素を寄せる -->
     <div id="data_frame">
-        <form class="formCss" action="./data_create.php" method="post" enctype="multipart/form-data">
+        <form class="formCss" action="./data_create.php" method="post" enctype="multipart/form-data" onsubmit="return false;">
             <div class="container-fluid">
                 <div class="row">
                     <!-- <div class="col-md-6"> -->
@@ -333,7 +333,8 @@
                             </div>
                             <!-- 名前： Data_Detail_Regist_Button -->
                             <div class="DDRButton">
-                                <input type="submit" class="form-control" id="editButton" value="登録">
+                                <!-- <input type="submit" class="form-control" id="editButton" onclick="submitIsOk=true" value="登録"> -->
+                                <input type="button" class="form-cotrol" id="editButton" onclick="submit();" value="登録">
                             </div>
                         </div>
                     </div>
@@ -345,6 +346,10 @@
     <!-- id="imgMaxSize" -->
  
     <script>
+        
+
+
+
         // DBに登録されているtagの一覧を表示
         showTags(
             <?php
