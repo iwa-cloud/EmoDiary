@@ -279,6 +279,15 @@
                     <!-- <div class="col-md-6"> -->
                     <!-- 画面の左側 -->
                     <div class="col-md-6" id="data_left">
+                        <!-- エラー表示 -->
+                    <?php
+                        if ($_SESSION['error'] != "") {
+                        echo '<div class="error">';
+                        echo $_SESSION['error'];
+                        echo '</div>';
+                        }
+                    ?>
+
                         <p class="data_input_width">タイトル<br>
                         <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
                         </p>
@@ -345,6 +354,9 @@
     </div>
     <!-- id="imgMaxSize" -->
  
+    <?php
+    $_SESSION['error'] = "";
+    ?>
     <script>
         
 
