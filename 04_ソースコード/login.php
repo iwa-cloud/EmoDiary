@@ -1,6 +1,7 @@
 <?php
   session_start(); 
   $_SESSION['user_id'] = "";
+  $_SESSION['input_user_name'] = "";
   $_SESSION['input_mail'] = "";
   $_SESSION['input_pass'] = "";
   $_SESSION['error'] = "";
