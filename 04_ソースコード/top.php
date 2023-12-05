@@ -281,7 +281,7 @@ $previewMemo = "選択されていません";
             <button type = "submit" value = "new" name = "three_btn" class = "topbutton" onclick = "showElement('element1')">最新 ↓</button>
             <button type = "submit" value = "tag" name = "three_btn" class = "topbutton" onclick = "showElement('element2')">タグ ↓</button>
             <button type = "submit" value = "date" name = "three_btn" class = "topbutton" onclick = "showElement('element3')">日付 ↓</button>
-            <button class = "topbutton">編集 ↓</button>
+            <!-- <button class = "topbutton">編集 ↓</button> -->
           </form><br>
         </div>
         
@@ -392,7 +392,7 @@ $previewMemo = "選択されていません";
               <input id="memo" type="text" name="bin" value="<?php echo $previewMemo; ?>" readonly>
             </p> 
             <!-- 処理は書いてない -->
-            <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="">共有</button><br>
+            <!-- <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="">共有</button><br> -->
             <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="isClick('data_detail.php', '<?php echo $_SESSION['data_id']; ?>')">詳細</button>
           </div>
         </div>

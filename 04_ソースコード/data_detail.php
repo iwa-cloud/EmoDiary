@@ -310,9 +310,9 @@
                                 <br>
                                 <br>
                                 <!-- 名前： Data_Detail_Regist_Button -->
-                                <div class="DDRButton">
+                                <!-- <div class="DDRButton">
                                     <input type="submit" class="form-control" id="editButton" value="共有" style="border: 1px solid #999;">
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     <!-- </form> -->
