@@ -2,6 +2,7 @@
 session_start();
 require_once './DBManager.php';
 $dbmng = new DBManager();
+$_SESSION['page'] = "search.php";
 
 // 試験的に
 // $_SESSION['user_id'] = "0000002";

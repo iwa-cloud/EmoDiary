@@ -2,6 +2,7 @@
     session_start();
     // 「編集」処理のため、flgに「false」を代入
     $_SESSION['newData'] = false;
+    $_SESSION['page'] = "data_edit.php";
 
     // 次の画面遷移で使うため、試験的に
     // $_SESSION['data_id'] = "0000006";

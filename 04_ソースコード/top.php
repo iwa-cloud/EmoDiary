@@ -3,6 +3,7 @@ ini_set('display_errors', "On");
 session_start();
 require_once './DBManager.php';
 $dbmng = new DBManager();
+$_SESSION['page'] = "top.php";
 
 // 「最新順」「タグ順」「日付順」のどれかが押されているか判定
 // リダイレクトした場合は$_POST['three_btn']に選択したボタンの情報が入る
@@ -173,6 +174,8 @@ $previewMemo = "選択されていません";
       /* display: flex;
       justify-content: center;
       align-items: center; */
+      /* text-align: center; */
+      margin: 0 auto;
       background-color: #EEEEEE;
 
     }
@@ -182,6 +185,8 @@ $previewMemo = "選択されていません";
       width: 100%;
       height: 100%;
       object-fit: contain;
+      display: inline-block;
+      /* text-align: center; */
     }
 
     .data_input_width {

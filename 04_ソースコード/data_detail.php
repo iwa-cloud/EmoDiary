@@ -3,6 +3,7 @@
     // 他の画面から遷移する際には「data_id」を送ってもらう
     require_once './DBManager.php';
     $dbmng = new DBManager();
+    // $_SESSION['page'] = "data_detail.php";
  
     // 検索画面のflgを初期化'
     $_SESSION['searchFlg'] = false;
@@ -213,7 +214,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10">
-                    <i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i>&emsp;
+                    <i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='top.php'"></i>&emsp;
                     <a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a>
                 </div>
                 <div class="col-md-2" style="text-align:right">
