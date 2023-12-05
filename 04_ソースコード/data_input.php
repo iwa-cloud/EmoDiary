@@ -343,7 +343,7 @@
                             <!-- 名前： Data_Detail_Regist_Button -->
                             <div class="DDRButton">
                                 <!-- <input type="submit" class="form-control" id="editButton" onclick="submitIsOk=true" value="登録"> -->
-                                <input type="button" class="form-cotrol" id="editButton" onclick="submit();" value="登録">
+                                <input type="button" class="form-cotrol" id="editButton" onclick="submit();" value="登録" style=" background-color: white; border-radius: 5px; height: 38px; width: 123px;">
                             </div>
                         </div>
                     </div>
