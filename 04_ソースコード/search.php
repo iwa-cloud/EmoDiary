@@ -185,7 +185,7 @@ foreach ($data as $row) {
 <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
+      <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px"><a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a></div>
       <div class="col-md-2" style="text-align:right">
         <details>
           <summary>
