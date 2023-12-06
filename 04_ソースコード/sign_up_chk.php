@@ -62,6 +62,10 @@
     margin:  5px;
     padding:  10px;  
   }
+
+  .centerCss {
+    margin: 0 auto;
+  }
 </style>
 </head>
 <body style=background-color:#fff4ff>
@@ -116,19 +120,13 @@
           <div class="a" name="name"></div>
       </div>
           <br>
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-3 mt-4"></div>
-                  <div class="col-md-3 mt-4">
-                      <input type="submit" class="form-control" value="登録" style="color:#DCB3FC;">
-                  </div>
-                  <div class="col-md-3 mt-4">
-                      <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;">
-                  </div>
-                  <div class="col-md-3 mt-4"></div>
-              </div>
+          <div class="col-md-3 mt-4 centerCss">
+              <input type="submit" class="form-control" value="登録" style="color:#DCB3FC;">
           </div>
-      </form>
+        </form>
+        <div class="col-md-3 mt-4 centerCss">
+            <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;" onclick="location.href='sign_up.php';">
+        </div>
   </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="./header.js"></script>

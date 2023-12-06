@@ -4,6 +4,8 @@ require_once './DBManager.php';
 $dbmng = new DBManager();
 $_SESSION['test'] = "";
 
+// 
+
 // photoテーブルの最後のid+1の値を取得
 $photoMaxId = $dbmng->getPhotoNextId();
 
@@ -16,6 +18,32 @@ if($_SESSION['newData'] == true) {
     $data_id = $_SESSION['data_id'];
 }
 
+// 初期化
+$title = "ありません";
+$url = "ありません";
+$memo = "ありません";
+// $img = "ありません";
+// 複数入ってる可能性あり
+$tags;
+
+// 入力値があれば代入
+if(!empty($_POST['title'])) {
+    $title = $_POST['title'];
+}else{
+    $_SESSION['error'] = "タイトルが入力されていません。";
+    header('Location:data_input.php');
+    exit;
+}
+if(!empty($_POST['url'])) {
+    $url = $_POST['url'];
+}
+// メモはnameが「bin」になってた
+if(!empty($_POST['bin'])) {
+    $memo = $_POST['bin'];
+}
+if(!empty($_POST['hiddenSelectTags'])) {
+    $tags = $_POST['hiddenSelectTags'];
+}
 // 画像の名前を格納
 $photoName;
 
@@ -83,28 +111,6 @@ if( $_FILES['file']['size'] > 0 ){
 }
 
 
-// 初期化
-$title = "ありません";
-$url = "ありません";
-$memo = "ありません";
-// $img = "ありません";
-// 複数入ってる可能性あり
-$tags;
-
-// 入力値があれば代入
-if(!empty($_POST['title'])) {
-    $title = $_POST['title'];
-}
-if(!empty($_POST['url'])) {
-    $url = $_POST['url'];
-}
-// メモはnameが「bin」になってた
-if(!empty($_POST['bin'])) {
-    $memo = $_POST['bin'];
-}
-if(!empty($_POST['hiddenSelectTags'])) {
-    $tags = $_POST['hiddenSelectTags'];
-}
 
 // $_SESSION['test'] = $data_id;
 
