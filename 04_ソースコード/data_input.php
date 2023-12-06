@@ -240,7 +240,7 @@
     </style>
 </head>
  
-<body>
+<body style=background-color:#fff4ff>
     <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
         <div class="container-fluid">
             <div class="row">
@@ -279,6 +279,15 @@
                     <!-- <div class="col-md-6"> -->
                     <!-- 画面の左側 -->
                     <div class="col-md-6" id="data_left">
+                        <!-- エラー表示 -->
+                    <?php
+                        if ($_SESSION['error'] != "") {
+                        echo '<div class="error">';
+                        echo $_SESSION['error'];
+                        echo '</div>';
+                        }
+                    ?>
+
                         <p class="data_input_width">タイトル<br>
                         <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
                         </p>
@@ -334,7 +343,7 @@
                             <!-- 名前： Data_Detail_Regist_Button -->
                             <div class="DDRButton">
                                 <!-- <input type="submit" class="form-control" id="editButton" onclick="submitIsOk=true" value="登録"> -->
-                                <input type="button" class="form-cotrol" id="editButton" onclick="submit();" value="登録">
+                                <input type="button" class="form-cotrol" id="editButton" onclick="submit();" value="登録" style=" background-color: white; border-radius: 5px; height: 38px; width: 123px;">
                             </div>
                         </div>
                     </div>
@@ -345,6 +354,9 @@
     </div>
     <!-- id="imgMaxSize" -->
  
+    <?php
+    $_SESSION['error'] = "";
+    ?>
     <script>
         
 

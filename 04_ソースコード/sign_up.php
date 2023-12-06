@@ -64,7 +64,7 @@
             }
         </style>
     </head>
-    <body>
+    <body style=background-color:#fff4ff>
     <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
         <div class="container-fluid">
           <div class="row">
@@ -94,13 +94,13 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <p style="text-align: left; color:#DCB3FC;">name</p>
-                        <input type="textbox" name="name" class="form-control" id="txt1" required>
+                        <input type="textbox" name="name" class="form-control" id="txt1" value="<?php echo $_SESSION ['input_user_name']?>" required>
                     </div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <p style="text-align: left; color:#DCB3FC;">mail</p>
-                        <input type="email" name="mail" class="form-control" id="txt2" required>
+                        <input type="email" name="mail" class="form-control" id="txt2" value="<?php echo $_SESSION ['input_mail']?>" required>
                     </div>
                      
                     <!-- エラー表示 -->
@@ -116,7 +116,7 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <p style="text-align: left; color:#DCB3FC;">pass</p>
-                        <input type="password" name="pass" class="form-control" id="pwd1" required>
+                        <input type="password" name="pass" class="form-control" id="pwd1" value="<?php echo $_SESSION ['input_pass']?>" required>
                     </div>
                     <div class="col-md-4">
                         <input type="checkbox" id="chk1" style="margin-top: 50px;"> Show Password
@@ -124,7 +124,7 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <p style="text-align: left; color:#DCB3FC;">confirmpass</p>
-                        <input type="password" name="confirmpass" class="form-control" id="pwd2" required>
+                        <input type="password" name="confirmpass" class="form-control" id="pwd2" value="<?php echo $_SESSION ['input_pass']?>" required>
                     </div>
                     <div class="col-md-4">
                         <input type="checkbox" id="chk2" style="margin-top: 50px;"> Show Password

@@ -181,7 +181,7 @@ foreach ($data as $row) {
   }
   </style>
 </head>
-<body>
+<body style=background-color:#fff4ff>
 <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
   <div class="container-fluid">
     <div class="row">
@@ -208,7 +208,7 @@ foreach ($data as $row) {
 
     <!-- 検索結果表示領域 -->
     <div class="col-md-5">
-      <div class="viewScroll viewFrame" id="borderStyle" style="background-color: #dcb3fc53;">
+      <div class="viewScroll viewFrame" id="borderStyle">
       <!-- <div class="viewScroll viewFrame" id="borderStyle"> -->
         <div class="Scroll">
 
@@ -252,7 +252,7 @@ foreach ($data as $row) {
     </div>
     
     <!-- 検索入力領域 -->
-    <div class="col-md-7" style="background-color: #b5fcb353;">
+    <div class="col-md-7">
     <!-- <div class="col-md-7"> -->
       <div id="searchFrame">
         <form action="./search.php" method="post">
@@ -281,7 +281,7 @@ foreach ($data as $row) {
           <div id="hiddenDiv">
             <!-- 選択したタグのinputを非表示で追加 -->
           </div>
-          <button type="submit" id="updateBtn">更新</button>
+          <button type="submit" id="updateBtn" style="border-radius: 5px;">更新</button>
         </form>
       </div>
     </div>
