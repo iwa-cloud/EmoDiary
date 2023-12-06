@@ -5,7 +5,7 @@
     $dbmng = new DBManager();
     // $_SESSION['page'] = "data_detail.php";
  
-    // 検索画面のflgを初期化'
+    // 検索画面のflgを初期化
     $_SESSION['searchFlg'] = false;
  
     // search.phpから遷移したか判定
@@ -206,6 +206,13 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
+        .transparentBtn {
+            width: 25px;
+            height: 37.5px;
+            background: rgba(44,125,212,0.5);
+            display: flex;
+        }
     </style>
 </head>
  
@@ -218,22 +225,22 @@
                     <a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a>
                 </div>
                 <div class="col-md-2" style="text-align:right">
-                    <details>
+                <details>
  
-                        <summary>
-                            <!-- クラスの切り替えテスト -->
-                            <div id="first">
-                                <!-- parent       人間アイコン                       -->
-                                <!-- first1_2     虫眼鏡                            -->
-                                <!-- first2_2     ログアウトボタン                   -->
-                                <!-- first2_1     ユーザー情報変更画面に遷移するボタン -->
-                                <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;"></i>
-                                <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='search.php'"></i>&emsp;
-                                <button type="button" id="first2_2" class="hidden" onclick="location.href='logout.php'">ログアウト</button>
-                                <button type="button" id="first2_1" class="hidden" onclick="location.href='usr_inf_chg_input.php'">ユーザー変更画面</button>
-                            </div>
-                        </summary>
-                       
+                    <summary>
+                        <!-- クラスの切り替えテスト -->
+                        <div id="first">
+                            <!-- parent       人間アイコン                       -->
+                            <!-- first1_2     虫眼鏡                            -->
+                            <!-- first2_2     ログアウトボタン                   -->
+                            <!-- first2_1     ユーザー情報変更画面に遷移するボタン -->
+                            <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;"></i>
+                            <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='search.php'"></i>&emsp;
+                            <button type="button" id="first2_2" class="hidden" onclick="location.href='logout.php'">ログアウト</button>
+                            <button type="button" id="first2_1" class="hidden" onclick="location.href='usr_inf_chg_input.php'">ユーザー変更画面</button>
+                        </div>
+                    </summary>
+
                     </details>
                 </div>
             </div>
@@ -323,13 +330,6 @@
     <!-- id="imgMaxSize" -->
  
     <script>
-        // DBに登録されているtagの一覧を表示
-        showTags(
-            <?php
-                echo $tagIdJson . "," . $tagNameJson;
-            ?>
-        );
-        // 画面右上のアイコンの表示処理
         const element = document.getElementById("first");
         const Button = document.getElementById("parent");
         const element_2 = document.getElementById("first1_2");
@@ -352,8 +352,6 @@
                 element_4.classList.add("hidden");
             }
         });
- 
-        // 文字の色を変える処理
         function changeColor(hoge) {
             if (hoge.value == 0) {
                 hoge.style.color = '';
@@ -361,120 +359,7 @@
                 hoge.style.color = 'black';
             }
         }
- 
-       
-        // タグの一覧をselect要素に入れ込む処理
-        function showTags(tIdArr,tNameArr) {
-            // select要素(２箇所書かないと反応しない)
-            let elTag = document.getElementById("tags");
-            // 「tags」にタグの一覧を追加し、表示
-            for(let i = 0; i < tIdArr.length; i++) {
-                let option = document.createElement("option");
-                option.setAttribute("name", "tags");
-                option.value = tIdArr[i];
-                option.text = tNameArr[i];
-                elTag.appendChild(option);
-            }
-        }
- 
-        // select要素(２箇所書かないと反応しない)
-        let elTag = document.getElementById("tags");
-        // 選ばれた要素
-        let selectedTag = document.getElementById("selectTag");
-       
- 
-        // タグ一覧からタグを選択した時
-        elTag.onchange = event => {
-            let insertTag = document.getElementById("selectTag");
-            // 選択したoptionのindexを取得
-            let selectIndex = elTag.selectedIndex;
-            let selectText = elTag.options[selectIndex].text;
-            let eValue = selectText;
-            let option = document.createElement("option");
-            option.value = eValue;
-            option.innerText = selectText;
-            insertTag.appendChild(option);
-            // 選択したタグを一覧から削除
-            elTag.remove(selectIndex);
-           
-            // $_POST['selectTags']で受け取るためにinputを非表示で追加
-            let hiddenDiv = document.getElementById("hiddenDiv");
-            let inputEl = document.createElement("input");
-            inputEl.setAttribute("id", eValue);
-            inputEl.setAttribute("type", "hidden");
-            inputEl.name = "hiddenSelectTags[]";
-            inputEl.value = eValue;
-            hiddenDiv.appendChild(inputEl);
-        }
-       
-        // 入力されたタグを追加する処理
-        let tagMaxId = "" + <?php $tagMaxId = $dbmng->nextId($tagMaxId);
-            echo "\"" . $tagMaxId . "\"";?>;
-        function hashed() {
-            // select要素
-            let insertTag = document.getElementById("selectTag");
-            // 入力した要素
-            let inputTag = document.getElementById("inputTag");
-            let eValue = inputTag.value;
-            // 「tags」にタグの一覧を追加し、表示
-            let option = document.createElement("option");
- 
-            option.value = tagMaxId;
-           
-            option.innerText = eValue;
-            insertTag.appendChild(option);
-            inputTag.value = "";
-           
-            // $_POST['selectTags']で受け取るためにinputを非表示で追加
-            let hiddenDiv = document.getElementById("hiddenDiv");
-            let inputEl = document.createElement("input");
-            inputEl.setAttribute("id", eValue);
-            inputEl.setAttribute("type", "hidden");
-            inputEl.name = "hiddenSelectTags[]";
-            inputEl.value = eValue;
-            hiddenDiv.appendChild(inputEl);
- 
-            tagMaxId = nextId(tagMaxId);
-        }
- 
-        // 選択したタグを押下した時
-        selectedTag.onchange = event => {
-            let eValue = selectedTag.value;
-             // select要素
-             let insertTag = document.getElementById("tags");
-            // 選択したoptionのindexを取得
-            let selectIndex = selectedTag.selectedIndex;
-            // indexからtextを取得
-            let selectText = selectedTag.options[selectIndex].text;
-            // 「tags」にタグの一覧を追加し、表示
-            let option = document.createElement("option");
-            // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
-            option.setAttribute("name", "tags");
-            option.value = eValue;
-            option.innerText = selectText;
-            insertTag.appendChild(option);
-            // 選択したタグを一覧から削除
-            selectedTag.remove(selectIndex);
-            // 非表示のinputタグも削除
-            let delEl = document.getElementById(eValue);
-            delEl.remove();
-        }
-        // DBManager.phpのnextId()が使えなかったため、jsで再定義
-        function nextId(id) {
-            id = parseInt(id);
-            id++;
-            id = String(id).padStart(7, '0');
-            return id;
-        }
- 
-        // プレビュー表示
-        function previewImg(obj) {
-            let fileReader = new FileReader();
-            fileReader.onload = (function() {
-                document.getElementById('imgSize').src = fileReader.result;
-            });
-            fileReader.readAsDataURL(obj.files[0]);
-        }
+        
  
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
