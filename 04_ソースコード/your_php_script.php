@@ -96,7 +96,7 @@ session_start();
 
     </style>
 </head>
-<body>
+<body style=background-color:#fff4ff>
 
 
   <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">

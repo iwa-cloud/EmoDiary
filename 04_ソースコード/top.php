@@ -247,7 +247,7 @@ $previewMemo = "選択されていません";
     }
   </style>
 </head>
-<body>
+<body style=background-color:#fff4ff>
   <!-- ヘッダー -->
   <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
     <div class="container-fluid">

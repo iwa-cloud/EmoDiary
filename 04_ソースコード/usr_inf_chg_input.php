@@ -59,7 +59,7 @@ session_start();
 </head>
 <style>
 </style>
-<body>
+<body style=background-color:#fff4ff>
 <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
     <div class="container-fluid">
       <div class="row">

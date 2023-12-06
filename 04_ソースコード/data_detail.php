@@ -130,7 +130,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #EEEEEE;
+            background-color: #FFFFFF;
         }
  
         #imgMaxSize2 {
@@ -216,7 +216,7 @@
     </style>
 </head>
  
-<body>
+<body style=background-color:#fff4ff>
     <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
         <div class="container-fluid">
             <div class="row">
