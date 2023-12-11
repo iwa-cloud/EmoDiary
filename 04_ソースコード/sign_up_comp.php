@@ -63,13 +63,13 @@
         <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
             <div class="col-md-2" style="text-align:right">
               <details>
-                  <summary>
+                  <!-- <summary>
                     <i type="button" class="bi bi-plus-square" style="font-size:40px;" onclick="location.href='.php'"></i>&emsp;
                     <i type="button" class="bi bi-search" style="font-size:40px" onclick="location.href='.php'"></i>&emsp;
                     <i type="button" class="bi bi-person-fill" style="font-size:40px"></i>
                   </summary>
                 <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ログイン</button>
-                <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ユーザ情報変更</button> -->
+                <button class="form-control" style="color:#DCB3FC;" onclick="location.href='login.php'">ユーザ情報変更</button> --> -->
                 <summary>
                         <!-- //元のコード -->
                       <!-- <div id="first">
@@ -80,7 +80,7 @@
                         <!-- //クラスの切り替えテスト -->
                         <div id="first" class="first">
                           <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;" ></i>
-                          <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="search.href='search.php'"></i>&emsp;
+                          <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='search.php'"></i>&emsp;
                         <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='data_input.php'"></i>&emsp;
                         <button type="button" id="first2_2" class="hidden" onclick="location.href='logout.php'">ログアウト</button>
                         <button type="button" id="first2_1" class="hidden" onclick="location.href='usr_inf_chg_input.php'">ユーザー変更画面</button>
@@ -135,13 +135,13 @@
                         //           element.innerHTML= '<i type="button" id="first_2" class="bi bi-search" style="font-size:40px" onclick="location.href='login.php'"></i>&emsp;';
                         //           element.innerHTML= '<i type="button" id="first_3" class="bi bi-person-fill" style="font-size:40px" onclick="removeExample()"></i> ';
                         //  } -->
-                        </script>
-              </details>
+                        <!-- </script> -->
+              <!-- </details>
                         </div>
             </div>
       </div>
     </div>
-  </nav>
+  </nav> -->
      <div id="maindiv" class="container">
         <div class = "row mt-5">
             <div class="offset-md-3 col-md-6">

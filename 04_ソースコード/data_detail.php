@@ -1,4 +1,6 @@
 <?php
+    ini_set("display_errors",1);
+    error_reporting(E_ALL);
     session_start();
     // 他の画面から遷移する際には「data_id」を送ってもらう
     require_once './DBManager.php';
@@ -60,7 +62,11 @@
             align-items: flex-end;
             white-space: nowrap;
         }
-        
+        #first1_1{
+          width : 25px;
+          float: right;
+          margin-right: 20px;
+        }
         #first1_2 {
             width: 25px;
             float: right;
@@ -92,8 +98,17 @@
         }
 
         #data_left {
-            /* background-color: rgba(255, 201, 201, 0.486); */
+            margin-left: auto;
+            margin-right: auto;
         }
+            /* @media  screen and (max-width: 600px) {
+                #data_left {
+                    display: flex; 
+                    justify-content: center;
+                }
+            } */
+            /* background-color: rgba(255, 201, 201, 0.486); */
+        
 
         #data_right {
             /* background-color: rgba(220, 179, 252, 0.233); */
@@ -101,6 +116,8 @@
 
         .data_input_width {
             width: 80%;
+            margin-left: auto;
+            margin-right: auto;
             color:#DCB3FC;
         }
 
@@ -117,38 +134,49 @@
         #imgMaxSize {
             width: 550px;
             height: 550px;
-            margin-left: 15%;
-            display: flex;
+            margin: auto;
+            /* margin-left: 15%; */
+            /* display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; */
             background-color: black;
         }
         
-        #imgSize {
+         #imgSize {
             /* 試験的に80%にしてる */
             width: 100%;
             height: auto;
             /* object-fit: contain; */
         }
+
+        /* @media (max-width: 300px) {
+            #imgSize {
+            width: 80%; /* 画像を親要素の80%幅にする */
+        /* }
+    } */ */
         
         .DDRButton {
             width: 550px;
-            float: right;
+            /* float: right; */
             display: flex;
             flex-direction:column;
-            align-items:flex-end;
-            margin: 15% 20% 0% 0%;
+            /* margin:0 auto; */
+            /* align-items:flex-end; */
+            /* text-align: right; */
+            /* margin: 15% 0% 0% 20%; */
             /* background-color: #dcb3fc71; */
         }
 
         #editButton {
             width: 100px;
             color:#DCB3FC;
+            float: right;
         }
 
         #shareButton {
             width: 100px;
             color:#DCB3FC;
+            float: right;
         }
 
         .data_select_width {
@@ -183,6 +211,7 @@
                                 <!-- first2_2     ログアウトボタン                   -->
                                 <!-- first2_1     ユーザー情報変更画面に遷移するボタン -->
                                 <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;"></i>
+                                <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='data_input.php'"></i>&emsp;
                                 <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='search.php'"></i>&emsp;
                                 <button type="button" id="first2_2" class="hidden" onclick="location.href='logout.php'">ログアウト</button>
                                 <button type="button" id="first2_1" class="hidden" onclick="location.href='usr_inf_chg_input.php'">ユーザー変更画面</button>
@@ -274,23 +303,23 @@
             }
         }
 
-        addOption();
-        function addOption() {
-            // selectタグを取得する
-            let select = document.getElementById("selectTag");
-            // optionタグを作成する
-            let option = document.createElement("option");
+        // addOption();
+        // function addOption() {
+        //     // selectタグを取得する
+        //     let select = document.getElementById("selectTag");
+        //     // optionタグを作成する
+        //     let option = document.createElement("option");
 
-            <?php
-            foreach ($tag as $tagValue) {
-                echo "option.value = " . $tagValue . ";";
-                echo "select.appendChild(option);";
-            }
-            ?>
+        //     <?php
+        //     foreach ($tag as $tagValue) {
+        //         echo "option.value = " . $tagValue . ";";
+        //         echo "select.appendChild(option);";
+        //     }
+        //     ?>
 
-            // option.value = 4;
-            // select.appendChild(option);
-        }
+        //     // option.value = 4;
+        //     // select.appendChild(option);
+        // }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
