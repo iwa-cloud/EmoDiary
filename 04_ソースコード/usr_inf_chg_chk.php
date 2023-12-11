@@ -186,7 +186,6 @@ session_start();
         </div>
       </div>
     </form>
-      <div class="col-md-3 mt-4"></div>
       <div class="col-md-3 mt-4">
           <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;" onclick="location.href='usr_inf_chg_input.php';">
       </div>
