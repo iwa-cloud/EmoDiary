@@ -4,9 +4,9 @@ require_once './DBManager.php';
 $dbmng = new DBManager();
 
 // ログインしているか
-if($_SESSION['user_id'] == ""){
+if ($_SESSION['user_id'] == "") {
     header('Location: login.php');
-}else{
+} else {
     $page = "Location: " . $_SESSION['page'] . ".php";
     header($page);
 }
