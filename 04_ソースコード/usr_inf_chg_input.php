@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>ユーザー情報変更画面</title>
     <style>
         .visible {
@@ -168,7 +168,7 @@ session_start();
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div style="color: #DCB3FC; text-align:left">name</div>
-                <input type="text" name="name" class="form-control" id="txt1" required>
+                <input type="text" name="name" class="form-control" id="txt1" value="<?php echo $_SESSION ['input_name']?>" required>
             </div>
             <div class="col-md-4"></div>
             <div class="col-md-4"></div>
@@ -190,12 +190,12 @@ session_start();
             <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
                 <input type="submit" class="btn btn-secondary" name="user" value="ユーザー情報変更" style="background:white; color:#DCB3FC;">
             </div>
-            <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
-                <input type="submit" class="btn btn-secondary" name="back" value="戻る" style="background:white; color:#DCB3FC;">
-            </div>
+          </div>
         </div>
-    </div>
-    </form>
+      </form>
+      <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
+          <input type="submit" class="btn btn-secondary" name="back" value="戻る" style="background:white; color:#DCB3FC;"  onclick="location.href='<?php echo $_SESSION['page'] ?>'">
+      </div>
     
     <script>
         const pwd1 = document.getElementById("pwd1");
