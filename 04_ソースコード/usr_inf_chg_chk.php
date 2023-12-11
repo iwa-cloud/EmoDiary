@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>ユーザー情報変更確認画面</title>
     <style>
         .visible {
@@ -182,13 +182,14 @@ session_start();
             <div class="col-md-3 mt-4">
                 <input type="submit" class="form-control" value="登録" style="color:#DCB3FC;">
             </div>
-            <div class="col-md-3 mt-4">
-                <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;">
-            </div>
             <div class="col-md-3 mt-4"></div>
         </div>
-    </div>
+      </div>
     </form>
+      <div class="col-md-3 mt-4"></div>
+      <div class="col-md-3 mt-4">
+          <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;" onclick="location.href='usr_inf_chg_input.php';">
+      </div>
 
 
     <script src="./header.js"></script>
