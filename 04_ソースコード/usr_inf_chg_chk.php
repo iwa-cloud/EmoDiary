@@ -84,7 +84,7 @@ session_start();
                         <div id="first" class="first">
                           <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;" ></i>
                           <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='search.php'"></i>&emsp;
-                        <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;
+                        <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='data_input.php'"></i>&emsp;
                         <button type="button" id="first2_2" class="hidden" onclick="location.href='logout.php'">ログアウト</button>
                         <button type="button" id="first2_1" class="hidden" onclick="location.href='usr_inf_chg_input.php'">ユーザー変更画面</button>
                         <!-- <i type="button" id="first2_2" class="hidden" style="font-size:25px;" onclick="location.href='login.php'"></i>&emsp;                   
@@ -179,16 +179,15 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-md-3 mt-4"></div>
-            <div class="col-md-3 mt-4">
-                <input type="submit" class="form-control" value="登録" style="color:#DCB3FC;">
-            </div>
-            <div class="col-md-3 mt-4"></div>
-        </div>
-      </div>
+              <div class="col-md-3 mt-4">
+                  <input type="submit" class="form-control" value="登録" style="color:#DCB3FC;">
+              </div>
+             <div class="col-md-3 mt-4">
+                  <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;" onclick="location.href='usr_inf_chg_input.php';">
+             </div>
+         </div>
+    </div>
     </form>
-      <div class="col-md-3 mt-4">
-          <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;" onclick="location.href='usr_inf_chg_input.php';">
-      </div>
 
 
     <script src="./header.js"></script>

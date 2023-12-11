@@ -100,7 +100,8 @@ if ($photo == "") {
         }
 
         #data_left {
-            /* background-color: rgba(255, 201, 201, 0.486); */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #data_right {
@@ -152,7 +153,7 @@ if ($photo == "") {
 
         .DDRButton {
             width: 550px;
-            float: right;
+            /* float: right; */
             display: flex;
             flex-direction: column;
             align-items: flex-end;
