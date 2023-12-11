@@ -92,10 +92,10 @@
             <form action="sign_up_input_chk.php" method="post">
                 <div class="row">
                     <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <p style="text-align: left; color:#DCB3FC;">name</p>
-                        <input type="textbox" name="name" class="form-control" id="txt1" value="<?php echo $_SESSION ['input_user_name']?>" required>
-                    </div>
+                      <div class="col-md-4">
+                          <p style="text-align: left; color:#DCB3FC;">name</p>
+                          <input type="textbox" name="name" class="form-control" id="txt1" value="<?php echo $_SESSION ['input_user_name']?>" required>
+                      </div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
