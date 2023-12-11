@@ -10,5 +10,5 @@ $user = $dbmng -> userRegist($_SESSION ['input_user_name'], $_SESSION ['input_ma
 // エラー文を消去
 $_SESSION['error'] = "";
 $_SESSION['user_name'] = $_SESSION ['input_user_name'];
-header('Location:top.php');
+header('Location:sign_up_comp.php');
 ?>

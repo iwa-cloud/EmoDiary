@@ -1,3 +1,39 @@
+<?php
+ini_set('display_errors', "On");
+session_start();
+require_once './DBManager.php';
+$dbmng = new DBManager();
+
+// 「最新順」「タグ順」「日付順」のどれかが押されているか判定
+// リダイレクトした場合は$_POST['three_btn']に選択したボタンの情報が入る
+if(!empty($_POST['three_btn'])) {
+  $_SESSION['select_name'] = $_POST['three_btn'];
+  // 初めてこの画面を表示したら"new"を格納する
+}else if(empty($_SESSION['select_name'])){
+  $_SESSION['select_name'] = "new";
+}
+
+// 表示するデータのプレビュー用の変数
+$previewPhoto = "./img/gray.png";
+$previewMemo = "選択されていません";
+
+// function newSelect($data_id){
+//  $pdo = $this->dbConnect();
+//      $sql = "SELECT * FROM data WHERE data_id = ?";
+//      $ps = $pdo->prepare($sql);
+//      $ps->bindValue(1, $data_id, PDO::PARAM_INT);
+//      $ps->execute();
+//      $result = $ps->fetchAll();
+//      foreach ($result as $row) {
+//      echo "Data ID: " . $row['data_id'] . "<br>";
+//      echo "Title: " . $row['title'] . "<br>";
+//      echo "TagName: " . $row['tag_name'] . "<br>";
+//      echo "TagUsedTime: " . $row['used_time'] . "<br>";
+//      echo "---------------<br>";
+//    }
+// }
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -31,16 +67,6 @@
       float: right;
       margin-right: 20px;
     }
-    /* #first2_1{
-      width : 75px;
-      float: right;
-      margin-right: 20px;
-    }
-    #first2_2{
-      width : 75px;
-      float: right;
-      margin-right: 20px;
-    } */
 
     #parent {
       /* width:25px; */
@@ -100,6 +126,7 @@
     .viewFrame{
       height: 84vh;
       width: 100%;
+      overflow: scroll;
     }
 
     #borderStyle {
@@ -134,25 +161,25 @@
     }
 
     #topFrame {
-      margin: 10%;
+      margin: 3%;
       padding-left: 5%;
     }
 
     #topImgMaxSize {
-      width: 100%;
-      height: 100%;
-      margin-left: 15%;
-      /* display: flex;
+      width: 85%;
+      height: 520px;
+      display: flex;
       justify-content: center;
       align-items: center;
-      background-color: black; */
+      background-color: #EEEEEE;
+      /* margin-left: 3%; */
     }
 
     #topImgSize {
-      /* 試験的に80%にしてる */
-      width: 60%;
+      max-width: 100%;
+      max-height: 470px;
       height: auto;
-      /* object-fit: contain; */
+      width: auto;
     }
 
     .data_input_width {
@@ -166,22 +193,24 @@
     }
 
     #memo {
-      width: 100%;
+      width: 115%;
       height:150px;
     }
 
     .viewMemoInput {
       /* padding-right: 10%; */
-      margin: 5% 15% 0 auto;
+      margin: 3% 20% 0 auto;
+      margin: right;
     }
 
     .viewMemoButton {
       /* padding-right: 10%; */
-      margin: 3% 15% 0 auto;
+      margin: 3% 8% 0 auto;
+      margin: right;
     }
   </style>
 </head>
-<body>
+<body style=background-color:#fff4ff>
   <!-- ヘッダー -->
   <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
     <div class="container-fluid">
@@ -204,15 +233,13 @@
     </div>
   </nav>
 
-
-
   <div class="container-fluid">
     <div class="row">
       <!-- 画面の左側 -->
       <div class="col-md-5 data_left"  id="borderStyle">
         <!-- ボタン表示領域 -->
         <div id="nav">
-          <form action="./three_test.php" method="post">
+          <form action="./top.php" method="post">
             <!-- 文字のcssは適応されてないかも -->
             <button type = "submit" value = "new" name = "three_btn" class = "topbutton" onclick = "showElement('element1')">最新 ↓</button>
             <button type = "submit" value = "tag" name = "three_btn" class = "topbutton" onclick = "showElement('element2')">タグ ↓</button>
@@ -227,27 +254,74 @@
           <p id="element2" class="element" style="display: none;"></p>
           <p id="element3" class="element" style="display: none;"></p>
 
-          <!-- テスト -->
-          <div class="titles">
-            <input type="radio" name="titleBtns" id="0000004" value="0000004" onclick="isClicked('0000004')">
-            <label for="0000004">
-              <strong class="mb-1" style="font-size: 20px;">
-                title4
-              </strong>
-            </label>
-          </div>
+          <?php
+          // 前回押したボタンによって表示内容をを変える
+          //試験的にuser_idを「0000002」
+          $user_id = "0000002";
 
-          <div class="titles">
-            <input type="radio" name="titleBtns" id="0000005" value="0000005" onclick="isClicked('0000005')">
-            <label for="0000005">
-              <strong class="mb-1" style="font-size: 20px;">
-                title5
-              </strong>
-            </label>
-          </div>
+          // 最新順
+          if($_SESSION['select_name'] == "new"){
+          $result = $dbmng->getDataNewest($user_id);
+          newASC($result);
+          // 日付順
+          }else if($_SESSION['select_name'] == "date"){
+          $result = $dbmng->getDataNewest($user_id);
+          newASC($result);
+          // タグ順
+          }else{
+          $result = $dbmng->getDataByDate($user_id);
+          dateASC($result);
+          }
+
+          //「最新順」「日付順」のボタンを押したしたとき
+          function newASC($result){
+            foreach ($result as $row) {
+              echo '<div class="titles">';
+              echo '<input type="radio" name="selectTitle" id = "' . $row['data_id'] . '" value = "' . $row['data_id'] . '" onclick="isClick(\'\',\''. $row['data_id'] .'\')">';
+              echo '<label for="' . $row['data_id'] . '">';
+              echo '<strong class="mb-1" style="font-size:20px;">' . $row['title'] . '</strong>';
+              echo '</label>';
+              echo '</div>';
+            }
+          }
+
+          // 「タグ順」を押下したとき
+          // <div class="titles">
+          // <input id="acd-chk1" class="acd-chk" type="checkbox">
+          // <label class="acd-label" for="acd-chk1">＃タグ名</label>
+          // <div class="acd-content">
+          //  <strong class="mb-1" style="font-size:20px;">タイトル</strong>
+          // </div>
+          // </div>
+          function dateASC($result){
+            foreach ($result as $row) {
+              echo '<div class="titles">';
+              echo '<input id="acd-chk1" class="acd-chk" type="checkbox">';
+              echo '<label class="acd-label" for="acd-chk1">'. $row['title'] . '</label>';
+              echo '<div class="acd-content">';
+              echo '<strong class="mb-1" style="font-size:20px;">タイトル</strong>';
+              echo '</div>';
+              echo '</div>';
+            }
+          }
+
+          // 【テスト】data_idを出力
+          if(!empty($_POST['data_id'])) {
+            $_SESSION['data_id'] = $_POST['data_id'];
+            // データベースからプレビュー用の情報を取得
+            $previewData = $dbmng->getDataPAndM($_SESSION['data_id']);
+            foreach ($previewData as $row) {
+              $previewPhoto = $row['photo'];
+              $previewMemo = $row['memo'];
+            }
+          }else {
+            $_SESSION['data_id'] = "new";
+          }
+
+          echo $_SESSION['data_id'];
+          ?>
+
         </div>
-    
-        
       </div>
 
       <!-- 画面の右側 -->
@@ -255,15 +329,16 @@
         <div id="topFrame">
           <!-- 画像表示領域 -->
           <div id="topImgMaxSize">
-            <img id="topImgSize" src="./img/gray.png" alt="none">
+            <img id="topImgSize" src="<?php echo $previewPhoto; ?>" alt="none">
           </div>
           <div class="">
             <!-- 文章表示領域 -->
             <p class="data_input_width viewMemoInput" style="color:#DCB3FC">文章<br>
-              <input id="memo" type="text" name="bin" value="表示テスト" readonly>
+              <input id="memo" type="text" name="bin" value="<?php echo $previewMemo; ?>" readonly>
             </p> 
             <!-- 処理は書いてない -->
-            <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="">共有</button>
+            <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="">共有</button><br>
+            <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="isClick('data_detail.php', '<?php echo $_SESSION['data_id']; ?>')">詳細</button>
           </div>
         </div>
       </div>
@@ -271,53 +346,19 @@
   </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- 画面左側 -->
-  <!-- <div id="nav">
-    <form action="./three_test.php" method="post">
-      <button type = "submit" value = "new" name = "three_btn" class = "topbutton" onclick = "showElement('element1')">最新 ↓</button>
-      <button type = "submit" value = "tag" name = "three_btn" class = "topbutton" onclick = "showElement('element2')">タグ ↓</button>
-      <button type = "submit" value = "date" name = "three_btn" class = "topbutton" onclick = "showElement('element3')">日付 ↓</button>
-      <button class = "topbutton">編集 ↓</button>
-    </form><br>
-
-    <p id="element1" class="element"></p>
-    <p id="element2" class="element" style="display: none;"></p>
-    <p id="element3" class="element" style="display: none;"></p>
-  </div> -->
-
-  <!-- 画面右側 -->
-  <!-- <p class="kk" style="color:#DCB3FC">文章</p> -->
-  <!-- <p class="kk" style="color:#DCB3FC">文章<br>
-    <input id="memo" type="text" name="bin" value="表示テスト" readonly>
-  </p> 
-  <button type="button" class="form-control" style="color: #DCB3FC; width: 100px;" onclick="">共有</button> -->
-
-
   <script>
-    function isClick(e,obj, num){
-      sendPost("","select_id",num);
+    function isClick(act, num){
+      sendPost(act, num);
     }
 
-    function sendPost(act,name,num){
+    // jsからphpにdata_idを送信
+    function sendPost(act, num){
       let form = document.createElement('form');
       let request = document.createElement('input');
       form.method = 'POST';
       form.action = act;
       request.type = 'hidden';
-      request.name = name;
+      request.name = "data_id";
       request.value = num;
       form.appendChild(request);
       document.body.appendChild(form);

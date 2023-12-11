@@ -59,11 +59,11 @@ session_start();
 </head>
 <style>
 </style>
-<body>
+<body style=background-color:#fff4ff>
 <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i>&emsp;<href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
+        <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i>&emsp;<a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a></div>
             <div class="col-md-2" style="text-align:right">
               <details>
                   <!-- <summary>
@@ -149,8 +149,9 @@ session_start();
     <br>
     <br>
     <br>
-    <br>
-    <p class="ff" style="color: #ff0000; font-size: 20px;">この内容で登録しますか</p>
+    <br> <div class="row offset-sm-4 offset-3 col-sm-4  col-6 mt-3">
+      <p style="color: #ff0000; font-size: 20px; text-align: center;">この内容で登録しますか</p>
+      </div>
     <br>
     <br>
     <form action="./usr_inf_chg.php" method="post">

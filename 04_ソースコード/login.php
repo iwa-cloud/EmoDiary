@@ -1,8 +1,11 @@
 <?php
   session_start(); 
+  $_SESSION['user_id'] = "";
+  $_SESSION['input_user_name'] = "";
   $_SESSION['input_mail'] = "";
   $_SESSION['input_pass'] = "";
   $_SESSION['error'] = "";
+  $_SESSION['select_name'] = "new";
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,26 +62,13 @@
         }
     </style>
 </head>
-<body>
+<body style=background-color:#fff4ff>
   
   <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
-            <div class="col-md-2" style="text-align:right">
-              <details>
-                <summary>
-                      
-                        <div id="first" class="first">
-                          <!-- <i type="button" id="parent" class="bi bi-person-fill" style="font-size:25px;" ></i> -->
-                          <i type="button" id="first1_2" class="visible bi bi-search" style="font-size:25px;" onclick="location.href='search.php'"></i>&emsp;
-                          <i type="button" id="first1_1" class="visible bi bi-plus-square" style="font-size:25px;" onclick="location.href='data_input.php'"></i>&emsp;
-                          <!-- <button type="button" id="first2_2" class="hidden" onclick="location.href='logout.php'">ログアウト</button>
-                          <button type="button" id="first2_1" class="hidden" onclick="location.href='usr_inf_chg_input.php'">ユーザー変更画面</button> -->
-                        </div>
-                </summary>
-              </details>
-            </div>
+            
           </div>
       </div>
     </div>
@@ -95,13 +85,10 @@
                 <br>
                 <br>
                 <br>
+                <br>
                   <div class="row">
                     <div class="col-md-12 mt-2">
                       <div class="d-grid gap-2">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
                         <br>
                         <br>
                         <button type="button" class="btn btn-outline-secondary btn-lg btn-block" style="background:white; color:#DCB3FC;" onclick="location.href='./login_input.php'">ログイン</button>
