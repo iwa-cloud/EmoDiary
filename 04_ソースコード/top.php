@@ -4,13 +4,14 @@ session_start();
 require_once './DBManager.php';
 $dbmng = new DBManager();
 $_SESSION['page'] = "top.php";
+$_SESSION ['input_name'] = "";
 
 // 「最新順」「タグ順」「日付順」のどれかが押されているか判定
 // リダイレクトした場合は$_POST['three_btn']に選択したボタンの情報が入る
-if(!empty($_POST['three_btn'])) {
+if (!empty($_POST['three_btn'])) {
   $_SESSION['select_name'] = $_POST['three_btn'];
   // 初めてこの画面を表示したら"new"を格納する
-}else if(empty($_SESSION['select_name'])){
+} else if (empty($_SESSION['select_name'])) {
   $_SESSION['select_name'] = "new";
 }
 
@@ -18,53 +19,41 @@ if(!empty($_POST['three_btn'])) {
 $previewPhoto = "./img/gray.png";
 $previewMemo = "選択されていません";
 
-// function newSelect($data_id){
-//  $pdo = $this->dbConnect();
-//      $sql = "SELECT * FROM data WHERE data_id = ?";
-//      $ps = $pdo->prepare($sql);
-//      $ps->bindValue(1, $data_id, PDO::PARAM_INT);
-//      $ps->execute();
-//      $result = $ps->fetchAll();
-//      foreach ($result as $row) {
-//      echo "Data ID: " . $row['data_id'] . "<br>";
-//      echo "Title: " . $row['title'] . "<br>";
-//      echo "TagName: " . $row['tag_name'] . "<br>";
-//      echo "TagUsedTime: " . $row['used_time'] . "<br>";
-//      echo "---------------<br>";
-//    }
-// }
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./css/style.css">
   <title>TOP画面</title>
   <style>
     .visible {
-        display: block;
-        /* width : 25px; */
+      display: block;
+      /* width : 25px; */
     }
 
     .hidden {
-        display: none;
-        /* width : 25px; */
+      display: none;
+      /* width : 25px; */
     }
-    #first{
+
+    #first {
       align-items: flex-end;
       white-space: nowrap;
     }
-    #first1_1{
-      width : 25px;
+
+    #first1_1 {
+      width: 25px;
       float: right;
       margin-right: 20px;
     }
-    #first1_2{
-      width : 25px;
+
+    #first1_2 {
+      width: 25px;
       float: right;
       margin-right: 20px;
     }
@@ -73,10 +62,11 @@ $previewMemo = "選択されていません";
       /* width:25px; */
       float: right;
     }
-    .half{
-      float:  left;               
-      margin:  5px;
-      padding:  10px;  
+
+    .half {
+      float: left;
+      margin: 5px;
+      padding: 10px;
     }
 
     input[type="radio"] {
@@ -99,39 +89,22 @@ $previewMemo = "選択されていません";
       position: relative;
     }
 
-    /* .radio-dez label:before {
-      content: '';
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      border: 2px solid #999;
-      border-radius: 50%;
-      position: absolute;
-      left: 0;
-      top: 1px;
-    }
-
-    .radio-dez input[type="radio"]:checked + label:before {
-      background-color: #2196F3;
-      border-color: #2196F3;
-    } */
-
     .data_left {
-        /* background-color: rgba(255, 201, 201, 0.486); */
+      /* background-color: rgba(255, 201, 201, 0.486); */
     }
 
     .data_right {
-        /* background-color: rgba(220, 179, 252, 0.233); */
+      /* background-color: rgba(220, 179, 252, 0.233); */
     }
 
-    .viewFrame{
+    .viewFrame {
       height: 84vh;
       width: 100%;
       overflow: scroll;
     }
 
     #borderStyle {
-      border-width:1.7px;
+      border-width: 1.7px;
       border-color: #A2A4A2;
       border-style: none solid none none;
       padding: 0%;
@@ -152,7 +125,7 @@ $previewMemo = "選択されていません";
       border-color: rgb(188, 188, 188) transparent rgb(188, 188, 188) transparent;
     }
 
-    .titles input:checked + label {
+    .titles input:checked+label {
       background: #d4fffc;
       color: black;
     }
@@ -170,11 +143,6 @@ $previewMemo = "選択されていません";
     #topImgMaxSize {
       width: 400px;
       height: 400px;
-      /* margin-left: 15%; */
-      /* display: flex;
-      justify-content: center;
-      align-items: center; */
-      /* text-align: center; */
       margin: 0 auto;
       background-color: #EEEEEE;
 
@@ -191,7 +159,7 @@ $previewMemo = "選択されていません";
 
     .data_input_width {
       width: 80%;
-      color:#DCB3FC;
+      color: #DCB3FC;
     }
 
     .data_input_width input {
@@ -201,7 +169,7 @@ $previewMemo = "選択されていません";
 
     #memo {
       width: 100%;
-      height:150px;
+      height: 150px;
     }
 
     .viewMemoInput {
@@ -217,26 +185,30 @@ $previewMemo = "選択されていません";
     .tagMenu {
       /* 要素の大きさは仮 */
       width: 100%;
-      
+
       display: flex;
       flex-flow: column;
     }
+
     .tagMenu button {
       border: 1px solid;
       border-color: rgb(188, 188, 188) transparent rgb(188, 188, 188) rgb(188, 188, 188);
     }
+
     .parent {
       height: 50px;
       background: rgba(181, 181, 181, 0.258);
       color: #DCB3FC;
-      font-size:20px;
+      font-size: 20px;
     }
+
     .child {
       height: 50px;
       background: white;
       /* margin-left: 20px; */
-      font-size:20px;
+      font-size: 20px;
     }
+
     .active {
       display: none;
     }
@@ -247,6 +219,7 @@ $previewMemo = "選択されていません";
     }
   </style>
 </head>
+
 <body style=background-color:#fff4ff>
   <!-- ヘッダー -->
   <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
@@ -273,18 +246,18 @@ $previewMemo = "選択されていません";
   <div class="container-fluid">
     <div class="row">
       <!-- 画面の左側 -->
-      <div class="col-md-5 data_left"  id="borderStyle">
+      <div class="col-md-5 data_left" id="borderStyle">
         <!-- ボタン表示領域 -->
         <div id="nav">
           <form action="./top.php" method="post">
             <!-- 文字のcssは適応されてないかも -->
-            <button type = "submit" value = "new" name = "three_btn" class = "topbutton" onclick = "showElement('element1')">最新 ↓</button>
-            <button type = "submit" value = "tag" name = "three_btn" class = "topbutton" onclick = "showElement('element2')">タグ ↓</button>
-            <button type = "submit" value = "date" name = "three_btn" class = "topbutton" onclick = "showElement('element3')">日付 ↓</button>
+            <button type="submit" value="new" name="three_btn" class="topbutton" onclick="showElement('element1')">最新 ↓</button>
+            <button type="submit" value="tag" name="three_btn" class="topbutton" onclick="showElement('element2')">タグ ↓</button>
+            <button type="submit" value="date" name="three_btn" class="topbutton" onclick="showElement('element3')">日付 ↓</button>
             <!-- <button class = "topbutton">編集 ↓</button> -->
           </form><br>
         </div>
-        
+
 
         <!-- タイトル表示領域 -->
         <div class="viewScroll  viewFrame">
@@ -295,24 +268,25 @@ $previewMemo = "選択されていません";
           $user_id = $_SESSION['user_id'];
 
           // 最新順
-          if($_SESSION['select_name'] == "new"){
-          $result = $dbmng->getDataNewest($user_id);
-          newASC($result);
-          // 日付順
-          }else if($_SESSION['select_name'] == "date"){
-          $result = $dbmng->getDataNewest($user_id);
-          newASC($result);
-          // タグ順
-          }else{
-          $result = $dbmng->getDataByDate($user_id);
-          dateASC($result);
+          if ($_SESSION['select_name'] == "new") {
+            $result = $dbmng->getDataNewest($user_id);
+            newASC($result);
+            // 日付順
+          } else if ($_SESSION['select_name'] == "date") {
+            $result = $dbmng->getDataNewest($user_id);
+            newASC($result);
+            // タグ順
+          } else {
+            $result = $dbmng->getDataByDate($user_id);
+            dateASC($result);
           }
 
           //「最新順」「日付順」のボタンを押したしたとき
-          function newASC($result){
+          function newASC($result)
+          {
             foreach ($result as $row) {
               echo '<div class="titles">';
-              echo '<input type="radio" name="selectTitle" id = "' . $row['data_id'] . '" value = "' . $row['data_id'] . '" onclick="isClick(\'\',\''. $row['data_id'] .'\')">';
+              echo '<input type="radio" name="selectTitle" id = "' . $row['data_id'] . '" value = "' . $row['data_id'] . '" onclick="isClick(\'\',\'' . $row['data_id'] . '\')">';
               echo '<label for="' . $row['data_id'] . '">';
               echo '<strong class="mb-1" style="font-size:20px;">' . $row['title'] . '</strong>';
               echo '</label>';
@@ -320,7 +294,8 @@ $previewMemo = "選択されていません";
             }
           }
 
-          function dateASC($result){
+          function dateASC($result)
+          {
             $tagNameArr = array();
             $titles = array();
             $tagDataId = array();
@@ -331,25 +306,20 @@ $previewMemo = "選択されていません";
               array_push($tagDataId, $row['data_id']);
             }
 
-            // $arr1 = ["tag1", "tag1", "tag1", "tag2", "tag2", "tag3"];
-            // $arr2 = ["title1", "title2", "title3", "title4", "title5", "title6"];
-            // $arr3 = ["0000001", "0000002", "0000003", "0000004", "0000005", "0000006"];
-
-
             // 初期化
             $html = '<div class="tagMenu">';
             $cnt = 0;
 
             // 配列の要素を順に処理
             for ($i = 0; $i < count($titles); $i++) {
-                // 親ボタン
-                if ($i == 0 || $tagNameArr[$i] !== $tagNameArr[$i - 1]) {
-                    $html .= '<button type="button" class="parent" onclick="func1(\'c' . ($cnt + 1) . '\')">' . $tagNameArr[$i] . '</button>';
-                    $cnt++;
-                }
+              // 親ボタン
+              if ($i == 0 || $tagNameArr[$i] !== $tagNameArr[$i - 1]) {
+                $html .= '<button type="button" class="parent" onclick="func1(\'c' . ($cnt + 1) . '\')">' . $tagNameArr[$i] . '</button>';
+                $cnt++;
+              }
 
-                // 子ボタン
-                $html .= '<button type="button" class="child c' . $cnt . ' active" onclick="func2(\'' . $tagDataId[$i] . '\')">' . $titles[$i] . '</button>';
+              // 子ボタン
+              $html .= '<button type="button" class="child c' . $cnt . ' active" onclick="func2(\'' . $tagDataId[$i] . '\')">' . $titles[$i] . '</button>';
             }
 
             // 最後の要素を閉じる
@@ -360,7 +330,7 @@ $previewMemo = "選択されていません";
 
 
           // 【テスト】data_idを出力
-          if(!empty($_POST['data_id'])) {
+          if (!empty($_POST['data_id'])) {
             $_SESSION['data_id'] = $_POST['data_id'];
             // データベースからプレビュー用の情報を取得
             $previewData = $dbmng->getDataPAndM($_SESSION['data_id']);
@@ -368,14 +338,11 @@ $previewMemo = "選択されていません";
               $previewPhoto = $row['photo'];
               $previewMemo = $row['memo'];
             }
-          }else {
+          } else {
             $_SESSION['data_id'] = "new";
           }
 
-          // echo $_SESSION['data_id'];
           ?>
-
-        <!-- <h1 id="echoText">ここ</h1> -->
         </div>
       </div>
 
@@ -390,9 +357,8 @@ $previewMemo = "選択されていません";
             <!-- 文章表示領域 -->
             <p class="data_input_width viewMemoInput" style="color:#DCB3FC">文章<br>
               <input id="memo" type="text" name="bin" value="<?php echo $previewMemo; ?>" readonly>
-            </p> 
+            </p>
             <!-- 処理は書いてない -->
-            <!-- <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="">共有</button><br> -->
             <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="isClick('data_detail.php', '<?php echo $_SESSION['data_id']; ?>')">詳細</button>
           </div>
         </div>
@@ -402,12 +368,12 @@ $previewMemo = "選択されていません";
 
 
   <script>
-    function isClick(act, num){
+    function isClick(act, num) {
       sendPost(act, num);
     }
 
     // jsからphpにdata_idを送信
-    function sendPost(act, num){
+    function sendPost(act, num) {
       let form = document.createElement('form');
       let request = document.createElement('input');
       form.method = 'POST';
@@ -418,7 +384,7 @@ $previewMemo = "選択されていません";
       form.appendChild(request);
       document.body.appendChild(form);
       form.submit();
-      
+
     }
 
     function showElement(elementId) {
@@ -431,17 +397,15 @@ $previewMemo = "選択されていません";
 
     function func1(e) {
       let childs = document.getElementsByClassName(e);
-      for(let i = 0; i < childs.length; i++) {
+      for (let i = 0; i < childs.length; i++) {
         childs[i].classList.toggle("active");
       }
-        // e.classList.toggle("active");
-    }
-    function func2(text) {
-      // let echoText = document.getElementById("echoText");
-      // echoText.textContent = text;
-      sendPost('', text);
+      // e.classList.toggle("active");
     }
 
+    function func2(text) {
+      sendPost('', text);
+    }
   </script>
   <script src="./header.js"></script>
 </body>
