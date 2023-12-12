@@ -102,8 +102,8 @@
         }
  
         #data_left {
-            margin-left: auto;
-            margin-right: auto;
+            /* margin-left: auto;
+            margin-right: auto; */
         }
  
         #data_right {
@@ -173,7 +173,6 @@
         #shareButton {
             width: 100px;
             color:#DCB3FC;
-            float: right;
         }
  
         .data_select_width {
