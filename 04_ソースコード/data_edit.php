@@ -1,82 +1,79 @@
 <?php
-    session_start();
-    // 「編集」処理のため、flgに「false」を代入
-    $_SESSION['newData'] = false;
-    $_SESSION['page'] = "data_edit.php";
+session_start();
+// 「編集」処理のため、flgに「false」を代入
+$_SESSION['newData'] = false;
+$_SESSION['page'] = "data_edit.php";
 
-    // 次の画面遷移で使うため、試験的に
-    // $_SESSION['data_id'] = "0000006";
-    // $_SESSION['user_id'] = "0000002";
-    
-    require_once './DBManager.php';
-    $dbmng = new DBManager();
+require_once './DBManager.php';
+$dbmng = new DBManager();
 
-    // 使用されたタグ一覧を取得
-    $tags = $dbmng->getTags();
+// 使用されたタグ一覧を取得
+$tags = $dbmng->getTags();
 
-    // タグを入力するやつ用
-    $tagMaxId = $dbmng->getMaxTagId();
+// タグを入力するやつ用
+$tagMaxId = $dbmng->getMaxTagId();
 
-    // data_idのデータを取得
-    $titleUrlMemo = $dbmng->getData($_SESSION['data_id']);
+// data_idのデータを取得
+$titleUrlMemo = $dbmng->getData($_SESSION['data_id']);
 
-    // データに適応されているタグ一覧
-    $selectedTags = $dbmng->getDataTag($_SESSION['data_id']);
-    // データに適応されていないタグ一覧
-    $notSelectedTags = $dbmng->getNotSelectTag($_SESSION['data_id']);
+// データに適応されているタグ一覧
+$selectedTags = $dbmng->getDataTag($_SESSION['data_id']);
+// データに適応されていないタグ一覧
+$notSelectedTags = $dbmng->getNotSelectTag($_SESSION['data_id']);
 
-    $upPhoto = $dbmng->getDataPhoto($_SESSION['data_id']);
+$upPhoto = $dbmng->getDataPhoto($_SESSION['data_id']);
 
-    $title = "";
-    $url = "";
-    $memo = "";
-    $photo = "";
-    $tagIdArray = array();
-    $tagNameArray = array();
-    $notTagIdArray = array();
-    $notTagNameArray = array();
-    $tagIdJson;
-    $tagNameJson;
-    $notTagIdJson;
-    $notTagNameJson;
+$title = "";
+$url = "";
+$memo = "";
+$photo = "";
+$tagIdArray = array();
+$tagNameArray = array();
+$notTagIdArray = array();
+$notTagNameArray = array();
+$tagIdJson;
+$tagNameJson;
+$notTagIdJson;
+$notTagNameJson;
 
-    foreach ($titleUrlMemo as $row) {
-        $title = $row['title'];
-        $url = $row['url'];
-        $memo = $row['memo'];
-    }
-    
-    foreach ($upPhoto as $row) {
-        $photo = $row['photo'];
-    }
+foreach ($titleUrlMemo as $row) {
+    $title = $row['title'];
+    $url = $row['url'];
+    $memo = $row['memo'];
+}
 
-    if($photo == null) {
-        $photo = "./img/gray.png";
-    }
+foreach ($upPhoto as $row) {
+    $photo = $row['photo'];
+}
 
-    // jsで配列を使うため、phpで配列に詰めておく
-    foreach ($selectedTags as $row) {
-        array_push($tagIdArray, $row['tag_id']);
-        array_push($tagNameArray, $row['tag_name']);
-    }
+if ($photo == null) {
+    $photo = "./img/gray.png";
+}
 
-    foreach ($notSelectedTags as $row) {
-        array_push($notTagIdArray, $row['tag_id']);
-        array_push($notTagNameArray, $row['tag_name']);
-    }
-    
+// jsで配列を使うため、phpで配列に詰めておく
+foreach ($selectedTags as $row) {
+    array_push($tagIdArray, $row['tag_id']);
+    array_push($tagNameArray, $row['tag_name']);
+}
 
-    // phpの配列をjsで使えるように変換
-    // データに適応されているタグ一覧
-    $tagIdJson = json_encode($tagIdArray);
-    $tagNameJson = json_encode($tagNameArray);
-    
-    // データに適応されていないタグ一覧
-    $notTagIdJson = json_encode($notTagIdArray);
-    $notTagNameJson = json_encode($notTagNameArray);
+foreach ($notSelectedTags as $row) {
+    array_push($notTagIdArray, $row['tag_id']);
+    array_push($notTagNameArray, $row['tag_name']);
+}
+
+
+// phpの配列をjsで使えるように変換
+// データに適応されているタグ一覧
+$tagIdJson = json_encode($tagIdArray);
+$tagNameJson = json_encode($tagNameArray);
+
+// データに適応されていないタグ一覧
+$notTagIdJson = json_encode($notTagIdArray);
+$notTagNameJson = json_encode($notTagNameArray);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,77 +82,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <style>
-        
         /* 試験的に色付けあり */
         .visible {
             display: block;
         }
- 
+
         .hidden {
             display: none;
         }
- 
+
         #first {
             align-items: flex-end;
             white-space: nowrap;
         }
-       
+
         #first1_2 {
             width: 25px;
             float: right;
             margin-right: 20px;
         }
- 
+
         #parent {
             float: right;
         }
- 
+
         .half {
             float: left;
             margin: 5px;
             padding: 10px;
         }
- 
+
         /* 以下メイン画面CSS */
         #button1 {
             height: 50px;
-            width:10%;
-            background-color:white;
-            color:#DCB3FC;
+            width: 10%;
+            background-color: white;
+            color: #DCB3FC;
         }
- 
+
         #data_frame {
             margin: 5vw;
             display: flex;
             justify-content: space-between;
         }
- 
+
         #data_left {
             /* background-color: rgba(255, 201, 201, 0.486); */
         }
- 
+
         #data_right {
             /* background-color: rgba(220, 179, 252, 0.233); */
             margin: right;
         }
- 
+
         .data_input_width {
             width: 180%;
-            color:#DCB3FC;
+            color: #DCB3FC;
         }
- 
+
         .data_input_width_input {
             width: 100%;
             height: 50px;
         }
- 
+
         #memo {
             width: 100%;
-            height:150px;
+            height: 150px;
         }
- 
+
         #imgMaxSize {
             width: 85%;
             height: 520px;
@@ -172,53 +168,54 @@
             object-fit: contain;
 
         }
-       
+
         #imgSize {
             /* 試験的に80%にしてる */
             max-width: 85%;
-            
+
             max-height: 520px;
-             
-            margin: right; 
+
+            margin: right;
             object-fit: contain;
-         }
-       
+        }
+
         .DDRButton {
             width: 550px;
             float: right;
             display: flex;
-            flex-direction:column;
-            align-items:flex-end;
+            flex-direction: column;
+            align-items: flex-end;
             margin: right;
             margin-left: 15%;
             /* background-color: #dcb3fc71; */
         }
- 
+
         #editButton {
             width: 100px;
-            color:#DCB3FC;
+            color: #DCB3FC;
             margin: right;
         }
- 
+
         #shareButton {
             width: 100px;
-            color:#DCB3FC;
+            color: #DCB3FC;
         }
- 
+
         .data_select_width {
-            padding:1em;
-            background-color:#ffffff;
-            margin:1em auto;
-            width:100%;
+            padding: 1em;
+            background-color: #ffffff;
+            margin: 1em auto;
+            width: 100%;
             margin-right: 50%;
             border: 1px solid rgb(0, 0, 0);
             color: #DCB3FC;
         }
+
         .custom-file-input {
             position: relative;
             display: inline-block;
         }
- 
+
         .custom-file-input input[type="file"] {
             opacity: 0;
             position: absolute;
@@ -228,7 +225,7 @@
             height: 5vw;
             cursor: pointer;
         }
- 
+
         .custom-file-input label {
             margin-top: 10px;
             display: inline-block;
@@ -239,7 +236,6 @@
             cursor: pointer;
             border-radius: 5px;
         }
-
     </style>
 </head>
 
@@ -248,12 +244,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10">
-                <i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='top.php'"></i>&emsp;
+                    <i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='top.php'"></i>&emsp;
                     <a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a>
                 </div>
                 <div class="col-md-2" style="text-align:right">
                     <details>
-
                         <summary>
                             <!-- クラスの切り替えテスト -->
                             <div id="first">
@@ -267,7 +262,6 @@
                                 <button type="button" id="first2_1" class="hidden" onclick="location.href='usr_inf_chg_input.php'">ユーザー変更画面</button>
                             </div>
                         </summary>
-                        
                     </details>
                 </div>
             </div>
@@ -279,43 +273,43 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="./data_create.php" method="post"  enctype="multipart/form-data">
-                    <!-- 画面の左側 -->
+                    <form action="./data_create.php" method="post" enctype="multipart/form-data">
+                        <!-- 画面の左側 -->
                         <div class="col-lg-6" id="data_left">
                             <p class="data_input_width">タイトル<br>
-                                <input type="text" maxlength = 50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
+                                <input type="text" maxlength=50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
                             </p>
-                        
+
                             <p class="data_input_width">URL(任意)<br>
-                                <input type="text" maxlength = 1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>">
+                                <input type="text" maxlength=1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>">
                             </p>
-                        
+
                             <p class="data_input_width">ハッシュタグ<br>
                                 <select class="data_select_width" id="selectTag" name="selectTags" type="text" autocomplete="on" onchange="changeColor(this)">
 
-                                <option value="0000000">適用された一覧</option>
-                                <!-- jsでここに一覧を表示 -->
+                                    <option value="0000000">適用された一覧</option>
+                                    <!-- jsでここに一覧を表示 -->
 
                                 </select>
                             </p>
 
                             <p class="data_input_width">
-                                <input type="text" maxlength = 50 name="tagu" id="inputTag" style="width: 89%; height: 50px;">
+                                <input type="text" maxlength=50 name="tagu" id="inputTag" style="width: 89%; height: 50px;">
                                 <input type="button" class="btn btn-outline-secondary" value="適用" id="button1" style="width: 10%; height: 50px;" onclick="hashed()">
                             </p>
 
                             <p class="data_input_width">
                                 <select class="data_select_width" id="tags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
 
-                                <!-- 表示するやつ -->
-                                <option value="0000000" selected>選択してください</option>
-                                <!-- 表示順に関する処理はしてない -->
-                                    
+                                    <!-- 表示するやつ -->
+                                    <option value="0000000" selected>選択してください</option>
+                                    <!-- 表示順に関する処理はしてない -->
+
                                 </select>
                             </p>
 
                             <p class="data_input_width">文章<br>
-                                <input id="memo" maxlength = 200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
+                                <input id="memo" maxlength=200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
                             </p>
 
                             <!-- 非表示 -->
@@ -323,11 +317,9 @@
                                 <!-- 選択したタグのinputを非表示で追加 -->
                             </div>
                         </div>
-                </div>
-                            
+    </div>
                         <!-- 画面の右側 -->
                         <div class="col-md-6">
-                            <!-- <div class="col-md-6" id="data_right"> -->
                             <!-- 画像表示領域 -->
                             <div id="imgMaxSize">
                                 <img id="imgMaxSize2" src="<?php echo $photo; ?>" alt="none">
@@ -346,24 +338,24 @@
                             </div>
                         </div>
                     </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
     <script>
         // データに適応されているタグ一覧を表示
         showTags(
             <?php
-                echo $tagIdJson . "," . $tagNameJson;
+            echo $tagIdJson . "," . $tagNameJson;
             ?>
         );
 
         // データに適応されていないタグ一覧を表示
         showNotTags(
             <?php
-                echo $notTagIdJson . "," . $notTagNameJson;
+            echo $notTagIdJson . "," . $notTagNameJson;
             ?>
         );
 
@@ -374,14 +366,14 @@
         const element_3 = document.getElementById("first2_2");
         const element_4 = document.getElementById("first2_1");
         Button.addEventListener("click", function() {
-            if(element_2.classList.contains("visible")) {
+            if (element_2.classList.contains("visible")) {
                 element_2.classList.remove("visible");
                 element_2.classList.add("hidden");
                 element_3.classList.remove("hidden");
                 element_3.classList.add("visible");
                 element_4.classList.remove("hidden");
                 element_4.classList.add("visible");
-            }else{
+            } else {
                 element_2.classList.remove("hidden");
                 element_2.classList.add("visible");
                 element_3.classList.remove("visible");
@@ -400,13 +392,13 @@
             }
         }
 
-        
+
         // データに紐づいたタグの一覧をselect要素に入れ込む処理
-        function showTags(tIdArr,tNameArr) {
+        function showTags(tIdArr, tNameArr) {
             // select要素(２箇所書かないと反応しない)
             let elTag = document.getElementById("selectTag");
             // 「selectTag」にタグの一覧を追加し、表示
-            for(let i = 0; i < tIdArr.length; i++) {
+            for (let i = 0; i < tIdArr.length; i++) {
                 let option = document.createElement("option");
                 option.setAttribute("name", "selectTag");
                 option.value = tIdArr[i];
@@ -416,11 +408,11 @@
         }
 
         // データに紐づいていないタグの一覧をselect要素に入れ込む処理
-        function showNotTags(tIdArr,tNameArr) {
+        function showNotTags(tIdArr, tNameArr) {
             // select要素(２箇所書かないと反応しない)
             let elTag = document.getElementById("tags");
             // 「tags」にタグの一覧を追加し、表示
-            for(let i = 0; i < tIdArr.length; i++) {
+            for (let i = 0; i < tIdArr.length; i++) {
                 let option = document.createElement("option");
                 option.setAttribute("name", "tags");
                 option.value = tIdArr[i];
@@ -433,7 +425,7 @@
         let elTag = document.getElementById("tags");
         // 選ばれた要素
         let selectedTag = document.getElementById("selectTag");
-        
+
 
         // タグ一覧からタグを選択した時
         elTag.onchange = event => {
@@ -450,7 +442,7 @@
             insertTag.appendChild(option);
             // 選択したタグを一覧から削除
             elTag.remove(selectIndex);
-            
+
             // $_POST['selectTags']で受け取るためにinputを非表示で追加
             let hiddenDiv = document.getElementById("hiddenDiv");
             let inputEl = document.createElement("input");
@@ -460,10 +452,11 @@
             inputEl.value = eValue;
             hiddenDiv.appendChild(inputEl);
         }
-        
+
         // 入力されたタグを追加する処理
         let tagMaxId = "" + <?php $tagMaxId = $dbmng->nextId($tagMaxId);
-            echo "\"" . $tagMaxId . "\"";?>;
+                            echo "\"" . $tagMaxId . "\""; ?>;
+
         function hashed() {
             // select要素
             let insertTag = document.getElementById("selectTag");
@@ -476,13 +469,13 @@
             // option.setAttribute("name", "selectTags");
 
             option.value = tagMaxId;
-            
+
             option.innerText = eValue;
             // 選んだ状態にする
             // option.setAttribute("selected", "selected");
             insertTag.appendChild(option);
             inputTag.value = "";
-            
+
             // $_POST['selectTags']で受け取るためにinputを非表示で追加
             let hiddenDiv = document.getElementById("hiddenDiv");
             let inputEl = document.createElement("input");
@@ -498,8 +491,8 @@
         // 選択したタグを押下した時
         selectedTag.onchange = event => {
             let eValue = selectedTag.value;
-             // select要素
-             let insertTag = document.getElementById("tags");
+            // select要素
+            let insertTag = document.getElementById("tags");
             // 選択したoptionのindexを取得
             let selectIndex = selectedTag.selectedIndex;
             // indexからtextを取得
@@ -536,8 +529,8 @@
             });
             fileReader.readAsDataURL(obj.files[0]);
         }
-
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
+
 </html>

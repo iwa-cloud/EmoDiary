@@ -179,15 +179,20 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-md-3 mt-4"></div>
-              <div class="col-md-3 mt-4">
-                  <input type="submit" class="form-control" value="登録" style="color:#DCB3FC;">
-              </div>
-             <div class="col-md-3 mt-4">
-                  <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;" onclick="location.href='usr_inf_chg_input.php';">
-             </div>
-         </div>
-    </div>
-    </form>
+            <div class="col-md-6 mt-4">
+                <input type="submit" class="form-control" value="登録" style="color:#DCB3FC;">
+            </div>
+            </div>
+          </div>
+        </form>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 mt-4"></div>
+            <div class="col-md-6 mt-4">
+                 <input type="submit" class="form-control" value="戻る" style="color:#DCB3FC;" onclick="location.href='usr_inf_chg_input.php';">
+            </div>
+          </div>
+        </div>
 
 
     <script src="./header.js"></script>

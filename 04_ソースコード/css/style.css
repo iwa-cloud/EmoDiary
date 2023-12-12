@@ -8,7 +8,7 @@
   outline: none;
   border-bottom: 1px solid #999;
   padding: 5px 10px;
-  position: relative; 
+  position: relative;
   z-index: 2;
 }
 
@@ -24,7 +24,7 @@
 }
 
 ::placeholder {
-  color: #DCB3FC;
+  color: #dcb3fc;
 }
 
 .wrap {
@@ -44,7 +44,7 @@
   min-width: 85%; /* 最小幅を指定 */
   max-width: 85%; /* 最大幅を指定 */
   border: 1px solid rgb(0, 0, 0);
-  color: #DCB3FC;
+  color: #dcb3fc;
 }
 
 .controller {
@@ -81,35 +81,17 @@ details[open] summary {
 }
 
 #nav {
-  /* position: relative; */
   margin-top: 5px;
-  /* margin-right: 600px; */
-
-  /* 他の「#nav」に書いてあった値 */
-  /* margin-top: 10px;
-  margin-right: 500px; */
-
-  /* list-style: none; */
   font-size: 0;
 }
 
 #nav button {
   width: 24%;
-  /* width: 9.5vw; */
-  /* 最小幅を指定 */
-  /* min-width: 9.5vw; */
-  /* 最大幅を指定 */
-  /* max-width: 100vw; */
-
-  /* 他の「#nav li」に書いてあった値 */
-  /* width: 146px; */
-  
   text-align: center;
   border: 0.5px solid #aaa9a9;
   background-color: #ffffff;
   display: inline-block;
   font-size: 16px;
-  /* height: 50px; */
   min-height: 50px; /* 最小高さを指定 */
   max-height: 50px; /* 最大高さを指定 */
   line-height: 50px;
@@ -118,14 +100,12 @@ details[open] summary {
 
 #nav button a {
   text-decoration: none;
-  color: #DCB3FC;
+  color: #dcb3fc;
   font-weight: bold;
   padding: 19px;
 }
 
 .b input {
-  /* width: 50%; */
-  /* height: 40px; */
   min-height: 40px; /* 最小高さを指定 */
   max-height: 40px; /* 最大高さを指定 */
   min-width: 50%; /* 最小幅を指定 */
@@ -133,7 +113,6 @@ details[open] summary {
 }
 
 .c input {
-  /* width: 40%; */
   min-width: 40%; /* 最小幅を指定 */
   max-width: 40%; /* 最大幅を指定 */
 }
@@ -142,21 +121,18 @@ details[open] summary {
   padding: 1em;
   background-color: #ffffff;
   margin: 1em auto;
-  /* width: 50%; */
   min-width: 50%; /* 最小幅を指定 */
   max-width: 50%; /* 最大幅を指定 */
   border: 1px solid rgb(0, 0, 0);
-  color: #DCB3FC;
+  color: #dcb3fc;
 }
 
 .g input {
   position: absolute;
-  /* width: 50%; */
   min-width: 50%; /* 最小幅を指定 */
   max-width: 50%; /* 最大幅を指定 */
   min-height: 40px; /* 最小高さを指定 */
   max-height: 40px; /* 最大高さを指定 */
-  /* height: 40px; */
   bottom: 5px;
 }
 
@@ -174,23 +150,21 @@ details[open] summary {
   padding: 1em;
   background-color: #ffffff;
   margin: 1em auto;
-  /* width: 85%; */
   min-width: 85%; /* 最小幅を指定 */
   max-width: 85%; /* 最大幅を指定 */
   border: 1px solid rgb(0, 0, 0);
-  color: #DCB3FC;
+  color: #dcb3fc;
 }
 
 select {
-  color: #DCB3FC;
+  color: #dcb3fc;
 }
 
 #reservationDate {
-  color: #DCB3FC;
+  color: #dcb3fc;
   padding: 1em;
   background-color: #ffffff;
   margin: 1em auto;
-  /* width: 85%; */
   min-width: 85%; /* 最小幅を指定 */
   max-width: 85%; /* 最大幅を指定 */
 }
@@ -199,11 +173,10 @@ select {
   padding: 1em;
   background-color: #ffffff;
   margin: 1em auto;
-  /* width: 50%; */
   min-width: 50%; /* 最小幅を指定 */
   max-width: 50%; /* 最大幅を指定 */
   border: 1px solid rgb(0, 0, 0);
-  color: #DCB3FC;
+  color: #dcb3fc;
 }
 
 .error {
