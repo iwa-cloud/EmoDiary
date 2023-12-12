@@ -100,8 +100,8 @@ if ($photo == "") {
         }
 
         #data_left {
-            margin-left: auto;
-            margin-right: auto;
+            /* margin-left: auto;
+            margin-right: auto; */
         }
 
         #data_right {
