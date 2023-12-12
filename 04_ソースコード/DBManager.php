@@ -503,6 +503,17 @@ class DBManager
         return $result;
     }
 
+    // タグ一件取得
+    public function getTag($tag_id) {
+        $pdo = $this->dbConnect();
+        $sql = "SELECT tag_name FROM tag WHERE tag_id = ?";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $tag_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        return $result[0][0];
+    }
+
     // タグ最終利用時間更新処理(仮)
     public function updateTagTimeSub($time, $data_id, $tag_id)
     {
