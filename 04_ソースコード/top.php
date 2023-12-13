@@ -254,7 +254,7 @@ $previewMemo = "選択されていません";
             <!-- 文字のcssは適応されてないかも -->
             <button type="submit" value="new" name="three_btn" class="topbutton" onclick="showElement('element1')">最新 ↓</button>
             <button type="submit" value="tag" name="three_btn" class="topbutton" onclick="showElement('element2')">タグ ↓</button>
-            <button type="submit" value="date" name="three_btn" class="topbutton" onclick="showElement('element3')">日付 ↓</button>
+            <!-- <button type="submit" value="date" name="three_btn" class="topbutton" onclick="showElement('element3')">日付 ↓</button> -->
             <!-- <button class = "topbutton">編集 ↓</button> -->
           </form><br>
         </div>
