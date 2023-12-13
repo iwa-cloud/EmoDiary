@@ -41,6 +41,8 @@ if (!empty($_POST['bin'])) {
 }
 if (!empty($_POST['hiddenSelectTags'])) {
     $tags = $_POST['hiddenSelectTags'];
+} else {
+    $tags = "タグなし";
 }
 // 画像の名前を格納
 $photoName;

@@ -30,7 +30,9 @@ $data;
 $inputMemo = "";
 $inputDate = "";
 $inputTitle = "";
-$inputTag = "";
+$inputTagName = "選択されたタグ";
+// sqlで使用する変数
+$inputTag = "%";
 
 if ($_SESSION['searchFlg'] == false) {
   $_SESSION['searchFlg'] = true;
@@ -47,8 +49,8 @@ if ($_SESSION['searchFlg'] == false) {
     $inputTitle = $_POST['inputTitle'];
   }
 
-  if (!empty($_POST['hiddenSelectTags'])) {
-    $inputTag = $_POST['hiddenSelectTags'][0];
+  if (!empty($_POST['hiddenDivChildren'])) {
+    $inputTag = $_POST['hiddenDivChildren'];
   }
 }
 
@@ -236,12 +238,15 @@ foreach ($data as $row) {
             <!-- title -->
             <input class="content" name="inputTitle" placeholder="タイトル検索欄" style="color: black;" value="<?php echo $inputTitle; ?>">
             <!-- selectedTags -->
-            <select class="content" type="text" name="selectTags" id="selectTag" onchange="changeColor(this)">
 
+            <!-- <select class="content" type="text" name="selectTags" id="selectTag" onchange="changeColor(this)">
               <option>適用された一覧</option>
-              <!-- jsでここに一覧を表示 -->
-            </select>
+            </select> -->
+
+            <!-- 選択されたタグ -->
+            <input class="content" id="selectTag" name="selectTags" placeholder="<?php echo $inputTagName ?>" style="color: black;" readonly>
             <!-- tags -->
+
             <!-- valueにはtagNameを入れる -->
             <select class="content" type="text" name="inputTag" id="tags" onchange="changeColor(this)">
 
@@ -252,6 +257,7 @@ foreach ($data as $row) {
             </select>
             <!-- 非表示 -->
             <div id="hiddenDiv">
+              <input type="hidden" id="hiddenDivChild" name="hiddenDivChildren">
               <!-- 選択したタグのinputを非表示で追加 -->
             </div>
             <button type="submit" id="updateBtn" style="border-radius: 5px;">更新</button>
@@ -320,47 +326,39 @@ foreach ($data as $row) {
       // 選択したoptionのindexを取得
       let selectIndex = elTag.selectedIndex;
       let selectText = elTag.options[selectIndex].text;
+      // タグ名をeValueに代入
       let eValue = selectText;
-      let option = document.createElement("option");
-      option.value = eValue;
-      option.innerText = selectText;
-      insertTag.appendChild(option);
-      // 選択したタグを一覧から削除
-      elTag.remove(selectIndex);
+      insertTag.placeholder = eValue;
 
       // $_POST['selectTags']で受け取るためにinputを非表示で追加
       let hiddenDiv = document.getElementById("hiddenDiv");
-      let inputEl = document.createElement("input");
-      inputEl.setAttribute("id", eValue);
-      inputEl.setAttribute("type", "hidden");
-      inputEl.name = "hiddenSelectTags[]";
-      inputEl.value = eValue;
-      hiddenDiv.appendChild(inputEl);
+      let hiddenDivChild = document.getElementById("hiddenDivChild");
+      hiddenDivChild.value = eValue;
     }
 
     // 選択したタグを押下した時
-    selectedTag.onchange = event => {
-      let eValue = selectedTag.value;
-      // select要素
-      let insertTag = document.getElementById("tags");
-      // 選択したoptionのindexを取得
-      let selectIndex = selectedTag.selectedIndex;
-      // indexからtextを取得
-      let selectText = selectedTag.options[selectIndex].text;
-      // 「tags」にタグの一覧を追加し、表示
-      let option = document.createElement("option");
-      // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
-      option.setAttribute("name", "tags");
-      option.value = eValue;
-      option.innerText = selectText;
-      insertTag.appendChild(option);
-      // 選択したタグを一覧から削除
-      selectedTag.remove(selectIndex);
+    // selectedTag.onchange = event => {
+    //   let eValue = selectedTag.value;
+    //   // select要素
+    //   let insertTag = document.getElementById("tags");
+    //   // 選択したoptionのindexを取得
+    //   let selectIndex = selectedTag.selectedIndex;
+    //   // indexからtextを取得
+    //   let selectText = selectedTag.options[selectIndex].text;
+    //   // 「tags」にタグの一覧を追加し、表示
+    //   let option = document.createElement("option");
+    //   // $_POST['selectTag']は二次元配列で、選択したタグのidが格納される
+    //   option.setAttribute("name", "tags");
+    //   option.value = eValue;
+    //   option.innerText = selectText;
+    //   insertTag.appendChild(option);
+    //   // 選択したタグを一覧から削除
+    //   selectedTag.remove(selectIndex);
 
-      // 非表示のinputタグも削除
-      let delEl = document.getElementById(eValue);
-      delEl.remove();
-    }
+    //   // 非表示のinputタグも削除
+    //   let delEl = document.getElementById(eValue);
+    //   delEl.remove();
+    // }
   </script>
   <script src="./header.js"></script>
 </body>
