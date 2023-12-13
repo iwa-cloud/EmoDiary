@@ -5,6 +5,7 @@ require_once './DBManager.php';
 $dbmng = new DBManager();
 $_SESSION['page'] = "top.php";
 $_SESSION ['input_name'] = "";
+$_SESSION['searchFlg'] = false;
 
 // 「最新順」「タグ順」「日付順」のどれかが押されているか判定
 // リダイレクトした場合は$_POST['three_btn']に選択したボタンの情報が入る
