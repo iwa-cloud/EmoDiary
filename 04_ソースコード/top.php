@@ -5,6 +5,7 @@ require_once './DBManager.php';
 $dbmng = new DBManager();
 $_SESSION['page'] = "top.php";
 $_SESSION ['input_name'] = "";
+$_SESSION['searchFlg'] = false;
 
 // 「最新順」「タグ順」「日付順」のどれかが押されているか判定
 // リダイレクトした場合は$_POST['three_btn']に選択したボタンの情報が入る
@@ -253,7 +254,7 @@ $previewMemo = "選択されていません";
             <!-- 文字のcssは適応されてないかも -->
             <button type="submit" value="new" name="three_btn" class="topbutton" onclick="showElement('element1')">最新 ↓</button>
             <button type="submit" value="tag" name="three_btn" class="topbutton" onclick="showElement('element2')">タグ ↓</button>
-            <button type="submit" value="date" name="three_btn" class="topbutton" onclick="showElement('element3')">日付 ↓</button>
+            <!-- <button type="submit" value="date" name="three_btn" class="topbutton" onclick="showElement('element3')">日付 ↓</button> -->
             <!-- <button class = "topbutton">編集 ↓</button> -->
           </form><br>
         </div>

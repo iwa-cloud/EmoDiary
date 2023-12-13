@@ -30,7 +30,7 @@ $data;
 $inputMemo = "";
 $inputDate = "";
 $inputTitle = "";
-$inputTag = "%";
+$inputTag = "";
 
 if ($_SESSION['searchFlg'] == false) {
   $_SESSION['searchFlg'] = true;
