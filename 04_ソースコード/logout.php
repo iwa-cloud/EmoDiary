@@ -80,7 +80,7 @@ session_destroy();
         <br>
         <br>
         <br>
-        <h2 class="text-center md-5" style="background:white; color:#DCB3FC">ログアウトが完了しました</h2>
+        <h2 class="text-center md-5" style="color:#DCB3FC">ログアウトが完了しました</h2>
         <div class="row">
           <div class="col-md-12 mt-1 mb-1 alert-danger text-center" id="errorMsg">
           </div>
