@@ -334,9 +334,12 @@ $previewMemo = "選択されていません";
           if (!empty($_POST['data_id'])) {
             $_SESSION['data_id'] = $_POST['data_id'];
             // データベースからプレビュー用の情報を取得
-            $previewData = $dbmng->getDataPAndM($_SESSION['data_id']);
-            foreach ($previewData as $row) {
+            $previewDataPhoto = $dbmng->getDataP($_SESSION['data_id']);
+            $previewDataMemo = $dbmng->getDataM($_SESSION['data_id']);
+            foreach ($previewDataPhoto as $row) {
               $previewPhoto = $row['photo'];
+            }
+            foreach ($previewDataMemo as $row) {
               $previewMemo = $row['memo'];
             }
           } else {

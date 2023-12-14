@@ -389,10 +389,36 @@ class DBManager
 
     // データプレビュー取得
     // photoとmemo
-    public function getDataPAndM($data_id)
-    {
+    // public function getDataPAndM($data_id)
+    // {
+    //     $pdo = $this->dbConnect();
+    //     $sql = "SELECT dataId.memo, photo.photo FROM photoAndData JOIN (SELECT * FROM data WHERE data_id = ?) AS dataId ON photoAndData.data_id = dataId.data_id JOIN photo ON photo.photo_id = photoAndData.photo_id";
+    //     $ps = $pdo->prepare($sql);
+    //     $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+    //     $ps->execute();
+    //     $result = $ps->fetchAll();
+    //     // $resultが二次元配列になってる
+    //     return $result;
+    // }
+
+    // プレビュー取得(photo)
+    public function getDataP($data_id) {
         $pdo = $this->dbConnect();
-        $sql = "SELECT dataId.memo, photo.photo FROM photoAndData JOIN (SELECT * FROM data WHERE data_id = ?) AS dataId ON photoAndData.data_id = dataId.data_id JOIN photo ON photo.photo_id = photoAndData.photo_id";
+        // SELECT photo.photo FROM photoAndData JOIN photo ON photoAndData.photo_id = photo.photo_id WHERE photoAndData.data_id = "0000005";
+        $sql = "SELECT photo.photo FROM photoAndData JOIN photo ON photoAndData.photo_id = photo.photo_id WHERE photoAndData.data_id = ?";
+        $ps = $pdo->prepare($sql);
+        $ps->bindValue(1, $data_id, PDO::PARAM_STR);
+        $ps->execute();
+        $result = $ps->fetchAll();
+        // $resultが二次元配列になってる
+        return $result;
+    }
+
+    // プレビュー取得(memo)
+    public function getDataM($data_id) {
+        $pdo = $this->dbConnect();
+        // SELECT memo FROM data WHERE data_id = "0000005";
+        $sql = "SELECT memo FROM data WHERE data_id = ?";
         $ps = $pdo->prepare($sql);
         $ps->bindValue(1, $data_id, PDO::PARAM_STR);
         $ps->execute();
