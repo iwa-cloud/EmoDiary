@@ -326,7 +326,7 @@ $notTagNameJson = json_encode($notTagNameArray);
                             </div>
                             <div class="DDRButton">
                                 <div class="custom-file-input">
-                                    <input type="file" name="file" accept="img/*" onchange="previewImg(this);" id="fileInput">
+                                    <input type="file" name="file" accept="img/*" id="fileInput">
                                     <label for="fileInput">ファイルを選択</label>
                                 </div>
                                 <br>
@@ -522,12 +522,20 @@ $notTagNameJson = json_encode($notTagNameArray);
         }
 
         // プレビュー表示
-        function previewImg(obj) {
-            let fileReader = new FileReader();
-            fileReader.onload = (function() {
-                document.getElementById('imgSize').src = fileReader.result;
-            });
-            fileReader.readAsDataURL(obj.files[0]);
+        // function previewImg(obj) {
+        //     let fileReader = new FileReader();
+        //     fileReader.onload = (function() {
+        //         document.getElementById('imgSize').src = fileReader.result;
+        //     });
+        //     fileReader.readAsDataURL(obj.files[0]);
+        // }
+        let img = document.getElementById("imgMaxSize2");
+        let input = document.getElementById("fileInput");
+        
+        input.onchange = (e) => {
+            if(input.files[0]) {
+                img.src = URL.createObjectURL(input.files[0]);
+            }
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
