@@ -63,7 +63,7 @@ session_start();
 <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i>&emsp;<a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a></div>
+        <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;"></i>&emsp;<a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;<b><font face="Comic Sans MS">EmoDiary</a></font></b></div>
             <div class="col-md-2" style="text-align:right">
               <details>
                   <!-- <summary>

@@ -224,7 +224,8 @@ if ($photo == "") {
             <div class="row">
                 <div class="col-md-10">
                     <i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='top.php'"></i>&emsp;
-                    <a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a>
+                    <b><font face="Comic Sans MS">
+                    <a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a></font></b>
                 </div>
                 <div class="col-md-2" style="text-align:right">
                     <details>
@@ -255,15 +256,15 @@ if ($photo == "") {
                     <!-- 画面の左側 -->
                     <div class="col-md-6" id="data_left">
                         <p class="data_input_width">タイトル<br>
-                            <input type="text" maxlength=50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required readonly>
+                            <input type="text" maxlength=50 class="data_input_width_input" name="title"  style="border-radius: 5px;" value="<?php echo $title; ?>" required readonly>
                         </p>
                         <br>
                         <p class="data_input_width">URL(任意)<br>
-                            <input type="text" maxlength=1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>" readonly>
+                            <input type="text" maxlength=1000 class="data_input_width_input" name="url" style="border-radius: 5px;" value="<?php echo $url; ?>" readonly>
                         </p>
                         <br>
                         <p class="data_input_width">ハッシュタグ<br>
-                            <select class="data_select_width" id="selectTag" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)" readonly>
+                            <select class="data_select_width" id="selectTag" type="text" autocomplete="on" placeholder="メモ検索欄"  style="border-radius: 5px;" onchange="changeColor(this)" readonly>
                                 <?php
                                 foreach ($data2 as $row) {
                                     echo "<option>" . $row['tag_name'] . "</option>";
@@ -275,7 +276,7 @@ if ($photo == "") {
                         <br>
 
                         <p class="data_input_width">文章<br>
-                            <input id="memo" maxlength=200 style="height: 230px" type="text" name="bin" value="<?php echo $memo; ?>" readonly>
+                            <input id="memo" maxlength=200 style="height: 230px; border-radius: 5px;" type="text" name="bin" value="<?php echo $memo; ?>" readonly>
                         </p>
 
                         <!-- 非表示 -->
