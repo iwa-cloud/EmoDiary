@@ -230,7 +230,8 @@ $tagNameJson = json_encode($tagNameArray);
             <div class="row">
                 <div class="col-md-10">
                     <i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='<?php echo $_SESSION['page'] ?>'"></i>&emsp;
-                    <a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a>
+                    <b><font face="Comic Sans MS">
+                    <a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a></font></b>
                 </div>
                 <div class="col-md-2" style="text-align:right">
                     <details>
@@ -270,15 +271,15 @@ $tagNameJson = json_encode($tagNameArray);
                         ?>
 
                         <p class="data_input_width">タイトル<br>
-                            <input type="text" maxlength=50 class="data_input_width_input" name="title" value="<?php echo $title; ?>" required>
+                            <input type="text" maxlength=50 class="data_input_width_input" name="title" style="border-radius: 5px;" value="<?php echo $title; ?>" required>
                         </p>
 
                         <p class="data_input_width">URL(任意)<br>
-                            <input type="text" maxlength=1000 class="data_input_width_input" name="url" value="<?php echo $url; ?>">
+                            <input type="text" maxlength=1000 class="data_input_width_input" name="url" style="border-radius: 5px;" value="<?php echo $url; ?>">
                         </p>
 
                         <p class="data_input_width">ハッシュタグ<br>
-                            <select class="data_select_width" id="selectTag" name="selectTags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+                            <select class="data_select_width" id="selectTag" name="selectTags" type="text" style="border-radius: 5px;" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
                                 <!-- 表示するやつ -->
                                 <option value="0000000">適用された一覧</option>
                                 <!-- jsでここに一覧を表示 -->
@@ -286,12 +287,12 @@ $tagNameJson = json_encode($tagNameArray);
                         </p>
 
                         <p class="data_input_width">
-                            <input type="text" maxlength=50 name="tagu" id="inputTag" style="width: 89%; height: 50px;">
+                            <input type="text" maxlength=50 name="tagu" id="inputTag" style="width: 89%; height: 50px; border-radius: 5px;">
                             <input type="button" class="btn btn-outline-secondary" value="適用" id="button1" style="width: 10%; height: 50px;" onclick="hashed()">
                         </p>
 
                         <p class="data_input_width">
-                            <select class="data_select_width" id="tags" type="text" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
+                            <select class="data_select_width" id="tags" type="text" style="border-radius: 5px;" autocomplete="on" placeholder="メモ検索欄" onchange="changeColor(this)">
                                 <!-- 表示するやつ -->
                                 <option value="0000000" selected>選択してください</option>
                                 <!-- 表示順に関する処理はしてない -->
@@ -299,7 +300,7 @@ $tagNameJson = json_encode($tagNameArray);
                         </p>
 
                         <p class="data_input_width">文章<br>
-                            <input id="memo" maxlength=200 class="data_input_width_input" type="text" name="bin" value="<?php echo $memo; ?>">
+                            <input id="memo" maxlength=200 class="data_input_width_input" type="text" name="bin" style="border-radius: 5px;" value="<?php echo $memo; ?>">
                         </p>
 
                         <!-- 非表示 -->

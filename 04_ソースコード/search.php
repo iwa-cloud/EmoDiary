@@ -181,7 +181,7 @@ foreach ($data as $row) {
   <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px"><a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp;EmoDiary</a></div>
+        <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px"><a href="./top.php" style="color:#DCB3FC; font-size:40px; text-decoration:none;">&emsp; <b><font face="Comic Sans MS">EmoDiary</a></font></b></div>
         <div class="col-md-2" style="text-align:right">
           <details>
             <summary>
@@ -232,11 +232,11 @@ foreach ($data as $row) {
         <div id="searchFrame">
           <form action="./search.php" method="post">
             <!-- memo -->
-            <input class="content" type="text" name="inputMemo" placeholder="メモ検索欄" style="color: black;" value="<?php echo $inputMemo; ?>">
+            <input class="content" type="text" name="inputMemo" placeholder="メモ検索欄" style="color: black; border-radius: 5px;" value="<?php echo $inputMemo; ?>">
             <!-- date -->
-            <input class="content" type="date" name="inputDate" id="reservationDate" placeholder="年／月／日" value="<?php echo $inputDate; ?>">
+            <input class="content" type="date" name="inputDate" id="reservationDate" placeholder="年／月／日" value="<?php echo $inputDate; ?>" style="border-radius: 5px;">
             <!-- title -->
-            <input class="content" name="inputTitle" placeholder="タイトル検索欄" style="color: black;" value="<?php echo $inputTitle; ?>">
+            <input class="content" name="inputTitle" placeholder="タイトル検索欄" style="color: black; border-radius: 5px;" value="<?php echo $inputTitle; ?>">
             <!-- selectedTags -->
 
             <!-- <select class="content" type="text" name="selectTags" id="selectTag" onchange="changeColor(this)">
@@ -244,11 +244,11 @@ foreach ($data as $row) {
             </select> -->
 
             <!-- 選択されたタグ -->
-            <input class="content" id="selectTag" name="selectTags" placeholder="<?php echo $inputTagName ?>" style="color: black;" readonly>
+            <input class="content" id="selectTag" name="selectTags" placeholder="<?php echo $inputTagName ?>" style="color: black; border-radius: 5px;" readonly>
             <!-- tags -->
 
             <!-- valueにはtagNameを入れる -->
-            <select class="content" type="text" name="inputTag" id="tags" onchange="changeColor(this)">
+            <select class="content" type="text" name="inputTag" id="tags" onchange="changeColor(this)" style="border-radius: 5px;">
 
               <!-- 表示するやつ -->
               <option selected>選択してください</option>

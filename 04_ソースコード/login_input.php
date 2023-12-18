@@ -62,7 +62,8 @@ session_start();
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-10"><i type="button" class="bi bi-chevron-left" style="font-size:40px;" onclick="location.href='./login.php'"></i>
-          <href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary
+        <b><font face="Comic Sans MS">
+          <href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</font></b>
         </div>
       </div>
     </div>

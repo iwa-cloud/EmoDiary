@@ -226,7 +226,7 @@ $previewMemo = "選択されていません";
   <nav class="a" aria-label="Sixth navbar example" style="background-color: white;">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px">&emsp;EmoDiary</div>
+        <div class="col-md-10" href="#" style="color:#DCB3FC; font-size:40px">&emsp; <b><font face="Comic Sans MS">EmoDiary</font></b></div>
         <div class="col-md-2" style="text-align:right;">
           <details>
             <summary>
@@ -360,7 +360,7 @@ $previewMemo = "選択されていません";
           <div class="">
             <!-- 文章表示領域 -->
             <p class="data_input_width viewMemoInput" style="color:#DCB3FC">文章<br>
-              <input id="memo" type="text" name="bin" value="<?php echo $previewMemo; ?>" readonly>
+              <input id="memo" type="text" name="bin" style="border-radius: 5px;" value="<?php echo $previewMemo; ?>" readonly>
             </p>
             <!-- 処理は書いてない -->
             <button type="button" class="form-control viewMemoButton" style="color: #DCB3FC; width: 100px;" onclick="isClick('data_detail.php', '<?php echo $_SESSION['data_id']; ?>')">詳細</button>
