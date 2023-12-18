@@ -193,8 +193,14 @@ session_start();
           </div>
         </div>
       </form>
+      <div class="container-fluid">
+      <form action="<?php echo $_SESSION['page'] ?>">
+      <div class="row">
       <div class="row offset-sm-4 offset-3 col-sm-4 col-6 mt-4">
           <input type="submit" class="btn btn-secondary" name="back" value="戻る" style="background:white; color:#DCB3FC;"  onclick="location.href='<?php echo $_SESSION['page'] ?>'">
+      </div>
+      </div>
+      </form>
       </div>
     
     <script>
